@@ -3,17 +3,17 @@ package doudecimal;
 @:forward
 abstract Doudecimal( Int ) from Int to Int {
   public inline function new( v: Int ){
-		this = v;
+    this = v;
   }
   @:to
   public inline function toString(): String {
     var v: Int = this;
     var dd = Doudecimal_.fromInt( v) ;
-		return dd.toString();
+    return dd.toString();
   }
   @:from
   public static inline function fromString( s: String ): Doudecimal {
-		var dd = new Doudecimal_( s );
+    var dd = new Doudecimal_( s );
     return dd.int;
   }
   @:op(A/B) function divide( b: Doudecimal ):Doudecimal;
@@ -35,27 +35,27 @@ class Doudecimal_ {
   }
   @:keep 
   public inline function toString():String {
-		return doudecimal;
+    return doudecimal;
   }
   public inline function checkStr( s: String ){
-		var len = s.length;
+    var len = s.length;
     var b = new StringBuf();
     var no = 0;
     for( i in 0...len ){
       no = StringTools.fastCodeAt( s, i );
       switch( no ){
           case 48:
-          	b.add( '0' );
+            b.add( '0' );
           case 49:
-        		b.add( '1' );
+            b.add( '1' );
           case 50:
             b.add( '2' );
           case 51:
-          	b.add( '3' );
+            b.add( '3' );
           case 52:
             b.add( '4' );
           case 53:
-          	b.add( '5' );
+            b.add( '5' );
           case 54:
             b.add( '6' );
           case 55:
@@ -75,29 +75,29 @@ class Doudecimal_ {
           case 84:
             b.add( 'A' );
           case 116:
-           b.add( 'A' );
+            b.add( 'A' );
           case 88:
-           b.add( 'A' );
+            b.add( 'A' );
           case 102:
-           b.add( 'A' );
+            b.add( 'A' );
           case 69:
-           b.add( 'B' );
+            b.add( 'B' );
           case 90:
-           b.add( 'B' );
+            b.add( 'B' );
           case 122:
-           b.add( 'B' );
+            b.add( 'B' );
           case 59:
-           b.add( ';');
+            b.add( ';');
           case '↊'.code:
-           b.add( 'A' );	  
+            b.add( 'A' );	  
           case '↋'.code:
-           b.add( 'B' );
+            b.add( 'B' );
           case 35:
-           b.add( 'A' );
+            b.add( 'A' );
           case 42:
-           b.add( 'B' );
+            b.add( 'B' );
           case _:
-           throw 'invalid Doudecimal';
+            throw 'invalid Doudecimal';
       } 
     }
     return b.toString();
