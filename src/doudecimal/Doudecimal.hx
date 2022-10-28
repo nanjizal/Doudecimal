@@ -96,7 +96,13 @@ class Doudecimal_ {
             b.add( 'A' );
           case 42:
             b.add( 'B' );
-          case _:
+          case 45:
+            if( i == 0 ){
+		          b.add( '-' );
+	  		    } else {  
+	            throw 'invalid Doudecimal';
+	          }
+		  case _:
             throw 'invalid Doudecimal';
       } 
     }
@@ -109,7 +115,7 @@ class Doudecimal_ {
     for( i in 0...len ){
       no = StringTools.fastCodeAt( doudecimal, i ); 
       b.add(switch( no ){
-	case 65:
+	      case 65:
           '↊';
         case 66:
           '↋';
@@ -124,45 +130,61 @@ class Doudecimal_ {
     var b = new StringBuf();
     var max = 100000000;
     var s: String;
-    while( true ){
+	  var negative: Bool = false;
+	  if( decimal < 1 ){
+	    decimal = -decimal;
+	    negative = true; 
+	  }
+	  while( true ){
       if( max-- == 0 ) break;
       var remainder = tens % 12;
       if( remainder == 0 ) break;
       tens = Std.int( (tens - remainder )/12 );
       s = if( remainder < 10 ){
-	Std.string( remainder );
+	      Std.string( remainder );
       } else if( remainder == 10 ){
-	'A';
+	      'A';
       } else {
-	'B';
+	      'B';
       }
       b.add( s );
     }
     var out: Doudecimal_ = Type.createEmptyInstance( Doudecimal_);
-    out.doudecimal = b.toString();
-    out.int = decimal;
+		if( negative ){
+			out.doudecimal = '-' + b.toString();
+    	out.int = -decimal;
+		} else {
+      out.doudecimal = b.toString();
+      out.int = decimal;
+		}
     return out;
   }
-  public inline function toInt():Int{
+  public inline function toInt(): Int{ 
     var len = doudecimal.length;
     var n: Int = len - 1;
     var multi: Float;
     var out = 0.;
     var no = 0.;
     var dozit = '';
+		var negative = false;
+		if( doudecimal.charAt(0) == '-' ){
+			doudecimal = doudecimal.substr( 1 );
+			len = doudecimal.length;
+			negative = true;
+		}
     for( i in 0...len ){
       multi = Math.pow( 12, n );
       dozit = doudecimal.charAt( i );
       var no = if( dozit == 'A' ){
-	10;
+				10;
       } else if( dozit == 'B' ){
-	11;
+				11;
       } else { 
-	Std.parseInt( dozit );
+				Std.parseInt( dozit );
       }
       out = out + multi*no;
       n--;
     }
-    return Std.int( out );
+    return ( negative )? -Std.int( out ): Std.int( out );
   }        
 }
