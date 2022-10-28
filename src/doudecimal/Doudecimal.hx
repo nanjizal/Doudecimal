@@ -42,7 +42,7 @@ class Doudecimal_ {
     var b = new StringBuf();
     var no = 0;
     for( i in 0...len ){
-			no = StringTools.fastCodeAt( s, i );
+      no = StringTools.fastCodeAt( s, i );
       switch( no ){
           case 48:
           	b.add( '0' );
@@ -89,8 +89,8 @@ class Doudecimal_ {
           case 59:
            b.add( ';');
           case '↊'.code:
-        	 b.add( 'A' );	  
-        	case '↋'.code:
+           b.add( 'A' );	  
+          case '↋'.code:
            b.add( 'B' );
           case 35:
            b.add( 'A' );
@@ -103,13 +103,13 @@ class Doudecimal_ {
     return b.toString();
   }
   public inline function toDozenal():String {
-		var len = doudecimal.length;
+    var len = doudecimal.length;
     var no: Int;
     var b = new StringBuf();
     for( i in 0...len ){
       no = StringTools.fastCodeAt( doudecimal, i ); 
       b.add(switch( no ){
-				case 65:
+	case 65:
           '↊';
         case 66:
           '↋';
@@ -125,18 +125,18 @@ class Doudecimal_ {
     var max = 100000000;
     var s: String;
     while( true ){
-			if( max-- == 0 ) break;
+      if( max-- == 0 ) break;
       var remainder = tens % 12;
       if( remainder == 0 ) break;
       tens = Std.int( (tens - remainder )/12 );
       s = if( remainder < 10 ){
-				Std.string( remainder );
+	Std.string( remainder );
       } else if( remainder == 10 ){
-				'A';
+	'A';
       } else {
-				'B';
+	'B';
       }
-      b.add(s);
+      b.add( s );
     }
     var out: Doudecimal_ = Type.createEmptyInstance( Doudecimal_);
     out.doudecimal = b.toString();
@@ -151,14 +151,14 @@ class Doudecimal_ {
     var no = 0.;
     var dozit = '';
     for( i in 0...len ){
-			multi = Math.pow( 12, n );
+      multi = Math.pow( 12, n );
       dozit = doudecimal.charAt( i );
       var no = if( dozit == 'A' ){
-				10;
+	10;
       } else if( dozit == 'B' ){
-				11;
+	11;
       } else { 
-				Std.parseInt( dozit );
+	Std.parseInt( dozit );
       }
       out = out + multi*no;
       n--;
