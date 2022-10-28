@@ -98,10 +98,10 @@ class Doudecimal_ {
             b.add( 'B' );
           case 45:
             if( i == 0 ){
-		          b.add( '-' );
-	  		    } else {  
-	            throw 'invalid Doudecimal';
-	          }
+		      b.add( '-' );
+	  		} else {  
+	          throw 'invalid Doudecimal';
+	        }
 		  case _:
             throw 'invalid Doudecimal';
       } 
@@ -115,7 +115,7 @@ class Doudecimal_ {
     for( i in 0...len ){
       no = StringTools.fastCodeAt( doudecimal, i ); 
       b.add(switch( no ){
-	      case 65:
+	    case 65:
           '↊';
         case 66:
           '↋';
@@ -150,13 +150,13 @@ class Doudecimal_ {
       b.add( s );
     }
     var out: Doudecimal_ = Type.createEmptyInstance( Doudecimal_);
-		if( negative ){
-			out.doudecimal = '-' + b.toString();
-    	out.int = -decimal;
-		} else {
+	if( negative ){
+	  out.doudecimal = '-' + b.toString();
+      out.int = -decimal;
+	} else {
       out.doudecimal = b.toString();
       out.int = decimal;
-		}
+	}
     return out;
   }
   public inline function toInt(): Int{ 
@@ -166,12 +166,12 @@ class Doudecimal_ {
     var out = 0.;
     var no = 0.;
     var dozit = '';
-		var negative = false;
-		if( doudecimal.charAt(0) == '-' ){
-			doudecimal = doudecimal.substr( 1 );
-			len = doudecimal.length;
-			negative = true;
-		}
+    var negative = false;
+    if( doudecimal.charAt(0) == '-' ){
+	  doudecimal = doudecimal.substr( 1 );
+      len = doudecimal.length;
+	  negative = true;
+    }
     for( i in 0...len ){
       multi = Math.pow( 12, n );
       dozit = doudecimal.charAt( i );
