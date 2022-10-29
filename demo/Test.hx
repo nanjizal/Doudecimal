@@ -23,11 +23,22 @@ inline function main(){
     var v7: Doudecimal = 1584;
     trace( 'v7 ' + v7 );
     trace( v5 );
-    // neko highest = 175598
-    // gets dodgy after about 0xFFFFFF on JS.
-    for( i in 0...1000 ){
+    var d0: Doudecimal = 'AB10';
+    trace( 'pair ' + d0.pair(0) );
+    trace( 'pair ' + d0.pair(1) );
+    //var d1: Doudecimal = 'AB10';
+    //trace( 'pair ' + d1.pair(1) );
+    #if !js
+    /*
+    var i: Int = 1;
+    while( i > 0 ){
         var d: Doudecimal = i;
         trace( i + ' = ' + d.toString() );
+        i+=1;
     }
-    
+    */
+    #end
+    var dd:Doudecimal_ = {doudecimal:"BBBBBBBB"};
+    var v8: String = StringTools.hex(dd.toInt(),8);
+    trace(v8);
 }

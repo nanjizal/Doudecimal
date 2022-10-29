@@ -36,6 +36,23 @@ Std.parseInt = function(x) {
 	}
 	return v;
 };
+var StringTools = function() { };
+StringTools.__name__ = true;
+StringTools.hex = function(n,digits) {
+	var s = "";
+	var hexChars = "0123456789ABCDEF";
+	while(true) {
+		s = hexChars.charAt(n & 15) + s;
+		n >>>= 4;
+		if(!(n > 0)) {
+			break;
+		}
+	}
+	if(digits != null) {
+		while(s.length < digits) s = "0" + s;
+	}
+	return s;
+};
 function Test_main() {
 	console.log("Test.hx:6:","test");
 	var dd = new doudecimal_Doudecimal_$("2↊↋");
@@ -70,181 +87,194 @@ function Test_main() {
 		var v = v1;
 		var tens = v;
 		var negative = false;
-		if(v <= 0) {
+		if(v < 0) {
 			tens = -v;
 			negative = true;
 		}
 		var b = "";
-		var targ = tens;
-		var v10 = Math.pow(12,10) | 0;
-		var v9 = Math.pow(12,9) | 0;
-		var v8 = Math.pow(12,8) | 0;
-		var v7 = Math.pow(12,7) | 0;
-		var v6 = Math.pow(12,6) | 0;
-		var v5 = Math.pow(12,5) | 0;
-		var v4 = Math.pow(12,4) | 0;
-		var v3 = Math.pow(12,3) | 0;
-		var v2 = Math.pow(12,2) | 0;
-		var v11 = 12;
-		var s = "";
-		var o = 0;
-		var n = "";
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v10 >= 0) {
-				targ -= v10;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+		if(tens == 0) {
+			b = "0";
+		} else {
+			doudecimal_Doudecimal_$.targTemp = tens;
+			var s = "";
+			var vx = doudecimal_Doudecimal_$.v10;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v9 >= 0) {
-				targ -= v9;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v9;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v8 >= 0) {
-				targ -= v8;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v8;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v7 >= 0) {
-				targ -= v7;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v7;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v6 >= 0) {
-				targ -= v6;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v6;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v5 >= 0) {
-				targ -= v5;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v5;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v4 >= 0) {
-				targ -= v4;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v4;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v3 >= 0) {
-				targ -= v3;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v3;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v2 >= 0) {
-				targ -= v2;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v2;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v11 >= 0) {
-				targ -= v11;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v1;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - 1 >= 0) {
-				--targ;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v0;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		var so = "";
-		var j = 0;
-		var _g = 0;
-		var _g1 = s.length;
-		while(_g < _g1) {
-			var i = _g++;
-			if(s.charAt(i) != "0") {
-				j = i;
-				break;
+			s = s1;
+			var j = 0;
+			var _g = 0;
+			var _g1 = s.length;
+			while(_g < _g1) {
+				var i = _g++;
+				if(s.charAt(i) != "0") {
+					j = i;
+					break;
+				}
 			}
+			s = HxOverrides.substr(s,j,null);
+			b = s;
 		}
-		so = HxOverrides.substr(s,j,null);
-		b = so;
 		var out = Object.create(doudecimal_Doudecimal_$.prototype);
 		if(negative) {
 			out.doudecimal = "-" + b;
@@ -385,181 +415,194 @@ function Test_main() {
 		var v = v2;
 		var tens = v;
 		var negative = false;
-		if(v <= 0) {
+		if(v < 0) {
 			tens = -v;
 			negative = true;
 		}
 		var b = "";
-		var targ = tens;
-		var v10 = Math.pow(12,10) | 0;
-		var v9 = Math.pow(12,9) | 0;
-		var v8 = Math.pow(12,8) | 0;
-		var v7 = Math.pow(12,7) | 0;
-		var v6 = Math.pow(12,6) | 0;
-		var v5 = Math.pow(12,5) | 0;
-		var v4 = Math.pow(12,4) | 0;
-		var v3 = Math.pow(12,3) | 0;
-		var v21 = Math.pow(12,2) | 0;
-		var v11 = 12;
-		var s = "";
-		var o = 0;
-		var n = "";
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v10 >= 0) {
-				targ -= v10;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+		if(tens == 0) {
+			b = "0";
+		} else {
+			doudecimal_Doudecimal_$.targTemp = tens;
+			var s = "";
+			var vx = doudecimal_Doudecimal_$.v10;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v9 >= 0) {
-				targ -= v9;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v9;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v8 >= 0) {
-				targ -= v8;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v8;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v7 >= 0) {
-				targ -= v7;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v7;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v6 >= 0) {
-				targ -= v6;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v6;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v5 >= 0) {
-				targ -= v5;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v5;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v4 >= 0) {
-				targ -= v4;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v4;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v3 >= 0) {
-				targ -= v3;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v3;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v21 >= 0) {
-				targ -= v21;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v2;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v11 >= 0) {
-				targ -= v11;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v1;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - 1 >= 0) {
-				--targ;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v0;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		var so = "";
-		var j = 0;
-		var _g = 0;
-		var _g1 = s.length;
-		while(_g < _g1) {
-			var i = _g++;
-			if(s.charAt(i) != "0") {
-				j = i;
-				break;
+			s = s1;
+			var j = 0;
+			var _g = 0;
+			var _g1 = s.length;
+			while(_g < _g1) {
+				var i = _g++;
+				if(s.charAt(i) != "0") {
+					j = i;
+					break;
+				}
 			}
+			s = HxOverrides.substr(s,j,null);
+			b = s;
 		}
-		so = HxOverrides.substr(s,j,null);
-		b = so;
 		var out = Object.create(doudecimal_Doudecimal_$.prototype);
 		if(negative) {
 			out.doudecimal = "-" + b;
@@ -583,181 +626,194 @@ function Test_main() {
 		var v = tmp;
 		var tens = v;
 		var negative = false;
-		if(v <= 0) {
+		if(v < 0) {
 			tens = -v;
 			negative = true;
 		}
 		var b = "";
-		var targ = tens;
-		var v10 = Math.pow(12,10) | 0;
-		var v9 = Math.pow(12,9) | 0;
-		var v8 = Math.pow(12,8) | 0;
-		var v7 = Math.pow(12,7) | 0;
-		var v6 = Math.pow(12,6) | 0;
-		var v5 = Math.pow(12,5) | 0;
-		var v4 = Math.pow(12,4) | 0;
-		var v3 = Math.pow(12,3) | 0;
-		var v21 = Math.pow(12,2) | 0;
-		var v11 = 12;
-		var s = "";
-		var o = 0;
-		var n = "";
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v10 >= 0) {
-				targ -= v10;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+		if(tens == 0) {
+			b = "0";
+		} else {
+			doudecimal_Doudecimal_$.targTemp = tens;
+			var s = "";
+			var vx = doudecimal_Doudecimal_$.v10;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v9 >= 0) {
-				targ -= v9;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v9;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v8 >= 0) {
-				targ -= v8;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v8;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v7 >= 0) {
-				targ -= v7;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v7;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v6 >= 0) {
-				targ -= v6;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v6;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v5 >= 0) {
-				targ -= v5;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v5;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v4 >= 0) {
-				targ -= v4;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v4;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v3 >= 0) {
-				targ -= v3;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v3;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v21 >= 0) {
-				targ -= v21;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v2;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v11 >= 0) {
-				targ -= v11;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v1;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - 1 >= 0) {
-				--targ;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v0;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		var so = "";
-		var j = 0;
-		var _g = 0;
-		var _g1 = s.length;
-		while(_g < _g1) {
-			var i = _g++;
-			if(s.charAt(i) != "0") {
-				j = i;
-				break;
+			s = s1;
+			var j = 0;
+			var _g = 0;
+			var _g1 = s.length;
+			while(_g < _g1) {
+				var i = _g++;
+				if(s.charAt(i) != "0") {
+					j = i;
+					break;
+				}
 			}
+			s = HxOverrides.substr(s,j,null);
+			b = s;
 		}
-		so = HxOverrides.substr(s,j,null);
-		b = so;
 		var out = Object.create(doudecimal_Doudecimal_$.prototype);
 		if(negative) {
 			out.doudecimal = "-" + b;
@@ -779,181 +835,194 @@ function Test_main() {
 		var v = v7;
 		var tens = v;
 		var negative = false;
-		if(v <= 0) {
+		if(v < 0) {
 			tens = -v;
 			negative = true;
 		}
 		var b = "";
-		var targ = tens;
-		var v10 = Math.pow(12,10) | 0;
-		var v9 = Math.pow(12,9) | 0;
-		var v8 = Math.pow(12,8) | 0;
-		var v7 = Math.pow(12,7) | 0;
-		var v6 = Math.pow(12,6) | 0;
-		var v51 = Math.pow(12,5) | 0;
-		var v4 = Math.pow(12,4) | 0;
-		var v3 = Math.pow(12,3) | 0;
-		var v2 = Math.pow(12,2) | 0;
-		var v1 = 12;
-		var s = "";
-		var o = 0;
-		var n = "";
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v10 >= 0) {
-				targ -= v10;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+		if(tens == 0) {
+			b = "0";
+		} else {
+			doudecimal_Doudecimal_$.targTemp = tens;
+			var s = "";
+			var vx = doudecimal_Doudecimal_$.v10;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v9 >= 0) {
-				targ -= v9;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v9;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v8 >= 0) {
-				targ -= v8;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v8;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v7 >= 0) {
-				targ -= v7;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v7;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v6 >= 0) {
-				targ -= v6;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v6;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v51 >= 0) {
-				targ -= v51;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v5;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v4 >= 0) {
-				targ -= v4;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v4;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v3 >= 0) {
-				targ -= v3;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v3;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v2 >= 0) {
-				targ -= v2;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v2;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - v1 >= 0) {
-				targ -= v1;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v1;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		o = 0;
-		var _g = 0;
-		while(_g < 12) {
-			var i = _g++;
-			if(targ - 1 >= 0) {
-				--targ;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+			s = s1;
+			var vx = doudecimal_Doudecimal_$.v0;
+			var s1 = s;
+			var o = 0;
+			var _g = 0;
+			while(_g < 12) {
+				var i = _g++;
+				if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+					doudecimal_Doudecimal_$.targTemp -= vx;
+					++o;
+				} else {
+					s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+					break;
+				}
 			}
-		}
-		var so = "";
-		var j = 0;
-		var _g = 0;
-		var _g1 = s.length;
-		while(_g < _g1) {
-			var i = _g++;
-			if(s.charAt(i) != "0") {
-				j = i;
-				break;
+			s = s1;
+			var j = 0;
+			var _g = 0;
+			var _g1 = s.length;
+			while(_g < _g1) {
+				var i = _g++;
+				if(s.charAt(i) != "0") {
+					j = i;
+					break;
+				}
 			}
+			s = HxOverrides.substr(s,j,null);
+			b = s;
 		}
-		so = HxOverrides.substr(s,j,null);
-		b = so;
 		var out = Object.create(doudecimal_Doudecimal_$.prototype);
 		if(negative) {
 			out.doudecimal = "-" + b;
@@ -966,200 +1035,486 @@ function Test_main() {
 	}
 	console.log("Test.hx:24:","v7 " + tmp);
 	console.log("Test.hx:25:",v5);
-	var _g = 251658240;
-	while(_g < 252706816) {
+	var len = "AB10".length;
+	var b_b = "";
+	var no = 0;
+	var _g = 0;
+	var _g1 = len;
+	while(_g < _g1) {
 		var i = _g++;
-		var d = i;
-		var tmp = i + " = ";
-		var v = d;
-		var tens = v;
-		var negative = false;
-		if(v <= 0) {
-			tens = -v;
-			negative = true;
-		}
-		var b = "";
-		var targ = tens;
-		var v10 = Math.pow(12,10) | 0;
-		var v9 = Math.pow(12,9) | 0;
-		var v8 = Math.pow(12,8) | 0;
-		var v7 = Math.pow(12,7) | 0;
-		var v6 = Math.pow(12,6) | 0;
-		var v5 = Math.pow(12,5) | 0;
-		var v4 = Math.pow(12,4) | 0;
-		var v3 = Math.pow(12,3) | 0;
-		var v2 = Math.pow(12,2) | 0;
-		var v1 = 12;
-		var s = "";
-		var o = 0;
-		var n = "";
-		o = 0;
-		var _g1 = 0;
-		while(_g1 < 12) {
-			var i1 = _g1++;
-			if(targ - v10 >= 0) {
-				targ -= v10;
-				++o;
+		no = "AB10".charCodeAt(i);
+		switch(no) {
+		case 35:
+			b_b += Std.string("A");
+			break;
+		case 42:
+			b_b += Std.string("B");
+			break;
+		case 45:
+			if(i == 0) {
+				b_b += Std.string("-");
 			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
+				throw haxe_Exception.thrown("invalid Doudecimal");
 			}
+			break;
+		case 48:
+			b_b += Std.string("0");
+			break;
+		case 49:
+			b_b += Std.string("1");
+			break;
+		case 50:
+			b_b += Std.string("2");
+			break;
+		case 51:
+			b_b += Std.string("3");
+			break;
+		case 52:
+			b_b += Std.string("4");
+			break;
+		case 53:
+			b_b += Std.string("5");
+			break;
+		case 54:
+			b_b += Std.string("6");
+			break;
+		case 55:
+			b_b += Std.string("7");
+			break;
+		case 56:
+			b_b += Std.string("8");
+			break;
+		case 57:
+			b_b += Std.string("9");
+			break;
+		case 59:
+			b_b += Std.string(";");
+			break;
+		case 65:
+			b_b += Std.string("A");
+			break;
+		case 66:
+			b_b += Std.string("B");
+			break;
+		case 69:
+			b_b += Std.string("B");
+			break;
+		case 84:
+			b_b += Std.string("A");
+			break;
+		case 88:
+			b_b += Std.string("A");
+			break;
+		case 90:
+			b_b += Std.string("B");
+			break;
+		case 97:
+			b_b += Std.string("A");
+			break;
+		case 98:
+			b_b += Std.string("B");
+			break;
+		case 102:
+			b_b += Std.string("A");
+			break;
+		case 116:
+			b_b += Std.string("A");
+			break;
+		case 122:
+			b_b += Std.string("B");
+			break;
+		case 8586:
+			b_b += Std.string("A");
+			break;
+		case 8587:
+			b_b += Std.string("B");
+			break;
+		default:
+			throw haxe_Exception.thrown("invalid Doudecimal");
 		}
-		o = 0;
-		var _g2 = 0;
-		while(_g2 < 12) {
-			var i2 = _g2++;
-			if(targ - v9 >= 0) {
-				targ -= v9;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		o = 0;
-		var _g3 = 0;
-		while(_g3 < 12) {
-			var i3 = _g3++;
-			if(targ - v8 >= 0) {
-				targ -= v8;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		o = 0;
-		var _g4 = 0;
-		while(_g4 < 12) {
-			var i4 = _g4++;
-			if(targ - v7 >= 0) {
-				targ -= v7;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		o = 0;
-		var _g5 = 0;
-		while(_g5 < 12) {
-			var i5 = _g5++;
-			if(targ - v6 >= 0) {
-				targ -= v6;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		o = 0;
-		var _g6 = 0;
-		while(_g6 < 12) {
-			var i6 = _g6++;
-			if(targ - v5 >= 0) {
-				targ -= v5;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		o = 0;
-		var _g7 = 0;
-		while(_g7 < 12) {
-			var i7 = _g7++;
-			if(targ - v4 >= 0) {
-				targ -= v4;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		o = 0;
-		var _g8 = 0;
-		while(_g8 < 12) {
-			var i8 = _g8++;
-			if(targ - v3 >= 0) {
-				targ -= v3;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		o = 0;
-		var _g9 = 0;
-		while(_g9 < 12) {
-			var i9 = _g9++;
-			if(targ - v2 >= 0) {
-				targ -= v2;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		o = 0;
-		var _g10 = 0;
-		while(_g10 < 12) {
-			var i10 = _g10++;
-			if(targ - v1 >= 0) {
-				targ -= v1;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		o = 0;
-		var _g11 = 0;
-		while(_g11 < 12) {
-			var i11 = _g11++;
-			if(targ - 1 >= 0) {
-				--targ;
-				++o;
-			} else {
-				n = o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
-				s += n;
-				break;
-			}
-		}
-		var so = "";
-		var j = 0;
-		var _g12 = 0;
-		var _g13 = s.length;
-		while(_g12 < _g13) {
-			var i12 = _g12++;
-			if(s.charAt(i12) != "0") {
-				j = i12;
-				break;
-			}
-		}
-		so = HxOverrides.substr(s,j,null);
-		b = so;
-		var out = Object.create(doudecimal_Doudecimal_$.prototype);
-		if(negative) {
-			out.doudecimal = "-" + b;
-		} else {
-			out.doudecimal = b;
-		}
-		out.int = v;
-		var dd = out;
-		console.log("Test.hx:33:",tmp + dd.doudecimal);
 	}
+	var dd_doudecimal = b_b;
+	var len = dd_doudecimal.length;
+	var n = len - 1;
+	var multi;
+	var out = 0.;
+	var dozit = "";
+	var negative = false;
+	if(dd_doudecimal.charAt(0) == "-") {
+		dd_doudecimal = HxOverrides.substr(dd_doudecimal,1,null);
+		len = dd_doudecimal.length;
+		negative = true;
+	}
+	var _g = 0;
+	var _g1 = len;
+	while(_g < _g1) {
+		var i = _g++;
+		multi = Math.pow(12,n);
+		dozit = dd_doudecimal.charAt(i);
+		var no = dozit == "A" ? 10 : dozit == "B" ? 11 : Std.parseInt(dozit);
+		out += multi * no;
+		--n;
+	}
+	var dd_int = negative ? -(out | 0) : out | 0;
+	var d0 = dd_int;
+	console.log("Test.hx:27:","pair " + Std.string(doudecimal_Doudecimal.pair(d0,0)));
+	console.log("Test.hx:28:","pair " + Std.string(doudecimal_Doudecimal.pair(d0,1)));
+	var len = "BBBBBBBB".length;
+	var b_b = "";
+	var no = 0;
+	var _g = 0;
+	var _g1 = len;
+	while(_g < _g1) {
+		var i = _g++;
+		no = "BBBBBBBB".charCodeAt(i);
+		switch(no) {
+		case 35:
+			b_b += Std.string("A");
+			break;
+		case 42:
+			b_b += Std.string("B");
+			break;
+		case 45:
+			if(i == 0) {
+				b_b += Std.string("-");
+			} else {
+				throw haxe_Exception.thrown("invalid Doudecimal");
+			}
+			break;
+		case 48:
+			b_b += Std.string("0");
+			break;
+		case 49:
+			b_b += Std.string("1");
+			break;
+		case 50:
+			b_b += Std.string("2");
+			break;
+		case 51:
+			b_b += Std.string("3");
+			break;
+		case 52:
+			b_b += Std.string("4");
+			break;
+		case 53:
+			b_b += Std.string("5");
+			break;
+		case 54:
+			b_b += Std.string("6");
+			break;
+		case 55:
+			b_b += Std.string("7");
+			break;
+		case 56:
+			b_b += Std.string("8");
+			break;
+		case 57:
+			b_b += Std.string("9");
+			break;
+		case 59:
+			b_b += Std.string(";");
+			break;
+		case 65:
+			b_b += Std.string("A");
+			break;
+		case 66:
+			b_b += Std.string("B");
+			break;
+		case 69:
+			b_b += Std.string("B");
+			break;
+		case 84:
+			b_b += Std.string("A");
+			break;
+		case 88:
+			b_b += Std.string("A");
+			break;
+		case 90:
+			b_b += Std.string("B");
+			break;
+		case 97:
+			b_b += Std.string("A");
+			break;
+		case 98:
+			b_b += Std.string("B");
+			break;
+		case 102:
+			b_b += Std.string("A");
+			break;
+		case 116:
+			b_b += Std.string("A");
+			break;
+		case 122:
+			b_b += Std.string("B");
+			break;
+		case 8586:
+			b_b += Std.string("A");
+			break;
+		case 8587:
+			b_b += Std.string("B");
+			break;
+		default:
+			throw haxe_Exception.thrown("invalid Doudecimal");
+		}
+	}
+	var dd_doudecimal = b_b;
+	var len = dd_doudecimal.length;
+	var n = len - 1;
+	var multi;
+	var out = 0.;
+	var dozit = "";
+	var negative = false;
+	if(dd_doudecimal.charAt(0) == "-") {
+		dd_doudecimal = HxOverrides.substr(dd_doudecimal,1,null);
+		len = dd_doudecimal.length;
+		negative = true;
+	}
+	var _g = 0;
+	var _g1 = len;
+	while(_g < _g1) {
+		var i = _g++;
+		multi = Math.pow(12,n);
+		dozit = dd_doudecimal.charAt(i);
+		var no = dozit == "A" ? 10 : dozit == "B" ? 11 : Std.parseInt(dozit);
+		out += multi * no;
+		--n;
+	}
+	var dd_int = negative ? -(out | 0) : out | 0;
+	var len = dd_doudecimal.length;
+	var n = len - 1;
+	var multi;
+	var out = 0.;
+	var dozit = "";
+	var negative = false;
+	if(dd_doudecimal.charAt(0) == "-") {
+		dd_doudecimal = HxOverrides.substr(dd_doudecimal,1,null);
+		len = dd_doudecimal.length;
+		negative = true;
+	}
+	var _g = 0;
+	var _g1 = len;
+	while(_g < _g1) {
+		var i = _g++;
+		multi = Math.pow(12,n);
+		dozit = dd_doudecimal.charAt(i);
+		var no = dozit == "A" ? 10 : dozit == "B" ? 11 : Std.parseInt(dozit);
+		out += multi * no;
+		--n;
+	}
+	var v8 = StringTools.hex(negative ? -(out | 0) : out | 0,8);
+	console.log("Test.hx:43:",v8);
 }
+var doudecimal_Doudecimal = {};
+doudecimal_Doudecimal.pair = function(this1,no) {
+	var v = this1;
+	var tens = v;
+	var s;
+	var negative = false;
+	if(v < 0) {
+		tens = -v;
+		negative = true;
+	}
+	var b = "";
+	if(tens == 0) {
+		b = "0";
+	} else {
+		doudecimal_Doudecimal_$.targTemp = tens;
+		var s = "";
+		var vx = doudecimal_Doudecimal_$.v10;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v9;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v8;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v7;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v6;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v5;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v4;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v3;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v2;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v1;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var vx = doudecimal_Doudecimal_$.v0;
+		var s1 = s;
+		var o = 0;
+		var _g = 0;
+		while(_g < 12) {
+			var i = _g++;
+			if(doudecimal_Doudecimal_$.targTemp - vx >= 0) {
+				doudecimal_Doudecimal_$.targTemp -= vx;
+				++o;
+			} else {
+				s1 += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+				break;
+			}
+		}
+		s = s1;
+		var j = 0;
+		var _g = 0;
+		var _g1 = s.length;
+		while(_g < _g1) {
+			var i = _g++;
+			if(s.charAt(i) != "0") {
+				j = i;
+				break;
+			}
+		}
+		s = HxOverrides.substr(s,j,null);
+		b = s;
+	}
+	var out = Object.create(doudecimal_Doudecimal_$.prototype);
+	if(negative) {
+		out.doudecimal = "-" + b;
+	} else {
+		out.doudecimal = b;
+	}
+	out.int = v;
+	var _this = out;
+	var no1 = no;
+	--no1;
+	if(_this.doudecimal.length >= (no1 * 2 | 0)) {
+		var p = HxOverrides.substr(_this.doudecimal,no1 * 2 | 0,2);
+		return new doudecimal_Doudecimal_$(p);
+	} else {
+		return new doudecimal_Doudecimal_$("0");
+	}
+};
 var doudecimal_Doudecimal_$ = function(doudecimal) {
 	var len = doudecimal.length;
 	var b_b = "";
@@ -1406,5 +1761,16 @@ if( String.fromCodePoint == null ) String.fromCodePoint = function(c) { return c
 String.__name__ = true;
 Array.__name__ = true;
 js_Boot.__toStr = ({ }).toString;
+doudecimal_Doudecimal_$.v10 = 1787822080;
+doudecimal_Doudecimal_$.v9 = 864813056;
+doudecimal_Doudecimal_$.v8 = 429981696;
+doudecimal_Doudecimal_$.v7 = 35831808;
+doudecimal_Doudecimal_$.v6 = 2985984;
+doudecimal_Doudecimal_$.v5 = 248832;
+doudecimal_Doudecimal_$.v4 = 20736;
+doudecimal_Doudecimal_$.v3 = 1728;
+doudecimal_Doudecimal_$.v2 = 144;
+doudecimal_Doudecimal_$.v1 = 12;
+doudecimal_Doudecimal_$.v0 = 1;
 Test_main();
 })({});

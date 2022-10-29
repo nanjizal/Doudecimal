@@ -16,6 +16,25 @@ abstract Doudecimal( Int ) from Int to Int {
     var dd = new Doudecimal_( s );
     return dd.int;
   }
+  public inline function pair( no: Int ): Doudecimal_ {
+    var v: Int = this;
+    return Doudecimal_.fromInt( v ).pair( no );
+  }
+  
+  /*
+  public inline function single( no: Int ): Doudecimal {
+    var v: Int = this;
+    var dd = Doudecimal_.fromInt( v );
+    return if( dd.length >= no ){
+      var s = dd.substr( no, 1 );
+      var d: Doudecimal = s; 
+      d;
+    } else {
+      var d: Doudecimal = '0';
+      d;
+    }
+  }
+  */
   @:op(A/B) function divide( b: Doudecimal ):Doudecimal;
   @:op(A+B) function add( b: Doudecimal ):Doudecimal;
   @:op(A*B) function multiply( b: Doudecimal ):Doudecimal;
@@ -27,11 +46,39 @@ abstract Doudecimal( Int ) from Int to Int {
 
 @:structInit
 class Doudecimal_ {
+  public static final v11 = 743008370688;
+  public static final v10 = 1787822080;
+  public static final v9  = 864813056;
+  public static final v8  = 429981696;
+  public static final v7  = 35831808;
+  public static final v6  = 2985984;
+  public static final v5  = 248832;
+  public static final v4  = 20736;
+  public static final v3  = 1728;
+  public static final v2  = 144;
+  public static final v1  = 12;
+  public static final v0  = 1;
   public var doudecimal: String;
   public var int: Int;
   public inline function new( doudecimal: String ){
     this.doudecimal = checkStr( doudecimal );
     int = toInt();
+  }
+  public var length( get, never ):Int;
+  public inline function get_length(): Int {
+    return doudecimal.length;
+  }
+  public inline function substr( pos: Int, len: Int ){
+    return doudecimal.substr( pos, len );
+  }
+  public inline function pair( no: Int ){
+    no = no-1;
+    return if( length >= Std.int( no*2 ) ){
+      var p = substr( Std.int( no*2 ), 2 );
+      new Doudecimal_( p ); 
+    } else {
+      new Doudecimal_( '0' );
+    }
   }
   @:keep 
   public inline function toString():String {
@@ -266,7 +313,7 @@ class Doudecimal_ {
     var tens = decimal;
     var s: String;
     var negative: Bool = false;
-    if( decimal <= 0 ){
+    if( decimal < 0 ){
       tens = -decimal;
       negative = true; 
     }
@@ -281,143 +328,41 @@ class Doudecimal_ {
     out.int = decimal;
     return out;
   }
+  static var targTemp: Int;
+  static inline function digitProcess( vx: Int, s: String ){
+      var o = 0;
+      for( i in 0...12 ){
+        if( targTemp - vx >= 0 ){
+          targTemp = targTemp - vx;
+          o++;
+        } else {
+          s = s + (( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o )));
+          break;
+        }
+      }
+    return s;
+  }
   static inline function convert( targ: Int ): String {
-    var v10 = Std.int(Math.pow(12,10));
-    var v9 =  Std.int(Math.pow(12,9));
-    var v8 =  Std.int(Math.pow(12,8));
-    var v7 =  Std.int(Math.pow(12,7));
-    var v6 =  Std.int(Math.pow(12,6));
-    var v5 =  Std.int(Math.pow(12,5));
-    var v4 =  Std.int(Math.pow(12,4));
-    var v3 =  Std.int(Math.pow(12,3));
-    var v2 =  Std.int(Math.pow(12,2));
-    var v1 =  12;
-    var s = '';
-    var o = 0;
-    var n = '';
-
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v10 >= 0 ){
-        targ = targ - v10;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
+    return if( targ == 0 ){
+      '0';
+    } else {
+      targTemp = targ;
+      var s = '';
+      s = digitProcess( v10, s );
+      s = digitProcess( v9, s );
+      s = digitProcess( v8, s );
+      s = digitProcess( v7, s );
+      s = digitProcess( v6, s );
+      s = digitProcess( v5, s );
+      s = digitProcess( v4, s );
+      s = digitProcess( v3, s );
+      s = digitProcess( v2, s );
+      s = digitProcess( v1, s );
+      s = digitProcess( v0, s );
+      s = stripLeading0( s );  
     }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v9 >= 0 ){
-        targ = targ - v9;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v8 >= 0 ){
-        targ = targ - v8;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v7 >= 0 ){
-        targ = targ - v7;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v6 >= 0 ){
-        targ = targ - v6;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v5 >= 0 ){
-        targ = targ - v5;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v4 >= 0 ){
-        targ = targ - v4;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v3 >= 0 ){
-        targ = targ - v3;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v2 >= 0 ){
-        targ = targ - v2;
-        o++;
-      } else{
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - v1 >= 0 ){
-        targ = targ - v1;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    o = 0;
-    for( i in 0...12 ){
-      if( targ - 1 >= 0 ){
-          targ = targ - 1;
-        o++;
-      } else {
-        n = ( o == 10 )? 'A': (( o == 11 )? 'B': Std.string( o ));
-        s = s + n;
-        break;
-      }
-    }
-    var so: String = '';
+  }
+  public static inline function stripLeading0( s: String ): String {
     var j = 0;
     for( i in 0...s.length ){
       if( s.charAt( i ) != '0' ){
@@ -425,8 +370,7 @@ class Doudecimal_ {
         break;
       }
     }
-    so = s.substr( j );
-    return so;
+    return s.substr( j );
   }
   public inline function toInt(): Int{ 
     var len = doudecimal.length;

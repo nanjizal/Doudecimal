@@ -1,0 +1,4 @@
+-cp ../src
+--main Test
+-cppia test.cppia
+-cmd haxelib run hxcpp test.cppia

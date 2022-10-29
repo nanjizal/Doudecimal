@@ -1,0 +1,4 @@
+-cp ../src
+--main Test
+ --cpp cpp
+ -D static_link
