@@ -5,36 +5,26 @@ abstract Doudecimal( Int ) from Int to Int {
   public inline function new( v: Int ){
     this = v;
   }
+  public  function dd():Doudecimal_{
+    var v: Int = this;
+    var d = Doudecimal_.fromInt( v );
+    return d;
+  }
   @:to
   public inline function toString(): String {
-    var v: Int = this;
-    var dd = Doudecimal_.fromInt( v );
-    return dd.toString();
+    return dd().toString();
   }
   @:from
   public static inline function fromString( s: String ): Doudecimal {
-    var dd = new Doudecimal_( s );
-    return dd.int;
+    var d = new Doudecimal_( s );
+    return new Doudecimal( d.int );
   }
   public inline function pair( no: Int ): Doudecimal_ {
-    var v: Int = this;
-    return Doudecimal_.fromInt( v ).pair( no );
+    return dd().pair( no );
   }
-  
-  /*
-  public inline function single( no: Int ): Doudecimal {
-    var v: Int = this;
-    var dd = Doudecimal_.fromInt( v );
-    return if( dd.length >= no ){
-      var s = dd.substr( no, 1 );
-      var d: Doudecimal = s; 
-      d;
-    } else {
-      var d: Doudecimal = '0';
-      d;
-    }
+  public inline function single( no: Int ): Doudecimal_ {
+    return dd().single( no );
   }
-  */
   @:op(A/B) function divide( b: Doudecimal ):Doudecimal;
   @:op(A+B) function add( b: Doudecimal ):Doudecimal;
   @:op(A*B) function multiply( b: Doudecimal ):Doudecimal;
@@ -71,7 +61,7 @@ class Doudecimal_ {
   public inline function substr( pos: Int, len: Int ){
     return doudecimal.substr( pos, len );
   }
-  public inline function pair( no: Int ){
+  public inline function pair( no: Int ): Doudecimal_{
     no = no-1;
     return if( length >= Std.int( no*2 ) ){
       var p = substr( Std.int( no*2 ), 2 );
@@ -80,6 +70,83 @@ class Doudecimal_ {
       new Doudecimal_( '0' );
     }
   }
+  public inline function single( no: Int ):Doudecimal_{
+    return if( length >= no ){
+      var p = substr( no, 1 );
+      new Doudecimal_( p ); 
+    } else {
+      new Doudecimal_( '0' );
+    }
+  }
+  public inline function third( dig: Int, four: Int ){
+    if( four != 0 || four != 1 || four != 2 ) return null;
+    var s = single( dig );
+    return { four0: s.int & 0x3, four1: s.int >> 2 & 0x3, four2: s.int >> 4 & 0x3 }  
+  }
+  public inline function setARGB( a: Float, r: Float, g: Float, b: Float ){
+    var aD = Math.round( a * 143 );
+    var rD = Math.round( r * 143 );
+    var gD = Math.round( g * 143 );
+    var bD = Math.round( b * 143 );
+    var col = aD << 18 | rD << 12 | gD << 6 | bD;
+    var temp = fromInt( col );
+    doudecimal = temp.doudecimal;
+    int = toInt();
+    if( length != 8 ) pad_BBbbBBbb();
+  }
+  public var alpha( get, never ): Float;
+  public inline function get_alpha(): Float {
+    if( length != 8 ) pad_BBbbBBbb();
+    var s = pair( 0 );
+    var i = s.int;
+    return ( i == 0 )? 0.: i/143;
+  }
+  public var red( get, never ): Float;
+  public inline function get_red(): Float {
+    if( length != 8 ) pad_BBbbBBbb();
+    var s = pair( 1 );
+    var i = s.int;
+    return ( i == 0 )? 0.: i/143;
+  }
+  public var green( get, never ): Float;
+  public inline function get_green(): Float {
+    if( length != 8 ) pad_BBbbBBbb();
+    var s = pair( 2 );
+    var i = s.int;
+    return ( i == 0 )? 0.: i/143;
+  }
+  public var blue( get, never ): Float;
+  public inline function get_blue(): Float {
+    if( length != 8 ) pad_BBbbBBbb();
+    var s = pair( 3 );
+    var i = s.int;
+    return ( i == 0 )? 0.: i/143;
+  }
+  public inline function colorHex(): Int {
+    return ( Std.int( Math.round( alpha * 255. )) << 24 ) 
+         | ( Std.int( Math.round( red * 255. )) << 16 ) 
+         | ( Std.int( Math.round( green * 255. )) << 8 ) 
+         | ( Std.int( Math.round( blue * 255. )));
+  }
+  public inline function colorflip13(): Int {
+    return ( Std.int( Math.round( alpha * 255. )) << 24 ) 
+         | ( Std.int( Math.round( blue * 255. )) << 16 ) 
+         | ( Std.int( Math.round( green * 255. )) << 8 ) 
+         | ( Std.int( Math.round( red * 255. )));
+  }
+  public inline function pad_BBbbBBbb(){
+    var s = '';
+    for( i in 0...8-length ){
+      s += '0';
+    }
+    s += doudecimal;
+    doudecimal = s;
+  }
+  /*
+  0xFFF
+  8         8 .    |  8     .   8      |  8 .       8     .
+  1 2 3 1   2 3 1 2   3 1 2 3   1 2 3 1   2 3 1 2   3 1 2 3
+  */
   @:keep 
   public inline function toString():String {
     return doudecimal;
@@ -341,6 +408,17 @@ class Doudecimal_ {
         }
       }
     return s;
+  }
+  static inline function convert2( targ: Int ): String {
+    return if( targ == 0 ){
+      '0';
+    } else {
+      targTemp = targ;
+      var s = '';
+      s = digitProcess( v1, s );
+      s = digitProcess( v0, s );
+      s = stripLeading0( s );  
+    }
   }
   static inline function convert( targ: Int ): String {
     return if( targ == 0 ){

@@ -26,6 +26,18 @@ inline function main(){
     var d0: Doudecimal = 'AB10';
     trace( 'pair ' + d0.pair(0) );
     trace( 'pair ' + d0.pair(1) );
+
+    trace( 'pair ' + d0.single(0) );
+    trace( 'pair ' + d0.single(1) );
+    trace( 'pair ' + d0.single(2) );
+    trace( 'pair ' + d0.single(3) );
+    var d2: Doudecimal = 'BBbbBB00';
+    for( i in 0...4 ){
+        trace( d2.pair(i) );
+    }
+    // test color
+    
+    trace( 'color ' + StringTools.hex( d2.dd().colorHex(), 8 ) );
     //var d1: Doudecimal = 'AB10';
     //trace( 'pair ' + d1.pair(1) );
     #if !js
