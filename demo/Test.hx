@@ -1,6 +1,8 @@
 package;
 
 import doudecimal.Doudecimal;
+import doudecimal.Doudecimal_Int;
+import doudecimal.Doudecimal_Color;
 
 inline function main(){
     trace('test');
@@ -9,21 +11,21 @@ inline function main(){
     
     trace( dd );
     trace( dd.toDozenal() );
-    var v1: Doudecimal = -1;
+    var v1: Doudecimal_Int = -1;
     trace(v1);
-    var v2: Doudecimal = '2A4';
+    var v2: Doudecimal_Int = '2A4';
     trace( v2 );
     var v6: Int = v2;
     trace( v6 );
     var v3: Int = v2;
     trace( v3 );
     trace( v1+v2 );
-    var v4: Doudecimal = v1+v2;
+    var v4: Doudecimal_Int = v1+v2;
     var v5: Int = v4;
-    var v7: Doudecimal = 1584;
+    var v7: Doudecimal_Int = 1584;
     trace( 'v7 ' + v7 );
     trace( v5 );
-    var d0: Doudecimal = 'AB10';
+    var d0: Doudecimal_Int = 'AB10';
     trace( 'pair ' + d0.pair(0) );
     trace( 'pair ' + d0.pair(1) );
 
@@ -31,13 +33,13 @@ inline function main(){
     trace( 'pair ' + d0.single(1) );
     trace( 'pair ' + d0.single(2) );
     trace( 'pair ' + d0.single(3) );
-    var d2: Doudecimal = 'BBbbBB00';
+    var d2: Doudecimal_Color = 'BBbbBB00';
     for( i in 0...4 ){
         trace( d2.pair(i) );
     }
     // test color
     
-    trace( 'color ' + StringTools.hex( d2.dd().colorHex(), 8 ) );
+    trace( 'color ' + StringTools.hex( d2.colorHex(), 8 ) );
     //var d1: Doudecimal = 'AB10';
     //trace( 'pair ' + d1.pair(1) );
     #if !js
@@ -50,7 +52,7 @@ inline function main(){
     }
     */
     #end
-    var dd:Doudecimal_ = {doudecimal:"BBBBBBBB"};
+    var dd: Doudecimal_Color = "BBBBBBBB";
     var v8: String = StringTools.hex(dd.toInt(),8);
     trace(v8);
 }

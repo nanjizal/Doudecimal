@@ -1,39 +1,5 @@
 package doudecimal;
 
-@:forward
-abstract Doudecimal( Int ) from Int to Int {
-  public inline function new( v: Int ){
-    this = v;
-  }
-  public  function dd():Doudecimal_{
-    var v: Int = this;
-    var d = Doudecimal_.fromInt( v );
-    return d;
-  }
-  @:to
-  public inline function toString(): String {
-    return dd().toString();
-  }
-  @:from
-  public static inline function fromString( s: String ): Doudecimal {
-    var d = new Doudecimal_( s );
-    return new Doudecimal( d.int );
-  }
-  public inline function pair( no: Int ): Doudecimal_ {
-    return dd().pair( no );
-  }
-  public inline function single( no: Int ): Doudecimal_ {
-    return dd().single( no );
-  }
-  @:op(A/B) function divide( b: Doudecimal ):Doudecimal;
-  @:op(A+B) function add( b: Doudecimal ):Doudecimal;
-  @:op(A*B) function multiply( b: Doudecimal ):Doudecimal;
-  @:op(++A) function pre():Doudecimal;
-  @:op(A++) function post():Doudecimal;
-  @:op(-A) function negate():Doudecimal;
-  @:op(A%B) function mod( b: Doudecimal ):Doudecimal;
-}
-
 @:structInit
 class Doudecimal_ {
   public static final v11 = 743008370688;
@@ -54,6 +20,10 @@ class Doudecimal_ {
     this.doudecimal = checkStr( doudecimal );
     int = toInt();
   }
+  public inline function writeValue( str: String ){
+    this.doudecimal = checkStr( str );
+    int = toInt();
+  }
   public var length( get, never ):Int;
   public inline function get_length(): Int {
     return doudecimal.length;
@@ -65,88 +35,56 @@ class Doudecimal_ {
     no = no-1;
     return if( length >= Std.int( no*2 ) ){
       var p = substr( Std.int( no*2 ), 2 );
-      new Doudecimal_( p ); 
+      quickZero(); 
     } else {
       new Doudecimal_( '0' );
     }
+  }
+  public inline function splicePair( no: Int, pair_: Doudecimal_ ){
+    var buf: StringBuf = new StringBuf();
+    var pos0 = 2*(no-1);
+    var pos1 = pos0+1;
+    var l = this.doudecimal.length;
+    var toggle = true;
+    for( i in 0...l ){
+      if( i != pos0 && i != pos1 ){
+        buf.addChar( StringTools.fastCodeAt(this.doudecimal, i ) ); 
+      } else {
+        if( toggle ){
+          toggle = false;
+          buf.addChar( StringTools.fastCodeAt( pair_.doudecimal, 0 ) );  
+        } else {
+          buf.addChar( StringTools.fastCodeAt( pair_.doudecimal, 1 ) );
+        }
+      }
+    }
+    writeValue( buf.toString() );
+  }
+  public inline function replaceAt( no: Int, d: Doudecimal_ ){
+    var buf: StringBuf = new StringBuf();
+    var l = this.length;
+    var l2 = d.length;
+    var pos0 = no;
+    var pos1 = pos0 + l2;
+    var dCount = 0;
+    for( i in 0...l ){
+      if( i < pos0 && i > pos1 ){
+        buf.addChar( StringTools.fastCodeAt( doudecimal, i ) ); 
+      } else {
+        buf.addChar( StringTools.fastCodeAt( d.doudecimal, dCount ) );
+        dCount++;
+      }
+    }
+    writeValue( buf.toString() );
   }
   public inline function single( no: Int ):Doudecimal_{
     return if( length >= no ){
       var p = substr( no, 1 );
-      new Doudecimal_( p ); 
+      new Doudecimal_( p );
     } else {
-      new Doudecimal_( '0' );
+      quickZero();
     }
   }
-  public inline function third( dig: Int, four: Int ){
-    if( four != 0 || four != 1 || four != 2 ) return null;
-    var s = single( dig );
-    return { four0: s.int & 0x3, four1: s.int >> 2 & 0x3, four2: s.int >> 4 & 0x3 }  
-  }
-  public inline function setARGB( a: Float, r: Float, g: Float, b: Float ){
-    var aD = Math.round( a * 143 );
-    var rD = Math.round( r * 143 );
-    var gD = Math.round( g * 143 );
-    var bD = Math.round( b * 143 );
-    var col = aD << 18 | rD << 12 | gD << 6 | bD;
-    var temp = fromInt( col );
-    doudecimal = temp.doudecimal;
-    int = toInt();
-    if( length != 8 ) pad_BBbbBBbb();
-  }
-  public var alpha( get, never ): Float;
-  public inline function get_alpha(): Float {
-    if( length != 8 ) pad_BBbbBBbb();
-    var s = pair( 0 );
-    var i = s.int;
-    return ( i == 0 )? 0.: i/143;
-  }
-  public var red( get, never ): Float;
-  public inline function get_red(): Float {
-    if( length != 8 ) pad_BBbbBBbb();
-    var s = pair( 1 );
-    var i = s.int;
-    return ( i == 0 )? 0.: i/143;
-  }
-  public var green( get, never ): Float;
-  public inline function get_green(): Float {
-    if( length != 8 ) pad_BBbbBBbb();
-    var s = pair( 2 );
-    var i = s.int;
-    return ( i == 0 )? 0.: i/143;
-  }
-  public var blue( get, never ): Float;
-  public inline function get_blue(): Float {
-    if( length != 8 ) pad_BBbbBBbb();
-    var s = pair( 3 );
-    var i = s.int;
-    return ( i == 0 )? 0.: i/143;
-  }
-  public inline function colorHex(): Int {
-    return ( Std.int( Math.round( alpha * 255. )) << 24 ) 
-         | ( Std.int( Math.round( red * 255. )) << 16 ) 
-         | ( Std.int( Math.round( green * 255. )) << 8 ) 
-         | ( Std.int( Math.round( blue * 255. )));
-  }
-  public inline function colorflip13(): Int {
-    return ( Std.int( Math.round( alpha * 255. )) << 24 ) 
-         | ( Std.int( Math.round( blue * 255. )) << 16 ) 
-         | ( Std.int( Math.round( green * 255. )) << 8 ) 
-         | ( Std.int( Math.round( red * 255. )));
-  }
-  public inline function pad_BBbbBBbb(){
-    var s = '';
-    for( i in 0...8-length ){
-      s += '0';
-    }
-    s += doudecimal;
-    doudecimal = s;
-  }
-  /*
-  0xFFF
-  8         8 .    |  8     .   8      |  8 .       8     .
-  1 2 3 1   2 3 1 2   3 1 2 3   1 2 3 1   2 3 1 2   3 1 2 3
-  */
   @:keep 
   public inline function toString():String {
     return doudecimal;
@@ -375,7 +313,19 @@ class Doudecimal_ {
       Std.parseInt( str );
     }
   }
-  
+  public inline static function quickZero(): Doudecimal_ {
+    var out: Doudecimal_ = Type.createEmptyInstance( Doudecimal_ );
+    out.int = 0;
+    out.doudecimal = '0';
+    return out;
+  }
+  public inline static function from2Channel( decimal: Int ): Doudecimal_ {
+    // assumes positive and within range as only called for colors?
+    var out: Doudecimal_ = Type.createEmptyInstance( Doudecimal_ );
+    out.doudecimal = convertPair( decimal );
+    out.int = decimal;
+    return out;
+  }
   public inline static function fromInt( decimal: Int ): Doudecimal_{
     var tens = decimal;
     var s: String;
@@ -386,7 +336,7 @@ class Doudecimal_ {
     }
     var b: String = '';
     b = convert( tens );
-    var out: Doudecimal_ = Type.createEmptyInstance( Doudecimal_);
+    var out: Doudecimal_ = Type.createEmptyInstance( Doudecimal_ );
     if( negative ){
       out.doudecimal = '-' + b;
     } else {
@@ -409,7 +359,7 @@ class Doudecimal_ {
       }
     return s;
   }
-  static inline function convert2( targ: Int ): String {
+  static inline function convertPair( targ: Int ): String {
     return if( targ == 0 ){
       '0';
     } else {
@@ -417,7 +367,7 @@ class Doudecimal_ {
       var s = '';
       s = digitProcess( v1, s );
       s = digitProcess( v0, s );
-      s = stripLeading0( s );  
+      //s = stripLeading0( s );  
     }
   }
   static inline function convert( targ: Int ): String {
