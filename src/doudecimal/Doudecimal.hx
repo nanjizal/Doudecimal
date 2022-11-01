@@ -35,9 +35,9 @@ class Doudecimal_ {
     no = no-1;
     return if( length >= Std.int( no*2 ) ){
       var p = substr( Std.int( no*2 ), 2 );
-      quickZero(); 
+      new Doudecimal_( p );
     } else {
-      new Doudecimal_( '0' );
+      quickZero(); 
     }
   }
   public inline function splicePair( no: Int, pair_: Doudecimal_ ){

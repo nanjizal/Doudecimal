@@ -3,6 +3,7 @@ package;
 import doudecimal.Doudecimal;
 import doudecimal.Doudecimal_Int;
 import doudecimal.Doudecimal_Color;
+import doudecimal.Doudecimal_Image;
 
 inline function main(){
     trace('test');
@@ -55,4 +56,5 @@ inline function main(){
     var dd: Doudecimal_Color = "BBBBBBBB";
     var v8: String = StringTools.hex(dd.toInt(),8);
     trace(v8);
+    var img = new Doudecimal_Image( 250, 250 );
 }
