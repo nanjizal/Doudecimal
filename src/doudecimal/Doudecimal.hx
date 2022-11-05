@@ -1,40 +1,58 @@
 package doudecimal;
+import doudecimal.format.doudecimalString.Writer;
+import doudecimal.format.doudecimalString.Reader;
 
 @:structInit
 class Doudecimal_ {
-  public static final v11 = 743008370688;
-  public static final v10 = 1787822080;
-  public static final v9  = 864813056;
-  public static final v8  = 429981696;
-  public static final v7  = 35831808;
-  public static final v6  = 2985984;
-  public static final v5  = 248832;
-  public static final v4  = 20736;
-  public static final v3  = 1728;
-  public static final v2  = 144;
-  public static final v1  = 12;
-  public static final v0  = 1;
   public var doudecimal: String;
-  public var int: Int;
-  public inline function new( doudecimal: String ){
-    this.doudecimal = checkStr( doudecimal );
-    int = toInt();
+  public var uint: UInt;
+  public inline function new( doudecimal: String = '0' ){
+    writeValue( doudecimal );
   }
   public inline function writeValue( str: String ){
-    this.doudecimal = checkStr( str );
-    int = toInt();
+    if( str == '' || str == '0' ){
+      uint = 0;
+      doudecimal = '0';
+    } else {
+      doudecimal = toStr( str );
+      uint       = toUInt_( doudecimal );
+    }
+  }
+  public inline function toUInt(){
+    uint = toUInt_( doudecimal );
+    return uint;
+  }
+  inline static function empty(){
+    return Type.createEmptyInstance( Doudecimal_ );
+  }
+  public inline static function quickZero(): Doudecimal_ {
+    var out = empty();
+    out.uint = 0;
+    out.doudecimal = '0';
+    return out;
+  }
+  public inline function zeroPad( no: Int ){
+    if( no > 0 ){
+      var s = '';
+      for( i in 0...no - length ) s += '0';
+      s = s + this.doudecimal;
+      this.doudecimal = s;
+    }
   }
   public var length( get, never ):Int;
   public inline function get_length(): Int {
     return doudecimal.length;
   }
+  public inline function toDozenal(): String {
+    return toDozenal_( doudecimal );
+  }
   public inline function substr( pos: Int, len: Int ){
     return doudecimal.substr( pos, len );
   }
   public inline function pair( no: Int ): Doudecimal_{
-    no = no-1;
+    var no1 = no;
     return if( length >= Std.int( no*2 ) ){
-      var p = substr( Std.int( no*2 ), 2 );
+      var p = substr( Std.int( no1*2 ), 2 );
       new Doudecimal_( p );
     } else {
       quickZero(); 
@@ -89,6 +107,22 @@ class Doudecimal_ {
   public inline function toString():String {
     return doudecimal;
   }
+  static inline function convertPair( targ: Int ): String {
+    return convertPair( targ );
+  }
+    /*
+    return if( targ == 0 ){
+      '0';
+    } else {
+      targTemp = targ;
+      var s = '';
+      s = digitProcess( v1, s );
+      s = digitProcess( v0, s );
+      //s = stripLeading0( s );  
+    }
+  }
+  */
+  /*
   #if neko
   public inline function checkStr( s: String ){
     var len = s.length;
@@ -235,23 +269,7 @@ class Doudecimal_ {
     return b.toString();
   }
   #end
-  public inline function toDozenal():String {
-    var len = doudecimal.length;
-    var no: Int;
-    var b = new StringBuf();
-    for( i in 0...len ){
-      no = StringTools.fastCodeAt( doudecimal, i ); 
-      b.add(switch( no ){
-        case 65:
-          '↊';
-        case 66:
-          '↋';
-        case _:
-          String.fromCharCode( no );
-      });
-    }
-    return b.toString();
-  }
+  */
   /*
   public static function convert( decimal: Int ): String {
     var tens = decimal;
@@ -293,39 +311,26 @@ class Doudecimal_ {
     return b;
   }
   */
-  public inline static function fromDigit( dig: Int ): String {
-    return if( dig < 10 ){
-      Std.string( dig );
-    } else if( dig == 10 ){
-      'A';
-    } else if( dig == 11 ){
-      'B';
-    } else {
-      '?';
-    }
+  public inline static function fromDigit( dig: UInt ): String {
+    return fromDigit_( dig );
   }
-  public inline static function toDigit( str: String ): Int {
-    return if( str == 'A' ){
-      10;
-    } else if( str == 'B' ){
-      11;
-    } else {
-      Std.parseInt( str );
-    }
+  public inline static function toDigit( str: String ): UInt {
+    return digitToUInt( str );
   }
-  public inline static function quickZero(): Doudecimal_ {
-    var out: Doudecimal_ = Type.createEmptyInstance( Doudecimal_ );
-    out.int = 0;
-    out.doudecimal = '0';
-    return out;
-  }
-  public inline static function from2Channel( decimal: Int ): Doudecimal_ {
+  public inline static function from2Channel( decimal: UInt ): Doudecimal_ {
     // assumes positive and within range as only called for colors?
     var out: Doudecimal_ = Type.createEmptyInstance( Doudecimal_ );
     out.doudecimal = convertPair( decimal );
-    out.int = decimal;
+    out.uint = decimal;
     return out;
   }
+  public inline static function fromUInt( decimal: UInt ): Doudecimal_{
+    var out = empty();
+    out.doudecimal = fromUInt_( decimal );
+    out.uint = decimal;
+    return out;
+  }
+  /*
   public inline static function fromInt( decimal: Int ): Doudecimal_{
     var tens = decimal;
     var s: String;
@@ -345,6 +350,8 @@ class Doudecimal_ {
     out.int = decimal;
     return out;
   }
+  */
+  /*
   static var targTemp: Int;
   static inline function digitProcess( vx: Int, s: String ){
       var o = 0;
@@ -359,17 +366,8 @@ class Doudecimal_ {
       }
     return s;
   }
-  static inline function convertPair( targ: Int ): String {
-    return if( targ == 0 ){
-      '0';
-    } else {
-      targTemp = targ;
-      var s = '';
-      s = digitProcess( v1, s );
-      s = digitProcess( v0, s );
-      //s = stripLeading0( s );  
-    }
-  }
+  */
+  /*
   static inline function convert( targ: Int ): String {
     return if( targ == 0 ){
       '0';
@@ -400,6 +398,8 @@ class Doudecimal_ {
     }
     return s.substr( j );
   }
+  */
+  /*
   public inline function toInt(): Int{ 
     var len = doudecimal.length;
     var n: Int = len - 1;
@@ -427,5 +427,6 @@ class Doudecimal_ {
       n--;
     }
     return ( negative )? -Std.int( out ): Std.int( out );
-  }        
+  }   
+  */     
 }

@@ -1,7 +1,7 @@
 package;
 
 import doudecimal.Doudecimal;
-import doudecimal.Doudecimal_Int;
+import doudecimal.Doudecimal_UInt;
 import doudecimal.Doudecimal_Color;
 import doudecimal.Doudecimal_Image;
 
@@ -12,21 +12,21 @@ inline function main(){
     
     trace( dd );
     trace( dd.toDozenal() );
-    var v1: Doudecimal_Int = -1;
+    var v1: Doudecimal_UInt = 1;
     trace(v1);
-    var v2: Doudecimal_Int = '2A4';
+    var v2: Doudecimal_UInt = '2A4';
     trace( v2 );
     var v6: Int = v2;
     trace( v6 );
     var v3: Int = v2;
     trace( v3 );
     trace( v1+v2 );
-    var v4: Doudecimal_Int = v1+v2;
+    var v4: Doudecimal_UInt = v1+v2;
     var v5: Int = v4;
-    var v7: Doudecimal_Int = 1584;
+    var v7: Doudecimal_UInt = 1584;
     trace( 'v7 ' + v7 );
     trace( v5 );
-    var d0: Doudecimal_Int = 'AB10';
+    var d0: Doudecimal_UInt = 'AB10';
     trace( 'pair ' + d0.pair(0) );
     trace( 'pair ' + d0.pair(1) );
 
@@ -54,7 +54,7 @@ inline function main(){
     */
     #end
     var dd: Doudecimal_Color = "BBBBBBBB";
-    var v8: String = StringTools.hex(dd.toInt(),8);
+    var v8: String = StringTools.hex( dd.uint, 8);
     trace(v8);
     var img = new Doudecimal_Image( 250, 250 );
 }
