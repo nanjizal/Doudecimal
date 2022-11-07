@@ -484,9 +484,8 @@ function doudecimal_format_doudecimalString_Writer_$fromUInt_getBigBase12(no) {
 	var out = "";
 	var large = UInt.gt(no,16777215);
 	if(large) {
-		var f = UInt.toFloat(no);
-		var topf = f / 144 / 144;
-		var bottomU = Math.round((topf - Math.round(topf)) * 144 * 144);
+		var topU = UInt.toFloat(no >>> 8) / UInt.toFloat(81) | 0;
+		var bottomU = no - (topU << 8) * 81;
 		var str = "";
 		doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp = bottomU;
 		var v_0 = doudecimal_format_doudecimalString_Powers_v8;
@@ -654,7 +653,6 @@ function doudecimal_format_doudecimalString_Writer_$fromUInt_getBigBase12(no) {
 			}
 		}
 		bottomS = HxOverrides.substr(bottomS,j,null);
-		var topU = topf | 0;
 		var str = "";
 		doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp = topU;
 		var v_0 = doudecimal_format_doudecimalString_Powers_v8;

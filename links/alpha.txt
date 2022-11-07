@@ -1,0 +1,35 @@
+https://github.com/nanjizal/cornerContour/commit/69b91395663a3cdf8774df153702fd20a09da869?diff=split
+
+inline
+function getAlpha( c: Float ): Float
+    return ((Std.int(c) >> 24) & 255 )/255 - 0.000000000000001;
+inline
+function alpha1(): Float
+    return 1. - 0.000000000000001;
+
+https://github.com/HaxeFlixel/flixel/blob/master/flixel/util/FlxColor.hx
+#if ((flash || flash9doc || cs || hl) && !doc_gen) 
+
+https://groups.google.com/g/haxelang/c/lefyEkFPZ4Q
+
+https://github.com/HaxeFoundation/haxe/blob/cc13b2be0cc7a920b678016574b2c7eeaef53432/std/haxe/Int64.hx
+
+foo >> x == foo / Math.pow(2, x) if I'm not mistaken.
+And << is the same but with multiplication.
+
+dividing by 12 is dividing by 4 and 3, which is right shifting by 2 then dividing by 3
+:
+Right shifting by 2 eliminates any negative number
+
+var topf = f/144/144;
+var bottomU = Math.round(( topf-Math.round( topf ) )*144*144 );
+
+:
+Well in that case you're right shifting by 16 which bounds the topf value between 0-65535 or whatever
+And then dividing by 81
+:
+That's all the 3s contained in 144*144   27*3
+
+and doing math on that is no problem, then left shifting back by 16
+
+3*3*3*3 = 81      >>  2*2*2*2  = >> 16

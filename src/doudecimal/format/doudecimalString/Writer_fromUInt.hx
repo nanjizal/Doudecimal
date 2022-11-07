@@ -20,14 +20,13 @@ inline function getBigBase12( no: UInt ): String {
 	var out = '';
     var large = no > 0xFFFFFF;
     return if( large ){
-        var f: Float = no;
-	    var topf = f/144/144;
-        var bottomU = Math.round(( topf-Math.round( topf ) )*144*144 );
+        // no / 144*144 can consider no>>4/3 no<<4*3
+        var topU: Int = Std.int( ( no>>8 )/81 );
+        var bottomU: Int = no - (topU<<8)*81; 
         var bottomS = getBase12( bottomU );
-        bottomS = stripLeading0s( bottomS );
-        var topU: UInt = Std.int( topf );
-        var topS = getBase12( topU );
-        topS = stripLeading0s( topS );
+        bottomS     = stripLeading0s( bottomS );
+        var topS    = getBase12( topU );
+        topS        = stripLeading0s( topS );
         topS + bottomS;
     } else {
 	    var allS = getBase12( no );
@@ -55,7 +54,7 @@ inline function stripLeading0s( s: String ): String {
 inline function getBase12( no: UInt ): String {
 	var str = '';
 	targTemp = no;
-    // TODO: unwrap for loop and remove array?
+    // TODO: unwrap for loop and remove array? Reconsider removing some of these terms as not needed.
 	var v:Array<UInt> = [ v8, v7, v6, v5, v4, v3, v2, v1, v0 ];
 	for (i in 0...9) {
 		str = digitProcess( v[ i ], str);
