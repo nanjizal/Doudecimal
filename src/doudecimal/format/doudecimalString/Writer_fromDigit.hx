@@ -6,12 +6,12 @@ package doudecimal.format.doudecimalString;
 
 inline function fromDigit( dig: UInt ): String {
     return if( dig < 10 ){
-      Std.string( dig );
+        Std.string( dig );
     } else if( dig == 10 ){
-      'A';
+        'A';
     } else if( dig == 11 ){
-      'B';
+        'B';
     } else {
-      '?';
+        '?';
     }
 }

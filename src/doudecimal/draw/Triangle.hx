@@ -53,22 +53,22 @@ import doudecimal.draw.algo.MathPix;
     }
 
     inline
-    function fillGradTriangle( image: Doudecimal_Image
-                        , ax: Float, ay: Float, colA: Doudecimal_Color
-                        , bx: Float, by: Float, colB: Doudecimal_Color
-                        , cx: Float, cy: Float, colC: Doudecimal_Color ){
-        var aA = colB.alpha;
-        var rA = colB.red;
-        var gA = colB.green;
-        var bA = colB.blue;
-        var aB = colA.alpha;
-        var rB = colA.red;
-        var gB = colA.green;
-        var bB = colA.blue;
-        var aC = colC.alpha;
-        var rC = colC.red;
-        var gC = colC.green;
-        var bC = colC.blue;
+    function fillGradTriangle(  image: Doudecimal_Image
+                            ,   ax: Float, ay: Float, colA: Doudecimal_Color
+                            ,   bx: Float, by: Float, colB: Doudecimal_Color
+                            ,   cx: Float, cy: Float, colC: Doudecimal_Color ){
+        var aA  = colB.alpha;
+        var rA  = colB.red;
+        var gA  = colB.green;
+        var bA  = colB.blue;
+        var aB  = colA.alpha;
+        var rB  = colA.red;
+        var gB  = colA.green;
+        var bB  = colA.blue;
+        var aC  = colC.alpha;
+        var rC  = colC.red;
+        var gC  = colC.green;
+        var bC  = colC.blue;
         var bcx = bx - cx;
         var bcy = by - cy;
         var acx = ax - cx; 
@@ -93,7 +93,7 @@ import doudecimal.draw.algo.MathPix;
                     var g = gA*ratioA + gB*ratioB + gC*ratioC;
                     var b = bA*ratioA + bB*ratioB + bC*ratioC;
                     var d = new Doudecimal_Color();
-                    d.setARGB( a, r, g, b );
+                    d.ARGB = { a: a, r: r, g: g, b: b };
                     image.set_doudecimalPixel( px, py, d );
                 }
             }

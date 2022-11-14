@@ -12,17 +12,17 @@ inline function toUInt( doudecimal: String ): UInt{
     var no = 0.;
     var dozit = '';
     for( i in 0...len ){
-      multi = Math.pow( 12, n );
-      dozit = doudecimal.charAt( i );
-      var no = if( dozit == 'A' ){
-        10;
-      } else if( dozit == 'B' ){
-        11;
-      } else { 
-        Std.parseInt( dozit );
-      }
-      out = out + multi*no;
-      n--;
+        multi = Math.pow( 12, n );
+        dozit = doudecimal.charAt( i );
+        var no = if( dozit == 'A' ){
+            10;
+        } else if( dozit == 'B' ){
+            11;
+        } else { 
+            Std.parseInt( dozit );
+        }
+        out = out + multi*no;
+        n--;
     }
     return Std.int( out );
 }  

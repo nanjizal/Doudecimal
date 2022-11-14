@@ -23,6 +23,19 @@ HxOverrides.substr = function(s,pos,len) {
 HxOverrides.now = function() {
 	return Date.now();
 };
+var IntIterator = function(min,max) {
+	this.min = min;
+	this.max = max;
+};
+IntIterator.__name__ = true;
+IntIterator.prototype = {
+	hasNext: function() {
+		return this.min < this.max;
+	}
+	,next: function() {
+		return this.min++;
+	}
+};
 Math.__name__ = true;
 var Std = function() { };
 Std.__name__ = true;
@@ -36,32 +49,520 @@ Std.parseInt = function(x) {
 	}
 	return v;
 };
-var StringTools = function() { };
-StringTools.__name__ = true;
-StringTools.hex = function(n,digits) {
-	var s = "";
-	var hexChars = "0123456789ABCDEF";
-	while(true) {
-		s = hexChars.charAt(n & 15) + s;
-		n >>>= 4;
-		if(!(n > 0)) {
-			break;
-		}
-	}
-	if(digits != null) {
-		while(s.length < digits) s = "0" + s;
-	}
-	return s;
-};
 var Test = function() {
 	this.canvasSetup = new htmlHelper_canvas_CanvasSetup();
 	haxe_Log.trace("Doudecimal example on Canvas",{ fileName : "Test.hx", lineNumber : 13, className : "Test", methodName : "new"});
 	var g = this.canvasSetup.surface;
-	var this1 = new Uint8Array(4);
-	var this2 = new doudecimal_Image8Struct(1,1,this1);
+	var this1 = new Uint8Array(4000000);
+	var this2 = new doudecimal_Image8Struct(1000,1000,this1);
 	var p = this2;
-	var d_uint;
-	var d_doudecimal;
+	var colA_uint;
+	var colA_doudecimal;
+	var str = "AAAA0000";
+	if(str == null) {
+		str = "0";
+	}
+	if(str == null) {
+		str = "0";
+	}
+	if(str.length > 8) {
+		str = "0";
+	}
+	var _g = 0;
+	var _g1 = 8 - str.length;
+	while(_g < _g1) {
+		var i = _g++;
+		str += "0";
+	}
+	var doudecimal = str;
+	if(doudecimal == null) {
+		doudecimal = "0";
+	}
+	if(doudecimal == "" || doudecimal == "0") {
+		colA_uint = 0;
+		colA_doudecimal = "0";
+	} else {
+		colA_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+		colA_uint = doudecimal_format_doudecimalString_Reader_toUInt_(colA_doudecimal);
+	}
+	var colB_uint;
+	var colB_doudecimal;
+	var str = "AA00AA00";
+	if(str == null) {
+		str = "0";
+	}
+	if(str == null) {
+		str = "0";
+	}
+	if(str.length > 8) {
+		str = "0";
+	}
+	var _g = 0;
+	var _g1 = 8 - str.length;
+	while(_g < _g1) {
+		var i = _g++;
+		str += "0";
+	}
+	var doudecimal = str;
+	if(doudecimal == null) {
+		doudecimal = "0";
+	}
+	if(doudecimal == "" || doudecimal == "0") {
+		colB_uint = 0;
+		colB_doudecimal = "0";
+	} else {
+		colB_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+		colB_uint = doudecimal_format_doudecimalString_Reader_toUInt_(colB_doudecimal);
+	}
+	var colC_uint;
+	var colC_doudecimal;
+	var str = "AA0000AA";
+	if(str == null) {
+		str = "0";
+	}
+	if(str == null) {
+		str = "0";
+	}
+	if(str.length > 8) {
+		str = "0";
+	}
+	var _g = 0;
+	var _g1 = 8 - str.length;
+	while(_g < _g1) {
+		var i = _g++;
+		str += "0";
+	}
+	var doudecimal = str;
+	if(doudecimal == null) {
+		doudecimal = "0";
+	}
+	if(doudecimal == "" || doudecimal == "0") {
+		colC_uint = 0;
+		colC_doudecimal = "0";
+	} else {
+		colC_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+		colC_uint = doudecimal_format_doudecimalString_Reader_toUInt_(colC_doudecimal);
+	}
+	var no1 = 0;
+	var s;
+	if(colB_doudecimal.length >= 0) {
+		var p1 = HxOverrides.substr(colB_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var aA = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 1;
+	var s;
+	if(colB_doudecimal.length >= 2) {
+		var p1 = HxOverrides.substr(colB_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var rA = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 2;
+	var s;
+	if(colB_doudecimal.length >= 4) {
+		var p1 = HxOverrides.substr(colB_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var gA = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 3;
+	var s;
+	if(colB_doudecimal.length >= 6) {
+		var p1 = HxOverrides.substr(colB_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var bA = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 0;
+	var s;
+	if(colA_doudecimal.length >= 0) {
+		var p1 = HxOverrides.substr(colA_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var aB = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 1;
+	var s;
+	if(colA_doudecimal.length >= 2) {
+		var p1 = HxOverrides.substr(colA_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var rB = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 2;
+	var s;
+	if(colA_doudecimal.length >= 4) {
+		var p1 = HxOverrides.substr(colA_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var gB = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 3;
+	var s;
+	if(colA_doudecimal.length >= 6) {
+		var p1 = HxOverrides.substr(colA_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var bB = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 0;
+	var s;
+	if(colC_doudecimal.length >= 0) {
+		var p1 = HxOverrides.substr(colC_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var aC = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 1;
+	var s;
+	if(colC_doudecimal.length >= 2) {
+		var p1 = HxOverrides.substr(colC_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var rC = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 2;
+	var s;
+	if(colC_doudecimal.length >= 4) {
+		var p1 = HxOverrides.substr(colC_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var gC = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var no1 = 3;
+	var s;
+	if(colC_doudecimal.length >= 6) {
+		var p1 = HxOverrides.substr(colC_doudecimal,no1 * 2 | 0,2);
+		s = new doudecimal_Doudecimal_$(p1);
+	} else {
+		var out = Object.create(doudecimal_Doudecimal_$.prototype);
+		out.uint = 0;
+		out.doudecimal = "0";
+		s = out;
+	}
+	var i = s.uint;
+	var bC = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
+	var bcx = 200;
+	var bcy = 0;
+	var acx = 0;
+	var acy = -400;
+	var dot11 = bcx * bcx + bcy * bcy;
+	var dot12 = bcx * acx + bcy * acy;
+	var dot22 = acx * acx + acy * acy;
+	var denom1 = 1 / (dot11 * dot22 - dot12 * dot12);
+	var _g_min = Math.ceil(100);
+	var _g_max = Math.ceil(300);
+	while(_g_min < _g_max) {
+		var px = _g_min++;
+		var pcx = px - 100;
+		var _g_min1 = Math.floor(100);
+		var _g_max1 = Math.ceil(500);
+		while(_g_min1 < _g_max1) {
+			var py = _g_min1++;
+			var pcy = py - 500;
+			var dot31 = pcx * bcx + pcy * bcy;
+			var dot32 = pcx * acx + pcy * acy;
+			var ratioA = (dot22 * dot31 - dot12 * dot32) * denom1;
+			var ratioB = (dot11 * dot32 - dot12 * dot31) * denom1;
+			var ratioC = 1.0 - ratioB - ratioA;
+			if(ratioA >= 0 && ratioB >= 0 && ratioC >= 0) {
+				var a = aA * ratioA + aB * ratioB + aC * ratioC;
+				var r = rA * ratioA + rB * ratioB + rC * ratioC;
+				var g1 = gA * ratioA + gB * ratioB + gC * ratioC;
+				var b = bA * ratioA + bB * ratioB + bC * ratioC;
+				var str = "0";
+				if(str == null) {
+					str = "0";
+				}
+				if(str.length > 8) {
+					str = "0";
+				}
+				var _g = 0;
+				var _g1 = 8 - str.length;
+				while(_g < _g1) {
+					var i = _g++;
+					str += "0";
+				}
+				var this1 = new doudecimal_Doudecimal_$(str);
+				var d = this1;
+				var c_a = a;
+				var c_r = r;
+				var c_g = g1;
+				var c_b = b;
+				var aD = Math.round(Math.max(143,c_a * 143));
+				var rD = Math.round(Math.max(143,c_r * 143));
+				var gD = Math.round(Math.max(143,c_g * 143));
+				var bD = Math.round(Math.max(143,c_b * 143));
+				var s = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD,rD,gD,bD);
+				var str1 = s;
+				if(str1 == null) {
+					str1 = "0";
+				}
+				if(str1 == null) {
+					str1 = "0";
+				}
+				if(str1.length > 8) {
+					str1 = "0";
+				}
+				var _g2 = 0;
+				var _g3 = 8 - str1.length;
+				while(_g2 < _g3) {
+					var i1 = _g2++;
+					str1 += "0";
+				}
+				var this2 = new doudecimal_Doudecimal_$(str1);
+				var temp = this2;
+				d.doudecimal = temp.doudecimal;
+				d.uint = temp.uint;
+				temp = null;
+				var small = 0.006993006993006993;
+				var x = px | 0;
+				var y = py | 0;
+				var pos = (p.useVirtualPos ? (y - p.virtualY) * p.width + x - p.virtualX | 0 : y * p.width + x | 0) * 4 | 0;
+				var no1 = 0;
+				var s1;
+				if(d.doudecimal.length >= 0) {
+					var p1 = HxOverrides.substr(d.doudecimal,no1 * 2 | 0,2);
+					s1 = new doudecimal_Doudecimal_$(p1);
+				} else {
+					var out = Object.create(doudecimal_Doudecimal_$.prototype);
+					out.uint = 0;
+					out.doudecimal = "0";
+					s1 = out;
+				}
+				var i2 = s1.uint;
+				if((i2 == 0 ? 0. : UInt.toFloat(i2) / UInt.toFloat(143)) < 1. - small && p.transparent) {
+					var c0 = p.image[pos];
+					var c1 = p.image[pos + 1];
+					var c2 = p.image[pos + 1];
+					var c3 = p.image[pos + 2];
+					var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
+					var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+					out1.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
+					out1.uint = fromRGB;
+					var d1 = out1;
+					var s2 = "";
+					var _g4 = 0;
+					var _g5 = 8 - d1.doudecimal.length;
+					while(_g4 < _g5) {
+						var i3 = _g4++;
+						s2 += "0";
+					}
+					s2 += d1.doudecimal;
+					d1.doudecimal = s2;
+					var currColor = d1;
+					var no11 = 0;
+					var s3;
+					if(currColor.doudecimal.length >= 0) {
+						var p2 = HxOverrides.substr(currColor.doudecimal,no11 * 2 | 0,2);
+						s3 = new doudecimal_Doudecimal_$(p2);
+					} else {
+						var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out2.uint = 0;
+						out2.doudecimal = "0";
+						s3 = out2;
+					}
+					var i4 = s3.uint;
+					var a1 = i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143);
+					var no12 = 1;
+					var s4;
+					if(currColor.doudecimal.length >= 2) {
+						var p3 = HxOverrides.substr(currColor.doudecimal,no12 * 2 | 0,2);
+						s4 = new doudecimal_Doudecimal_$(p3);
+					} else {
+						var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out3.uint = 0;
+						out3.doudecimal = "0";
+						s4 = out3;
+					}
+					var i5 = s4.uint;
+					var r1 = i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143);
+					var no13 = 2;
+					var s5;
+					if(currColor.doudecimal.length >= 4) {
+						var p4 = HxOverrides.substr(currColor.doudecimal,no13 * 2 | 0,2);
+						s5 = new doudecimal_Doudecimal_$(p4);
+					} else {
+						var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out4.uint = 0;
+						out4.doudecimal = "0";
+						s5 = out4;
+					}
+					var i6 = s5.uint;
+					var g11 = i6 == 0 ? 0. : UInt.toFloat(i6) / UInt.toFloat(143);
+					var no14 = 3;
+					var s6;
+					if(currColor.doudecimal.length >= 6) {
+						var p5 = HxOverrides.substr(currColor.doudecimal,no14 * 2 | 0,2);
+						s6 = new doudecimal_Doudecimal_$(p5);
+					} else {
+						var out5 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out5.uint = 0;
+						out5.doudecimal = "0";
+						s6 = out5;
+					}
+					var i7 = s6.uint;
+					var b1 = i7 == 0 ? 0. : UInt.toFloat(i7) / UInt.toFloat(143);
+					var no15 = 0;
+					var s7;
+					if(d.doudecimal.length >= 0) {
+						var p6 = HxOverrides.substr(d.doudecimal,no15 * 2 | 0,2);
+						s7 = new doudecimal_Doudecimal_$(p6);
+					} else {
+						var out6 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out6.uint = 0;
+						out6.doudecimal = "0";
+						s7 = out6;
+					}
+					var i8 = s7.uint;
+					var a2 = i8 == 0 ? 0. : UInt.toFloat(i8) / UInt.toFloat(143);
+					var no16 = 1;
+					var s8;
+					if(d.doudecimal.length >= 2) {
+						var p7 = HxOverrides.substr(d.doudecimal,no16 * 2 | 0,2);
+						s8 = new doudecimal_Doudecimal_$(p7);
+					} else {
+						var out7 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out7.uint = 0;
+						out7.doudecimal = "0";
+						s8 = out7;
+					}
+					var i9 = s8.uint;
+					var r2 = i9 == 0 ? 0. : UInt.toFloat(i9) / UInt.toFloat(143);
+					var no17 = 2;
+					var s9;
+					if(d.doudecimal.length >= 4) {
+						var p8 = HxOverrides.substr(d.doudecimal,no17 * 2 | 0,2);
+						s9 = new doudecimal_Doudecimal_$(p8);
+					} else {
+						var out8 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out8.uint = 0;
+						out8.doudecimal = "0";
+						s9 = out8;
+					}
+					var i10 = s9.uint;
+					var g2 = i10 == 0 ? 0. : UInt.toFloat(i10) / UInt.toFloat(143);
+					var no18 = 3;
+					var s10;
+					if(d.doudecimal.length >= 6) {
+						var p9 = HxOverrides.substr(d.doudecimal,no18 * 2 | 0,2);
+						s10 = new doudecimal_Doudecimal_$(p9);
+					} else {
+						var out9 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out9.uint = 0;
+						out9.doudecimal = "0";
+						s10 = out9;
+					}
+					var i11 = s10.uint;
+					var b2 = i11 == 0 ? 0. : UInt.toFloat(i11) / UInt.toFloat(143);
+					var a3 = a1 * (1. - a2);
+					var r3 = r1 * a3 + r2 * a2;
+					var g3 = g11 * a3 + g2 * a2;
+					var b3 = b1 * a3 + b2 * a2;
+					var a4 = a3 + a2;
+					var argb_a = a4;
+					var argb_r = r3;
+					var argb_g = g3;
+					var argb_b = b3;
+					var aD1 = Math.round(Math.max(143,argb_a * 143));
+					var rD1 = Math.round(Math.max(143,argb_r * 143));
+					var gD1 = Math.round(Math.max(143,argb_g * 143));
+					var bD1 = Math.round(Math.max(143,argb_b * 143));
+					var s11 = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD1,rD1,gD1,bD1);
+					var str2 = s11;
+					if(str2 == null) {
+						str2 = "0";
+					}
+					if(str2 == null) {
+						str2 = "0";
+					}
+					if(str2.length > 8) {
+						str2 = "0";
+					}
+					var _g6 = 0;
+					var _g7 = 8 - str2.length;
+					while(_g6 < _g7) {
+						var i12 = _g6++;
+						str2 += "0";
+					}
+					var this3 = new doudecimal_Doudecimal_$(str2);
+					var temp1 = this3;
+					currColor.doudecimal = temp1.doudecimal;
+					currColor.uint = temp1.uint;
+					temp1 = null;
+					p.image[pos] = currColor.uint >>> 32 & 255;
+					p.image[pos + 1] = currColor.uint >>> 16 & 255;
+					p.image[pos + 2] = currColor.uint >>> 8 & 255;
+					p.image[pos + 3] = currColor.uint & 255;
+				} else {
+					p.image[pos] = d.uint >>> 32 & 255;
+					p.image[pos + 1] = d.uint >>> 16 & 255;
+					p.image[pos + 2] = d.uint >>> 8 & 255;
+					p.image[pos + 3] = d.uint & 255;
+				}
+			}
+		}
+	}
+	this.drawAlphaTriangle(p);
+	var color_uint;
+	var color_doudecimal;
 	var str = "BBAA9988";
 	if(str == null) {
 		str = "0";
@@ -83,264 +584,2097 @@ var Test = function() {
 		doudecimal = "0";
 	}
 	if(doudecimal == "" || doudecimal == "0") {
-		d_uint = 0;
-		d_doudecimal = "0";
+		color_uint = 0;
+		color_doudecimal = "0";
 	} else {
-		d_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
-		d_uint = doudecimal_format_doudecimalString_Reader_toUInt_(d_doudecimal);
+		color_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+		color_uint = doudecimal_format_doudecimalString_Reader_toUInt_(color_doudecimal);
 	}
-	haxe_Log.trace(d_uint == null ? "null" : Std.string(UInt.toFloat(d_uint)),{ fileName : "Test.hx", lineNumber : 20, className : "Test", methodName : "new"});
-	haxe_Log.trace(d_uint == null ? "null" : Std.string(UInt.toFloat(d_uint)),{ fileName : "Test.hx", lineNumber : 23, className : "Test", methodName : "new"});
-	var decimal = d_uint >>> 32 & 255;
-	var out = Object.create(doudecimal_Doudecimal_$.prototype);
-	out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(decimal);
-	out.uint = decimal;
-	var tmp = out.doudecimal + " ";
-	var decimal = d_uint >>> 16 & 255;
-	var out = Object.create(doudecimal_Doudecimal_$.prototype);
-	out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(decimal);
-	out.uint = decimal;
-	var tmp1 = tmp + out.doudecimal + " ";
-	var decimal = d_uint >>> 8 & 255;
-	var out = Object.create(doudecimal_Doudecimal_$.prototype);
-	out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(decimal);
-	out.uint = decimal;
-	var tmp = tmp1 + out.doudecimal + " ";
-	var decimal = d_uint >>> 8 & 255;
-	var out = Object.create(doudecimal_Doudecimal_$.prototype);
-	out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(decimal);
-	out.uint = decimal;
-	haxe_Log.trace(tmp + out.doudecimal,{ fileName : "Test.hx", lineNumber : 24, className : "Test", methodName : "new"});
-	haxe_Log.trace(d_uint == null ? "null" : Std.string(UInt.toFloat(d_uint)),{ fileName : "Test.hx", lineNumber : 28, className : "Test", methodName : "new"});
-	var decimal = d_uint >>> 32 & 255;
-	var out = Object.create(doudecimal_Doudecimal_$.prototype);
-	out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(decimal);
-	out.uint = decimal;
-	var tmp = StringTools.hex(out.uint,2) + " ";
-	var decimal = d_uint >>> 16 & 255;
-	var out = Object.create(doudecimal_Doudecimal_$.prototype);
-	out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(decimal);
-	out.uint = decimal;
-	var tmp1 = tmp + StringTools.hex(out.uint,2) + " ";
-	var decimal = d_uint >>> 8 & 255;
-	var out = Object.create(doudecimal_Doudecimal_$.prototype);
-	out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(decimal);
-	out.uint = decimal;
-	var tmp = tmp1 + StringTools.hex(out.uint,2) + " ";
-	var decimal = d_uint & 255;
-	var out = Object.create(doudecimal_Doudecimal_$.prototype);
-	out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(decimal);
-	out.uint = decimal;
-	haxe_Log.trace(tmp + StringTools.hex(out.uint,2),{ fileName : "Test.hx", lineNumber : 29, className : "Test", methodName : "new"});
-	haxe_Log.trace(StringTools.hex(d_uint >>> 32 & 255,2) + StringTools.hex(d_uint >>> 16 & 255,2) + StringTools.hex(d_uint >>> 8 & 255,2) + StringTools.hex(d_uint & 255,2),{ fileName : "Test.hx", lineNumber : 35, className : "Test", methodName : "new"});
-	var small = 0.006993006993006993;
-	var x = 0. | 0;
-	var y = 0. | 0;
-	var pos = (p.useVirtualPos ? (y - p.virtualY) * p.width + x - p.virtualX | 0 : y * p.width + x | 0) * 4 | 0;
-	var no1 = 0;
-	var s;
-	if(d_doudecimal.length >= 0) {
-		var p1 = HxOverrides.substr(d_doudecimal,no1 * 2 | 0,2);
-		s = new doudecimal_Doudecimal_$(p1);
-	} else {
-		var out = Object.create(doudecimal_Doudecimal_$.prototype);
-		out.uint = 0;
-		out.doudecimal = "0";
-		s = out;
+	var x = 200.;
+	var y = 200.;
+	var p1 = x | 0;
+	var xx = p1;
+	var q = y | 0;
+	var maxX = x + 400 | 0;
+	var maxY = y + 400 | 0;
+	while(true) {
+		var small = 0.006993006993006993;
+		var x = p1++ | 0;
+		var y = q | 0;
+		var pos = (p.useVirtualPos ? (y - p.virtualY) * p.width + x - p.virtualX | 0 : y * p.width + x | 0) * 4 | 0;
+		var no1 = 0;
+		var s;
+		if(color_doudecimal.length >= 0) {
+			var p2 = HxOverrides.substr(color_doudecimal,no1 * 2 | 0,2);
+			s = new doudecimal_Doudecimal_$(p2);
+		} else {
+			var out = Object.create(doudecimal_Doudecimal_$.prototype);
+			out.uint = 0;
+			out.doudecimal = "0";
+			s = out;
+		}
+		var i = s.uint;
+		if((i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143)) < 1. - small && p.transparent) {
+			var c0 = p.image[pos];
+			var c1 = p.image[pos + 1];
+			var c2 = p.image[pos + 1];
+			var c3 = p.image[pos + 2];
+			var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
+			var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+			out1.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
+			out1.uint = fromRGB;
+			var d = out1;
+			var s1 = "";
+			var _g = 0;
+			var _g1 = 8 - d.doudecimal.length;
+			while(_g < _g1) {
+				var i1 = _g++;
+				s1 += "0";
+			}
+			s1 += d.doudecimal;
+			d.doudecimal = s1;
+			var currColor = d;
+			var no11 = 0;
+			var s2;
+			if(currColor.doudecimal.length >= 0) {
+				var p3 = HxOverrides.substr(currColor.doudecimal,no11 * 2 | 0,2);
+				s2 = new doudecimal_Doudecimal_$(p3);
+			} else {
+				var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+				out2.uint = 0;
+				out2.doudecimal = "0";
+				s2 = out2;
+			}
+			var i2 = s2.uint;
+			var a1 = i2 == 0 ? 0. : UInt.toFloat(i2) / UInt.toFloat(143);
+			var no12 = 1;
+			var s3;
+			if(currColor.doudecimal.length >= 2) {
+				var p4 = HxOverrides.substr(currColor.doudecimal,no12 * 2 | 0,2);
+				s3 = new doudecimal_Doudecimal_$(p4);
+			} else {
+				var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+				out3.uint = 0;
+				out3.doudecimal = "0";
+				s3 = out3;
+			}
+			var i3 = s3.uint;
+			var r1 = i3 == 0 ? 0. : UInt.toFloat(i3) / UInt.toFloat(143);
+			var no13 = 2;
+			var s4;
+			if(currColor.doudecimal.length >= 4) {
+				var p5 = HxOverrides.substr(currColor.doudecimal,no13 * 2 | 0,2);
+				s4 = new doudecimal_Doudecimal_$(p5);
+			} else {
+				var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+				out4.uint = 0;
+				out4.doudecimal = "0";
+				s4 = out4;
+			}
+			var i4 = s4.uint;
+			var g1 = i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143);
+			var no14 = 3;
+			var s5;
+			if(currColor.doudecimal.length >= 6) {
+				var p6 = HxOverrides.substr(currColor.doudecimal,no14 * 2 | 0,2);
+				s5 = new doudecimal_Doudecimal_$(p6);
+			} else {
+				var out5 = Object.create(doudecimal_Doudecimal_$.prototype);
+				out5.uint = 0;
+				out5.doudecimal = "0";
+				s5 = out5;
+			}
+			var i5 = s5.uint;
+			var b1 = i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143);
+			var no15 = 0;
+			var s6;
+			if(color_doudecimal.length >= 0) {
+				var p7 = HxOverrides.substr(color_doudecimal,no15 * 2 | 0,2);
+				s6 = new doudecimal_Doudecimal_$(p7);
+			} else {
+				var out6 = Object.create(doudecimal_Doudecimal_$.prototype);
+				out6.uint = 0;
+				out6.doudecimal = "0";
+				s6 = out6;
+			}
+			var i6 = s6.uint;
+			var a2 = i6 == 0 ? 0. : UInt.toFloat(i6) / UInt.toFloat(143);
+			var no16 = 1;
+			var s7;
+			if(color_doudecimal.length >= 2) {
+				var p8 = HxOverrides.substr(color_doudecimal,no16 * 2 | 0,2);
+				s7 = new doudecimal_Doudecimal_$(p8);
+			} else {
+				var out7 = Object.create(doudecimal_Doudecimal_$.prototype);
+				out7.uint = 0;
+				out7.doudecimal = "0";
+				s7 = out7;
+			}
+			var i7 = s7.uint;
+			var r2 = i7 == 0 ? 0. : UInt.toFloat(i7) / UInt.toFloat(143);
+			var no17 = 2;
+			var s8;
+			if(color_doudecimal.length >= 4) {
+				var p9 = HxOverrides.substr(color_doudecimal,no17 * 2 | 0,2);
+				s8 = new doudecimal_Doudecimal_$(p9);
+			} else {
+				var out8 = Object.create(doudecimal_Doudecimal_$.prototype);
+				out8.uint = 0;
+				out8.doudecimal = "0";
+				s8 = out8;
+			}
+			var i8 = s8.uint;
+			var g2 = i8 == 0 ? 0. : UInt.toFloat(i8) / UInt.toFloat(143);
+			var no18 = 3;
+			var s9;
+			if(color_doudecimal.length >= 6) {
+				var p10 = HxOverrides.substr(color_doudecimal,no18 * 2 | 0,2);
+				s9 = new doudecimal_Doudecimal_$(p10);
+			} else {
+				var out9 = Object.create(doudecimal_Doudecimal_$.prototype);
+				out9.uint = 0;
+				out9.doudecimal = "0";
+				s9 = out9;
+			}
+			var i9 = s9.uint;
+			var b2 = i9 == 0 ? 0. : UInt.toFloat(i9) / UInt.toFloat(143);
+			var a3 = a1 * (1. - a2);
+			var r = r1 * a3 + r2 * a2;
+			var g3 = g1 * a3 + g2 * a2;
+			var b = b1 * a3 + b2 * a2;
+			var a = a3 + a2;
+			var argb_a = a;
+			var argb_r = r;
+			var argb_g = g3;
+			var argb_b = b;
+			var aD = Math.round(Math.max(143,argb_a * 143));
+			var rD = Math.round(Math.max(143,argb_r * 143));
+			var gD = Math.round(Math.max(143,argb_g * 143));
+			var bD = Math.round(Math.max(143,argb_b * 143));
+			var s10 = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD,rD,gD,bD);
+			var str = s10;
+			if(str == null) {
+				str = "0";
+			}
+			if(str == null) {
+				str = "0";
+			}
+			if(str.length > 8) {
+				str = "0";
+			}
+			var _g2 = 0;
+			var _g3 = 8 - str.length;
+			while(_g2 < _g3) {
+				var i10 = _g2++;
+				str += "0";
+			}
+			var this1 = new doudecimal_Doudecimal_$(str);
+			var temp = this1;
+			currColor.doudecimal = temp.doudecimal;
+			currColor.uint = temp.uint;
+			temp = null;
+			p.image[pos] = currColor.uint >>> 32 & 255;
+			p.image[pos + 1] = currColor.uint >>> 16 & 255;
+			p.image[pos + 2] = currColor.uint >>> 8 & 255;
+			p.image[pos + 3] = currColor.uint & 255;
+		} else {
+			p.image[pos] = color_uint >>> 32 & 255;
+			p.image[pos + 1] = color_uint >>> 16 & 255;
+			p.image[pos + 2] = color_uint >>> 8 & 255;
+			p.image[pos + 3] = color_uint & 255;
+		}
+		if(p1 > maxX) {
+			p1 = xx;
+			++q;
+		}
+		if(q > maxY) {
+			break;
+		}
 	}
-	var i = s.uint;
-	if((i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143)) < 1. - small && p.transparent) {
-		var c0 = p.image[pos];
-		var c1 = p.image[pos + 1];
-		var c2 = p.image[pos + 1];
-		var c3 = p.image[pos + 2];
-		var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
-		haxe_Log.trace("fromRGB " + (fromRGB == null ? "null" : Std.string(UInt.toFloat(fromRGB))),{ fileName : "../src/doudecimal/Doudecimal_Color.hx", lineNumber : 218, className : "doudecimal._Doudecimal_Color.Doudecimal_Color_Impl_", methodName : "fromChannelEncodeHex"});
+	this.drawGrid(p);
+	var ctx = g.me;
+	var data = new Uint8ClampedArray(p.image.length);
+	var pos = 0;
+	var str = "0";
+	if(str == null) {
+		str = "0";
+	}
+	if(str.length > 8) {
+		str = "0";
+	}
+	var _g = 0;
+	var _g1 = 8 - str.length;
+	while(_g < _g1) {
+		var i = _g++;
+		str += "0";
+	}
+	var this1 = new doudecimal_Doudecimal_$(str);
+	var d = this1;
+	var l = p.image.length / 4 | 0;
+	var _g = 0;
+	var _g1 = l;
+	while(_g < _g1) {
+		var i = _g++;
+		pos = i * 4 | 0;
+		var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(p.image[pos],p.image[pos + 1],p.image[pos + 2],p.image[pos + 3]);
 		var out = Object.create(doudecimal_Doudecimal_$.prototype);
 		out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
 		out.uint = fromRGB;
-		var d = out;
+		var d1 = out;
 		var s = "";
-		var _g = 0;
-		var _g1 = 8 - d.doudecimal.length;
-		while(_g < _g1) {
-			var i = _g++;
+		var _g2 = 0;
+		var _g3 = 8 - d1.doudecimal.length;
+		while(_g2 < _g3) {
+			var i1 = _g2++;
 			s += "0";
 		}
-		s += d.doudecimal;
-		d.doudecimal = s;
-		haxe_Log.trace("dd " + Std.string(d),{ fileName : "../src/doudecimal/Doudecimal_Color.hx", lineNumber : 221, className : "doudecimal._Doudecimal_Color.Doudecimal_Color_Impl_", methodName : "fromChannelEncodeHex"});
-		var currColor = d;
+		s += d1.doudecimal;
+		d1.doudecimal = s;
+		d = d1;
 		var no1 = 0;
-		var s;
-		if(currColor.doudecimal.length >= 0) {
-			var p1 = HxOverrides.substr(currColor.doudecimal,no1 * 2 | 0,2);
-			s = new doudecimal_Doudecimal_$(p1);
+		var s1;
+		if(d.doudecimal.length >= 0) {
+			var p1 = HxOverrides.substr(d.doudecimal,no1 * 2 | 0,2);
+			s1 = new doudecimal_Doudecimal_$(p1);
 		} else {
-			var out = Object.create(doudecimal_Doudecimal_$.prototype);
-			out.uint = 0;
-			out.doudecimal = "0";
-			s = out;
+			var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+			out1.uint = 0;
+			out1.doudecimal = "0";
+			s1 = out1;
 		}
-		var i = s.uint;
-		var a1 = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
-		var no1 = 1;
-		var s;
-		if(currColor.doudecimal.length >= 2) {
-			var p1 = HxOverrides.substr(currColor.doudecimal,no1 * 2 | 0,2);
-			s = new doudecimal_Doudecimal_$(p1);
+		var i2 = s1.uint;
+		data[pos] = Math.min((Math.round((i2 == 0 ? 0. : UInt.toFloat(i2) / UInt.toFloat(143)) * 255.) | 0) << 24,255) | 0;
+		var no11 = 3;
+		var s2;
+		if(d.doudecimal.length >= 6) {
+			var p2 = HxOverrides.substr(d.doudecimal,no11 * 2 | 0,2);
+			s2 = new doudecimal_Doudecimal_$(p2);
 		} else {
-			var out = Object.create(doudecimal_Doudecimal_$.prototype);
-			out.uint = 0;
-			out.doudecimal = "0";
-			s = out;
+			var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+			out2.uint = 0;
+			out2.doudecimal = "0";
+			s2 = out2;
 		}
-		var i = s.uint;
-		var r1 = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
-		var no1 = 2;
-		var s;
-		if(currColor.doudecimal.length >= 4) {
-			var p1 = HxOverrides.substr(currColor.doudecimal,no1 * 2 | 0,2);
-			s = new doudecimal_Doudecimal_$(p1);
+		var i3 = s2.uint;
+		data[pos + 1] = Math.min(Math.round((i3 == 0 ? 0. : UInt.toFloat(i3) / UInt.toFloat(143)) * 255.) | 0,255) | 0;
+		var no12 = 2;
+		var s3;
+		if(d.doudecimal.length >= 4) {
+			var p3 = HxOverrides.substr(d.doudecimal,no12 * 2 | 0,2);
+			s3 = new doudecimal_Doudecimal_$(p3);
 		} else {
-			var out = Object.create(doudecimal_Doudecimal_$.prototype);
-			out.uint = 0;
-			out.doudecimal = "0";
-			s = out;
+			var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+			out3.uint = 0;
+			out3.doudecimal = "0";
+			s3 = out3;
 		}
-		var i = s.uint;
-		var g1 = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
-		var no1 = 3;
-		var s;
-		if(currColor.doudecimal.length >= 6) {
-			var p1 = HxOverrides.substr(currColor.doudecimal,no1 * 2 | 0,2);
-			s = new doudecimal_Doudecimal_$(p1);
+		var i4 = s3.uint;
+		data[pos + 2] = Math.min((Math.round((i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143)) * 255.) | 0) << 8,255) | 0;
+		var no13 = 1;
+		var s4;
+		if(d.doudecimal.length >= 2) {
+			var p4 = HxOverrides.substr(d.doudecimal,no13 * 2 | 0,2);
+			s4 = new doudecimal_Doudecimal_$(p4);
 		} else {
-			var out = Object.create(doudecimal_Doudecimal_$.prototype);
-			out.uint = 0;
-			out.doudecimal = "0";
-			s = out;
+			var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+			out4.uint = 0;
+			out4.doudecimal = "0";
+			s4 = out4;
 		}
-		var i = s.uint;
-		var b1 = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
-		var no1 = 0;
-		var s;
-		if(d_doudecimal.length >= 0) {
-			var p1 = HxOverrides.substr(d_doudecimal,no1 * 2 | 0,2);
-			s = new doudecimal_Doudecimal_$(p1);
-		} else {
-			var out = Object.create(doudecimal_Doudecimal_$.prototype);
-			out.uint = 0;
-			out.doudecimal = "0";
-			s = out;
-		}
-		var i = s.uint;
-		var a2 = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
-		var no1 = 1;
-		var s;
-		if(d_doudecimal.length >= 2) {
-			var p1 = HxOverrides.substr(d_doudecimal,no1 * 2 | 0,2);
-			s = new doudecimal_Doudecimal_$(p1);
-		} else {
-			var out = Object.create(doudecimal_Doudecimal_$.prototype);
-			out.uint = 0;
-			out.doudecimal = "0";
-			s = out;
-		}
-		var i = s.uint;
-		var r2 = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
-		var no1 = 2;
-		var s;
-		if(d_doudecimal.length >= 4) {
-			var p1 = HxOverrides.substr(d_doudecimal,no1 * 2 | 0,2);
-			s = new doudecimal_Doudecimal_$(p1);
-		} else {
-			var out = Object.create(doudecimal_Doudecimal_$.prototype);
-			out.uint = 0;
-			out.doudecimal = "0";
-			s = out;
-		}
-		var i = s.uint;
-		var g2 = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
-		var no1 = 3;
-		var s;
-		if(d_doudecimal.length >= 6) {
-			var p1 = HxOverrides.substr(d_doudecimal,no1 * 2 | 0,2);
-			s = new doudecimal_Doudecimal_$(p1);
-		} else {
-			var out = Object.create(doudecimal_Doudecimal_$.prototype);
-			out.uint = 0;
-			out.doudecimal = "0";
-			s = out;
-		}
-		var i = s.uint;
-		var b2 = i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143);
-		var a3 = a1 * (1. - a2);
-		var r = r1 * a3 + r2 * a2;
-		var g = g1 * a3 + g2 * a2;
-		var b = b1 * a3 + b2 * a2;
-		var a = a3 + a2;
-		var aD = Math.round(a * 143);
-		var rD = Math.round(r * 143);
-		var gD = Math.round(g * 143);
-		var bD = Math.round(b * 143);
-		var col = aD << 18 | rD << 12 | gD << 6 | bD;
-		haxe_Log.trace("set ARGB " + aD,{ fileName : "../src/doudecimal/Doudecimal_Color.hx", lineNumber : 29, className : "doudecimal._Doudecimal_Color.Doudecimal_Color_Impl_", methodName : "setARGB"});
-		var out = Object.create(doudecimal_Doudecimal_$.prototype);
-		out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(col);
-		out.uint = col;
-		var temp = out;
-		currColor.doudecimal = temp.doudecimal;
-		currColor.uint = col;
-		if(currColor.doudecimal.length != 8) {
-			var s = "";
-			var _g = 0;
-			var _g1 = 8 - currColor.doudecimal.length;
-			while(_g < _g1) {
-				var i = _g++;
-				s += "0";
-			}
-			s += currColor.doudecimal;
-			currColor.doudecimal = s;
-		}
-		p.image[pos] = currColor.uint >>> 32 & 255;
-		p.image[pos + 1] = currColor.uint >>> 16 & 255;
-		p.image[pos + 2] = currColor.uint >>> 8 & 255;
-		p.image[pos + 3] = currColor.uint & 255;
+		var i5 = s4.uint;
+		data[pos + 3] = Math.min((Math.round((i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143)) * 255.) | 0) << 16,255) | 0;
+	}
+	var imageData = new ImageData(data,p.width,p.height);
+	if(p.useVirtualPos) {
+		ctx.putImageData(imageData,0 - p.virtualX,0 - p.virtualY);
 	} else {
-		p.image[pos] = d_uint >>> 32 & 255;
-		p.image[pos + 1] = d_uint >>> 16 & 255;
-		p.image[pos + 2] = d_uint >>> 8 & 255;
-		p.image[pos + 3] = d_uint & 255;
+		ctx.putImageData(imageData,0,0);
 	}
-	var x = 0. | 0;
-	var y = 0. | 0;
-	var pos = (p.useVirtualPos ? (y - p.virtualY) * p.width + x - p.virtualX | 0 : y * p.width + x | 0) * 4 | 0;
-	haxe_Log.trace(StringTools.hex(p.image[pos],2) + StringTools.hex(p.image[pos + 1],2) + StringTools.hex(p.image[pos + 2],2) + StringTools.hex(p.image[pos + 3],2),{ fileName : "Test.hx", lineNumber : 37, className : "Test", methodName : "new"});
-	var x = 0. | 0;
-	var y = 0. | 0;
-	var pos = (p.useVirtualPos ? (y - p.virtualY) * p.width + x - p.virtualX | 0 : y * p.width + x | 0) * 4 | 0;
-	var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(p.image[pos],p.image[pos + 1],p.image[pos + 2],p.image[pos + 3]);
-	haxe_Log.trace("fromRGB " + (fromRGB == null ? "null" : Std.string(UInt.toFloat(fromRGB))),{ fileName : "../src/doudecimal/Doudecimal_Color.hx", lineNumber : 218, className : "doudecimal._Doudecimal_Color.Doudecimal_Color_Impl_", methodName : "fromChannelEncodeHex"});
-	var out = Object.create(doudecimal_Doudecimal_$.prototype);
-	out.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
-	out.uint = fromRGB;
-	var d = out;
-	var s = "";
-	var _g = 0;
-	var _g1 = 8 - d.doudecimal.length;
-	while(_g < _g1) {
-		var i = _g++;
-		s += "0";
-	}
-	s += d.doudecimal;
-	d.doudecimal = s;
-	haxe_Log.trace("dd " + Std.string(d),{ fileName : "../src/doudecimal/Doudecimal_Color.hx", lineNumber : 221, className : "doudecimal._Doudecimal_Color.Doudecimal_Color_Impl_", methodName : "fromChannelEncodeHex"});
-	var d1 = d;
-	var d2 = d1;
-	haxe_Log.trace((d_uint == null ? "null" : Std.string(UInt.toFloat(d_uint))) + " " + d_doudecimal + " " + (d2.uint == null ? "null" : Std.string(UInt.toFloat(d2.uint))) + " " + d2.doudecimal,{ fileName : "Test.hx", lineNumber : 39, className : "Test", methodName : "new"});
 };
 Test.__name__ = true;
+Test.prototype = {
+	drawGrid: function(p) {
+		var color_uint;
+		var color_doudecimal;
+		var str = "BB002200";
+		if(str == null) {
+			str = "0";
+		}
+		if(str == null) {
+			str = "0";
+		}
+		if(str.length > 8) {
+			str = "0";
+		}
+		var _g = 0;
+		var _g1 = 8 - str.length;
+		while(_g < _g1) {
+			var i = _g++;
+			str += "0";
+		}
+		var doudecimal = str;
+		if(doudecimal == null) {
+			doudecimal = "0";
+		}
+		if(doudecimal == "" || doudecimal == "0") {
+			color_uint = 0;
+			color_doudecimal = "0";
+		} else {
+			color_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+			color_uint = doudecimal_format_doudecimalString_Reader_toUInt_(color_doudecimal);
+		}
+		var h_ = 1000;
+		var w_ = 1000;
+		var _g = 0;
+		var _g1 = 11;
+		while(_g < _g1) {
+			var i = _g++;
+			var x = 10 + i * 100 - 1.25;
+			var p1 = x | 0;
+			var xx = p1;
+			var q = 10;
+			var maxX = x + 2.5 | 0;
+			var maxY = 10 + h_ | 0;
+			while(true) {
+				var small = 0.006993006993006993;
+				var x1 = p1++ | 0;
+				var y = q | 0;
+				var pos = (p.useVirtualPos ? (y - p.virtualY) * p.width + x1 - p.virtualX | 0 : y * p.width + x1 | 0) * 4 | 0;
+				var no1 = 0;
+				var s;
+				if(color_doudecimal.length >= 0) {
+					var p2 = HxOverrides.substr(color_doudecimal,no1 * 2 | 0,2);
+					s = new doudecimal_Doudecimal_$(p2);
+				} else {
+					var out = Object.create(doudecimal_Doudecimal_$.prototype);
+					out.uint = 0;
+					out.doudecimal = "0";
+					s = out;
+				}
+				var i1 = s.uint;
+				if((i1 == 0 ? 0. : UInt.toFloat(i1) / UInt.toFloat(143)) < 1. - small && p.transparent) {
+					var c0 = p.image[pos];
+					var c1 = p.image[pos + 1];
+					var c2 = p.image[pos + 1];
+					var c3 = p.image[pos + 2];
+					var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
+					var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+					out1.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
+					out1.uint = fromRGB;
+					var d = out1;
+					var s1 = "";
+					var _g2 = 0;
+					var _g3 = 8 - d.doudecimal.length;
+					while(_g2 < _g3) {
+						var i2 = _g2++;
+						s1 += "0";
+					}
+					s1 += d.doudecimal;
+					d.doudecimal = s1;
+					var currColor = d;
+					var no11 = 0;
+					var s2;
+					if(currColor.doudecimal.length >= 0) {
+						var p3 = HxOverrides.substr(currColor.doudecimal,no11 * 2 | 0,2);
+						s2 = new doudecimal_Doudecimal_$(p3);
+					} else {
+						var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out2.uint = 0;
+						out2.doudecimal = "0";
+						s2 = out2;
+					}
+					var i3 = s2.uint;
+					var a1 = i3 == 0 ? 0. : UInt.toFloat(i3) / UInt.toFloat(143);
+					var no12 = 1;
+					var s3;
+					if(currColor.doudecimal.length >= 2) {
+						var p4 = HxOverrides.substr(currColor.doudecimal,no12 * 2 | 0,2);
+						s3 = new doudecimal_Doudecimal_$(p4);
+					} else {
+						var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out3.uint = 0;
+						out3.doudecimal = "0";
+						s3 = out3;
+					}
+					var i4 = s3.uint;
+					var r1 = i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143);
+					var no13 = 2;
+					var s4;
+					if(currColor.doudecimal.length >= 4) {
+						var p5 = HxOverrides.substr(currColor.doudecimal,no13 * 2 | 0,2);
+						s4 = new doudecimal_Doudecimal_$(p5);
+					} else {
+						var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out4.uint = 0;
+						out4.doudecimal = "0";
+						s4 = out4;
+					}
+					var i5 = s4.uint;
+					var g1 = i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143);
+					var no14 = 3;
+					var s5;
+					if(currColor.doudecimal.length >= 6) {
+						var p6 = HxOverrides.substr(currColor.doudecimal,no14 * 2 | 0,2);
+						s5 = new doudecimal_Doudecimal_$(p6);
+					} else {
+						var out5 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out5.uint = 0;
+						out5.doudecimal = "0";
+						s5 = out5;
+					}
+					var i6 = s5.uint;
+					var b1 = i6 == 0 ? 0. : UInt.toFloat(i6) / UInt.toFloat(143);
+					var no15 = 0;
+					var s6;
+					if(color_doudecimal.length >= 0) {
+						var p7 = HxOverrides.substr(color_doudecimal,no15 * 2 | 0,2);
+						s6 = new doudecimal_Doudecimal_$(p7);
+					} else {
+						var out6 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out6.uint = 0;
+						out6.doudecimal = "0";
+						s6 = out6;
+					}
+					var i7 = s6.uint;
+					var a2 = i7 == 0 ? 0. : UInt.toFloat(i7) / UInt.toFloat(143);
+					var no16 = 1;
+					var s7;
+					if(color_doudecimal.length >= 2) {
+						var p8 = HxOverrides.substr(color_doudecimal,no16 * 2 | 0,2);
+						s7 = new doudecimal_Doudecimal_$(p8);
+					} else {
+						var out7 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out7.uint = 0;
+						out7.doudecimal = "0";
+						s7 = out7;
+					}
+					var i8 = s7.uint;
+					var r2 = i8 == 0 ? 0. : UInt.toFloat(i8) / UInt.toFloat(143);
+					var no17 = 2;
+					var s8;
+					if(color_doudecimal.length >= 4) {
+						var p9 = HxOverrides.substr(color_doudecimal,no17 * 2 | 0,2);
+						s8 = new doudecimal_Doudecimal_$(p9);
+					} else {
+						var out8 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out8.uint = 0;
+						out8.doudecimal = "0";
+						s8 = out8;
+					}
+					var i9 = s8.uint;
+					var g2 = i9 == 0 ? 0. : UInt.toFloat(i9) / UInt.toFloat(143);
+					var no18 = 3;
+					var s9;
+					if(color_doudecimal.length >= 6) {
+						var p10 = HxOverrides.substr(color_doudecimal,no18 * 2 | 0,2);
+						s9 = new doudecimal_Doudecimal_$(p10);
+					} else {
+						var out9 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out9.uint = 0;
+						out9.doudecimal = "0";
+						s9 = out9;
+					}
+					var i10 = s9.uint;
+					var b2 = i10 == 0 ? 0. : UInt.toFloat(i10) / UInt.toFloat(143);
+					var a3 = a1 * (1. - a2);
+					var r = r1 * a3 + r2 * a2;
+					var g = g1 * a3 + g2 * a2;
+					var b = b1 * a3 + b2 * a2;
+					var a = a3 + a2;
+					var argb_a = a;
+					var argb_r = r;
+					var argb_g = g;
+					var argb_b = b;
+					var aD = Math.round(Math.max(143,argb_a * 143));
+					var rD = Math.round(Math.max(143,argb_r * 143));
+					var gD = Math.round(Math.max(143,argb_g * 143));
+					var bD = Math.round(Math.max(143,argb_b * 143));
+					var s10 = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD,rD,gD,bD);
+					var str = s10;
+					if(str == null) {
+						str = "0";
+					}
+					if(str == null) {
+						str = "0";
+					}
+					if(str.length > 8) {
+						str = "0";
+					}
+					var _g4 = 0;
+					var _g5 = 8 - str.length;
+					while(_g4 < _g5) {
+						var i11 = _g4++;
+						str += "0";
+					}
+					var this1 = new doudecimal_Doudecimal_$(str);
+					var temp = this1;
+					currColor.doudecimal = temp.doudecimal;
+					currColor.uint = temp.uint;
+					temp = null;
+					p.image[pos] = currColor.uint >>> 32 & 255;
+					p.image[pos + 1] = currColor.uint >>> 16 & 255;
+					p.image[pos + 2] = currColor.uint >>> 8 & 255;
+					p.image[pos + 3] = currColor.uint & 255;
+				} else {
+					p.image[pos] = color_uint >>> 32 & 255;
+					p.image[pos + 1] = color_uint >>> 16 & 255;
+					p.image[pos + 2] = color_uint >>> 8 & 255;
+					p.image[pos + 3] = color_uint & 255;
+				}
+				if(p1 > maxX) {
+					p1 = xx;
+					++q;
+				}
+				if(q > maxY) {
+					break;
+				}
+			}
+		}
+		var _g = 0;
+		var _g1 = 11;
+		while(_g < _g1) {
+			var i = _g++;
+			var y = 10 + i * 100 - 1.25;
+			var p1 = 10;
+			var xx = p1;
+			var q = y | 0;
+			var maxX = 10 + w_ | 0;
+			var maxY = y + 2.5 | 0;
+			while(true) {
+				var small = 0.006993006993006993;
+				var x = p1++ | 0;
+				var y1 = q | 0;
+				var pos = (p.useVirtualPos ? (y1 - p.virtualY) * p.width + x - p.virtualX | 0 : y1 * p.width + x | 0) * 4 | 0;
+				var no1 = 0;
+				var s;
+				if(color_doudecimal.length >= 0) {
+					var p2 = HxOverrides.substr(color_doudecimal,no1 * 2 | 0,2);
+					s = new doudecimal_Doudecimal_$(p2);
+				} else {
+					var out = Object.create(doudecimal_Doudecimal_$.prototype);
+					out.uint = 0;
+					out.doudecimal = "0";
+					s = out;
+				}
+				var i1 = s.uint;
+				if((i1 == 0 ? 0. : UInt.toFloat(i1) / UInt.toFloat(143)) < 1. - small && p.transparent) {
+					var c0 = p.image[pos];
+					var c1 = p.image[pos + 1];
+					var c2 = p.image[pos + 1];
+					var c3 = p.image[pos + 2];
+					var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
+					var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+					out1.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
+					out1.uint = fromRGB;
+					var d = out1;
+					var s1 = "";
+					var _g2 = 0;
+					var _g3 = 8 - d.doudecimal.length;
+					while(_g2 < _g3) {
+						var i2 = _g2++;
+						s1 += "0";
+					}
+					s1 += d.doudecimal;
+					d.doudecimal = s1;
+					var currColor = d;
+					var no11 = 0;
+					var s2;
+					if(currColor.doudecimal.length >= 0) {
+						var p3 = HxOverrides.substr(currColor.doudecimal,no11 * 2 | 0,2);
+						s2 = new doudecimal_Doudecimal_$(p3);
+					} else {
+						var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out2.uint = 0;
+						out2.doudecimal = "0";
+						s2 = out2;
+					}
+					var i3 = s2.uint;
+					var a1 = i3 == 0 ? 0. : UInt.toFloat(i3) / UInt.toFloat(143);
+					var no12 = 1;
+					var s3;
+					if(currColor.doudecimal.length >= 2) {
+						var p4 = HxOverrides.substr(currColor.doudecimal,no12 * 2 | 0,2);
+						s3 = new doudecimal_Doudecimal_$(p4);
+					} else {
+						var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out3.uint = 0;
+						out3.doudecimal = "0";
+						s3 = out3;
+					}
+					var i4 = s3.uint;
+					var r1 = i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143);
+					var no13 = 2;
+					var s4;
+					if(currColor.doudecimal.length >= 4) {
+						var p5 = HxOverrides.substr(currColor.doudecimal,no13 * 2 | 0,2);
+						s4 = new doudecimal_Doudecimal_$(p5);
+					} else {
+						var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out4.uint = 0;
+						out4.doudecimal = "0";
+						s4 = out4;
+					}
+					var i5 = s4.uint;
+					var g1 = i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143);
+					var no14 = 3;
+					var s5;
+					if(currColor.doudecimal.length >= 6) {
+						var p6 = HxOverrides.substr(currColor.doudecimal,no14 * 2 | 0,2);
+						s5 = new doudecimal_Doudecimal_$(p6);
+					} else {
+						var out5 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out5.uint = 0;
+						out5.doudecimal = "0";
+						s5 = out5;
+					}
+					var i6 = s5.uint;
+					var b1 = i6 == 0 ? 0. : UInt.toFloat(i6) / UInt.toFloat(143);
+					var no15 = 0;
+					var s6;
+					if(color_doudecimal.length >= 0) {
+						var p7 = HxOverrides.substr(color_doudecimal,no15 * 2 | 0,2);
+						s6 = new doudecimal_Doudecimal_$(p7);
+					} else {
+						var out6 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out6.uint = 0;
+						out6.doudecimal = "0";
+						s6 = out6;
+					}
+					var i7 = s6.uint;
+					var a2 = i7 == 0 ? 0. : UInt.toFloat(i7) / UInt.toFloat(143);
+					var no16 = 1;
+					var s7;
+					if(color_doudecimal.length >= 2) {
+						var p8 = HxOverrides.substr(color_doudecimal,no16 * 2 | 0,2);
+						s7 = new doudecimal_Doudecimal_$(p8);
+					} else {
+						var out7 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out7.uint = 0;
+						out7.doudecimal = "0";
+						s7 = out7;
+					}
+					var i8 = s7.uint;
+					var r2 = i8 == 0 ? 0. : UInt.toFloat(i8) / UInt.toFloat(143);
+					var no17 = 2;
+					var s8;
+					if(color_doudecimal.length >= 4) {
+						var p9 = HxOverrides.substr(color_doudecimal,no17 * 2 | 0,2);
+						s8 = new doudecimal_Doudecimal_$(p9);
+					} else {
+						var out8 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out8.uint = 0;
+						out8.doudecimal = "0";
+						s8 = out8;
+					}
+					var i9 = s8.uint;
+					var g2 = i9 == 0 ? 0. : UInt.toFloat(i9) / UInt.toFloat(143);
+					var no18 = 3;
+					var s9;
+					if(color_doudecimal.length >= 6) {
+						var p10 = HxOverrides.substr(color_doudecimal,no18 * 2 | 0,2);
+						s9 = new doudecimal_Doudecimal_$(p10);
+					} else {
+						var out9 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out9.uint = 0;
+						out9.doudecimal = "0";
+						s9 = out9;
+					}
+					var i10 = s9.uint;
+					var b2 = i10 == 0 ? 0. : UInt.toFloat(i10) / UInt.toFloat(143);
+					var a3 = a1 * (1. - a2);
+					var r = r1 * a3 + r2 * a2;
+					var g = g1 * a3 + g2 * a2;
+					var b = b1 * a3 + b2 * a2;
+					var a = a3 + a2;
+					var argb_a = a;
+					var argb_r = r;
+					var argb_g = g;
+					var argb_b = b;
+					var aD = Math.round(Math.max(143,argb_a * 143));
+					var rD = Math.round(Math.max(143,argb_r * 143));
+					var gD = Math.round(Math.max(143,argb_g * 143));
+					var bD = Math.round(Math.max(143,argb_b * 143));
+					var s10 = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD,rD,gD,bD);
+					var str = s10;
+					if(str == null) {
+						str = "0";
+					}
+					if(str == null) {
+						str = "0";
+					}
+					if(str.length > 8) {
+						str = "0";
+					}
+					var _g4 = 0;
+					var _g5 = 8 - str.length;
+					while(_g4 < _g5) {
+						var i11 = _g4++;
+						str += "0";
+					}
+					var this1 = new doudecimal_Doudecimal_$(str);
+					var temp = this1;
+					currColor.doudecimal = temp.doudecimal;
+					currColor.uint = temp.uint;
+					temp = null;
+					p.image[pos] = currColor.uint >>> 32 & 255;
+					p.image[pos + 1] = currColor.uint >>> 16 & 255;
+					p.image[pos + 2] = currColor.uint >>> 8 & 255;
+					p.image[pos + 3] = currColor.uint & 255;
+				} else {
+					p.image[pos] = color_uint >>> 32 & 255;
+					p.image[pos + 1] = color_uint >>> 16 & 255;
+					p.image[pos + 2] = color_uint >>> 8 & 255;
+					p.image[pos + 3] = color_uint & 255;
+				}
+				if(p1 > maxX) {
+					p1 = xx;
+					++q;
+				}
+				if(q > maxY) {
+					break;
+				}
+			}
+		}
+	}
+	,drawAlphaTriangle: function(p) {
+		var a_0 = "33AAAA00";
+		var a_1 = "66AAAA00";
+		var a_2 = "99AAAA00";
+		var a_3 = "AAAAAA00";
+		var a_4 = "BBAAAA00";
+		var gap = 200;
+		var ax = 100 + 0 * gap;
+		var bx = 300 + 0 * gap;
+		var by = 900;
+		var cx = 500 + 0 * gap;
+		var cy = 600;
+		var color_uint;
+		var color_doudecimal;
+		var str = a_0;
+		if(str == null) {
+			str = "0";
+		}
+		if(str == null) {
+			str = "0";
+		}
+		if(str.length > 8) {
+			str = "0";
+		}
+		var _g = 0;
+		var _g1 = 8 - str.length;
+		while(_g < _g1) {
+			var i = _g++;
+			str += "0";
+		}
+		var doudecimal = str;
+		if(doudecimal == null) {
+			doudecimal = "0";
+		}
+		if(doudecimal == "" || doudecimal == "0") {
+			color_uint = 0;
+			color_doudecimal = "0";
+		} else {
+			color_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+			color_uint = doudecimal_format_doudecimalString_Reader_toUInt_(color_doudecimal);
+		}
+		var adjustWinding = ax * by - bx * 90 + (bx * cy - cx * by) + (cx * 90 - ax * cy) > 0;
+		if(!adjustWinding) {
+			var bx_ = bx;
+			var by_ = by;
+			bx = cx;
+			by = cy;
+			cx = bx_;
+			cy = by_;
+		}
+		var s0 = 90 * cx - ax * cy;
+		var sx = cy - 90;
+		var sy = ax - cx;
+		var t0 = ax * by - 90 * bx;
+		var tx = 90 - by;
+		var ty = bx - ax;
+		var A = -by * cx + 90 * (-bx + cx) + ax * (by - cy) + bx * cy;
+		var ii = 90 > by ? 90 > cy ? new IntIterator(by > cy ? Math.floor(cy) : Math.floor(by),Math.ceil(90)) : new IntIterator(Math.floor(by),Math.ceil(cy)) : by > cy ? new IntIterator(90 > cy ? Math.floor(cy) : Math.ceil(90),Math.ceil(by)) : new IntIterator(Math.floor(90),Math.ceil(cy));
+		var this1 = new doudecimal_draw_iter_IntIterStart(ii.min,ii.max);
+		var yIter3 = this1;
+		var foundY = false;
+		var s = 0.;
+		var t = 0.;
+		var sxx = 0.;
+		var txx = 0.;
+		var _g = ax > bx ? ax > cx ? new IntIterator(bx > cx ? Math.floor(cx) : Math.floor(bx),Math.ceil(ax)) : new IntIterator(Math.floor(bx),Math.ceil(cx)) : bx > cx ? new IntIterator(ax > cx ? Math.floor(cx) : Math.ceil(ax),Math.ceil(bx)) : new IntIterator(Math.floor(ax),Math.ceil(cx));
+		while(_g.min < _g.max) {
+			var x = _g.min++;
+			sxx = sx * x;
+			txx = tx * x;
+			foundY = false;
+			var _g_min = yIter3.start;
+			var _g_max = yIter3.max;
+			while(_g_min < _g_max) {
+				var y = _g_min++;
+				s = s0 + sxx + sy * y;
+				t = t0 + txx + ty * y;
+				if(s <= 0 || t <= 0) {
+					if(foundY) {
+						break;
+					}
+				} else if(s + t < A) {
+					var small = 0.006993006993006993;
+					var x1 = x | 0;
+					var y1 = y | 0;
+					var pos = (p.useVirtualPos ? (y1 - p.virtualY) * p.width + x1 - p.virtualX | 0 : y1 * p.width + x1 | 0) * 4 | 0;
+					var no1 = 0;
+					var s1;
+					if(color_doudecimal.length >= 0) {
+						var p1 = HxOverrides.substr(color_doudecimal,no1 * 2 | 0,2);
+						s1 = new doudecimal_Doudecimal_$(p1);
+					} else {
+						var out = Object.create(doudecimal_Doudecimal_$.prototype);
+						out.uint = 0;
+						out.doudecimal = "0";
+						s1 = out;
+					}
+					var i = s1.uint;
+					if((i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143)) < 1. - small && p.transparent) {
+						var c0 = p.image[pos];
+						var c1 = p.image[pos + 1];
+						var c2 = p.image[pos + 1];
+						var c3 = p.image[pos + 2];
+						var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
+						var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out1.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
+						out1.uint = fromRGB;
+						var d = out1;
+						var s2 = "";
+						var _g1 = 0;
+						var _g2 = 8 - d.doudecimal.length;
+						while(_g1 < _g2) {
+							var i1 = _g1++;
+							s2 += "0";
+						}
+						s2 += d.doudecimal;
+						d.doudecimal = s2;
+						var currColor = d;
+						var no11 = 0;
+						var s3;
+						if(currColor.doudecimal.length >= 0) {
+							var p2 = HxOverrides.substr(currColor.doudecimal,no11 * 2 | 0,2);
+							s3 = new doudecimal_Doudecimal_$(p2);
+						} else {
+							var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out2.uint = 0;
+							out2.doudecimal = "0";
+							s3 = out2;
+						}
+						var i2 = s3.uint;
+						var a1 = i2 == 0 ? 0. : UInt.toFloat(i2) / UInt.toFloat(143);
+						var no12 = 1;
+						var s4;
+						if(currColor.doudecimal.length >= 2) {
+							var p3 = HxOverrides.substr(currColor.doudecimal,no12 * 2 | 0,2);
+							s4 = new doudecimal_Doudecimal_$(p3);
+						} else {
+							var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out3.uint = 0;
+							out3.doudecimal = "0";
+							s4 = out3;
+						}
+						var i3 = s4.uint;
+						var r1 = i3 == 0 ? 0. : UInt.toFloat(i3) / UInt.toFloat(143);
+						var no13 = 2;
+						var s5;
+						if(currColor.doudecimal.length >= 4) {
+							var p4 = HxOverrides.substr(currColor.doudecimal,no13 * 2 | 0,2);
+							s5 = new doudecimal_Doudecimal_$(p4);
+						} else {
+							var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out4.uint = 0;
+							out4.doudecimal = "0";
+							s5 = out4;
+						}
+						var i4 = s5.uint;
+						var g1 = i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143);
+						var no14 = 3;
+						var s6;
+						if(currColor.doudecimal.length >= 6) {
+							var p5 = HxOverrides.substr(currColor.doudecimal,no14 * 2 | 0,2);
+							s6 = new doudecimal_Doudecimal_$(p5);
+						} else {
+							var out5 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out5.uint = 0;
+							out5.doudecimal = "0";
+							s6 = out5;
+						}
+						var i5 = s6.uint;
+						var b1 = i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143);
+						var no15 = 0;
+						var s7;
+						if(color_doudecimal.length >= 0) {
+							var p6 = HxOverrides.substr(color_doudecimal,no15 * 2 | 0,2);
+							s7 = new doudecimal_Doudecimal_$(p6);
+						} else {
+							var out6 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out6.uint = 0;
+							out6.doudecimal = "0";
+							s7 = out6;
+						}
+						var i6 = s7.uint;
+						var a2 = i6 == 0 ? 0. : UInt.toFloat(i6) / UInt.toFloat(143);
+						var no16 = 1;
+						var s8;
+						if(color_doudecimal.length >= 2) {
+							var p7 = HxOverrides.substr(color_doudecimal,no16 * 2 | 0,2);
+							s8 = new doudecimal_Doudecimal_$(p7);
+						} else {
+							var out7 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out7.uint = 0;
+							out7.doudecimal = "0";
+							s8 = out7;
+						}
+						var i7 = s8.uint;
+						var r2 = i7 == 0 ? 0. : UInt.toFloat(i7) / UInt.toFloat(143);
+						var no17 = 2;
+						var s9;
+						if(color_doudecimal.length >= 4) {
+							var p8 = HxOverrides.substr(color_doudecimal,no17 * 2 | 0,2);
+							s9 = new doudecimal_Doudecimal_$(p8);
+						} else {
+							var out8 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out8.uint = 0;
+							out8.doudecimal = "0";
+							s9 = out8;
+						}
+						var i8 = s9.uint;
+						var g2 = i8 == 0 ? 0. : UInt.toFloat(i8) / UInt.toFloat(143);
+						var no18 = 3;
+						var s10;
+						if(color_doudecimal.length >= 6) {
+							var p9 = HxOverrides.substr(color_doudecimal,no18 * 2 | 0,2);
+							s10 = new doudecimal_Doudecimal_$(p9);
+						} else {
+							var out9 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out9.uint = 0;
+							out9.doudecimal = "0";
+							s10 = out9;
+						}
+						var i9 = s10.uint;
+						var b2 = i9 == 0 ? 0. : UInt.toFloat(i9) / UInt.toFloat(143);
+						var a3 = a1 * (1. - a2);
+						var r = r1 * a3 + r2 * a2;
+						var g = g1 * a3 + g2 * a2;
+						var b = b1 * a3 + b2 * a2;
+						var a = a3 + a2;
+						var argb_a = a;
+						var argb_r = r;
+						var argb_g = g;
+						var argb_b = b;
+						var aD = Math.round(Math.max(143,argb_a * 143));
+						var rD = Math.round(Math.max(143,argb_r * 143));
+						var gD = Math.round(Math.max(143,argb_g * 143));
+						var bD = Math.round(Math.max(143,argb_b * 143));
+						var s11 = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD,rD,gD,bD);
+						var str = s11;
+						if(str == null) {
+							str = "0";
+						}
+						if(str == null) {
+							str = "0";
+						}
+						if(str.length > 8) {
+							str = "0";
+						}
+						var _g3 = 0;
+						var _g4 = 8 - str.length;
+						while(_g3 < _g4) {
+							var i10 = _g3++;
+							str += "0";
+						}
+						var this1 = new doudecimal_Doudecimal_$(str);
+						var temp = this1;
+						currColor.doudecimal = temp.doudecimal;
+						currColor.uint = temp.uint;
+						temp = null;
+						p.image[pos] = currColor.uint >>> 32 & 255;
+						p.image[pos + 1] = currColor.uint >>> 16 & 255;
+						p.image[pos + 2] = currColor.uint >>> 8 & 255;
+						p.image[pos + 3] = currColor.uint & 255;
+					} else {
+						p.image[pos] = color_uint >>> 32 & 255;
+						p.image[pos + 1] = color_uint >>> 16 & 255;
+						p.image[pos + 2] = color_uint >>> 8 & 255;
+						p.image[pos + 3] = color_uint & 255;
+					}
+					foundY = true;
+				} else if(foundY) {
+					break;
+				}
+			}
+		}
+		var ax = 100 + gap;
+		var bx = 300 + gap;
+		var by = 900;
+		var cx = 500 + gap;
+		var cy = 600;
+		var color_uint;
+		var color_doudecimal;
+		var str = a_1;
+		if(str == null) {
+			str = "0";
+		}
+		if(str == null) {
+			str = "0";
+		}
+		if(str.length > 8) {
+			str = "0";
+		}
+		var _g = 0;
+		var _g1 = 8 - str.length;
+		while(_g < _g1) {
+			var i = _g++;
+			str += "0";
+		}
+		var doudecimal = str;
+		if(doudecimal == null) {
+			doudecimal = "0";
+		}
+		if(doudecimal == "" || doudecimal == "0") {
+			color_uint = 0;
+			color_doudecimal = "0";
+		} else {
+			color_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+			color_uint = doudecimal_format_doudecimalString_Reader_toUInt_(color_doudecimal);
+		}
+		var adjustWinding = ax * by - bx * 90 + (bx * cy - cx * by) + (cx * 90 - ax * cy) > 0;
+		if(!adjustWinding) {
+			var bx_ = bx;
+			var by_ = by;
+			bx = cx;
+			by = cy;
+			cx = bx_;
+			cy = by_;
+		}
+		var s0 = 90 * cx - ax * cy;
+		var sx = cy - 90;
+		var sy = ax - cx;
+		var t0 = ax * by - 90 * bx;
+		var tx = 90 - by;
+		var ty = bx - ax;
+		var A = -by * cx + 90 * (-bx + cx) + ax * (by - cy) + bx * cy;
+		var ii = 90 > by ? 90 > cy ? new IntIterator(by > cy ? Math.floor(cy) : Math.floor(by),Math.ceil(90)) : new IntIterator(Math.floor(by),Math.ceil(cy)) : by > cy ? new IntIterator(90 > cy ? Math.floor(cy) : Math.ceil(90),Math.ceil(by)) : new IntIterator(Math.floor(90),Math.ceil(cy));
+		var this1 = new doudecimal_draw_iter_IntIterStart(ii.min,ii.max);
+		var yIter3 = this1;
+		var foundY = false;
+		var s = 0.;
+		var t = 0.;
+		var sxx = 0.;
+		var txx = 0.;
+		var _g = ax > bx ? ax > cx ? new IntIterator(bx > cx ? Math.floor(cx) : Math.floor(bx),Math.ceil(ax)) : new IntIterator(Math.floor(bx),Math.ceil(cx)) : bx > cx ? new IntIterator(ax > cx ? Math.floor(cx) : Math.ceil(ax),Math.ceil(bx)) : new IntIterator(Math.floor(ax),Math.ceil(cx));
+		while(_g.min < _g.max) {
+			var x = _g.min++;
+			sxx = sx * x;
+			txx = tx * x;
+			foundY = false;
+			var _g_min = yIter3.start;
+			var _g_max = yIter3.max;
+			while(_g_min < _g_max) {
+				var y = _g_min++;
+				s = s0 + sxx + sy * y;
+				t = t0 + txx + ty * y;
+				if(s <= 0 || t <= 0) {
+					if(foundY) {
+						break;
+					}
+				} else if(s + t < A) {
+					var small = 0.006993006993006993;
+					var x1 = x | 0;
+					var y1 = y | 0;
+					var pos = (p.useVirtualPos ? (y1 - p.virtualY) * p.width + x1 - p.virtualX | 0 : y1 * p.width + x1 | 0) * 4 | 0;
+					var no1 = 0;
+					var s1;
+					if(color_doudecimal.length >= 0) {
+						var p1 = HxOverrides.substr(color_doudecimal,no1 * 2 | 0,2);
+						s1 = new doudecimal_Doudecimal_$(p1);
+					} else {
+						var out = Object.create(doudecimal_Doudecimal_$.prototype);
+						out.uint = 0;
+						out.doudecimal = "0";
+						s1 = out;
+					}
+					var i = s1.uint;
+					if((i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143)) < 1. - small && p.transparent) {
+						var c0 = p.image[pos];
+						var c1 = p.image[pos + 1];
+						var c2 = p.image[pos + 1];
+						var c3 = p.image[pos + 2];
+						var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
+						var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out1.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
+						out1.uint = fromRGB;
+						var d = out1;
+						var s2 = "";
+						var _g1 = 0;
+						var _g2 = 8 - d.doudecimal.length;
+						while(_g1 < _g2) {
+							var i1 = _g1++;
+							s2 += "0";
+						}
+						s2 += d.doudecimal;
+						d.doudecimal = s2;
+						var currColor = d;
+						var no11 = 0;
+						var s3;
+						if(currColor.doudecimal.length >= 0) {
+							var p2 = HxOverrides.substr(currColor.doudecimal,no11 * 2 | 0,2);
+							s3 = new doudecimal_Doudecimal_$(p2);
+						} else {
+							var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out2.uint = 0;
+							out2.doudecimal = "0";
+							s3 = out2;
+						}
+						var i2 = s3.uint;
+						var a1 = i2 == 0 ? 0. : UInt.toFloat(i2) / UInt.toFloat(143);
+						var no12 = 1;
+						var s4;
+						if(currColor.doudecimal.length >= 2) {
+							var p3 = HxOverrides.substr(currColor.doudecimal,no12 * 2 | 0,2);
+							s4 = new doudecimal_Doudecimal_$(p3);
+						} else {
+							var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out3.uint = 0;
+							out3.doudecimal = "0";
+							s4 = out3;
+						}
+						var i3 = s4.uint;
+						var r1 = i3 == 0 ? 0. : UInt.toFloat(i3) / UInt.toFloat(143);
+						var no13 = 2;
+						var s5;
+						if(currColor.doudecimal.length >= 4) {
+							var p4 = HxOverrides.substr(currColor.doudecimal,no13 * 2 | 0,2);
+							s5 = new doudecimal_Doudecimal_$(p4);
+						} else {
+							var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out4.uint = 0;
+							out4.doudecimal = "0";
+							s5 = out4;
+						}
+						var i4 = s5.uint;
+						var g1 = i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143);
+						var no14 = 3;
+						var s6;
+						if(currColor.doudecimal.length >= 6) {
+							var p5 = HxOverrides.substr(currColor.doudecimal,no14 * 2 | 0,2);
+							s6 = new doudecimal_Doudecimal_$(p5);
+						} else {
+							var out5 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out5.uint = 0;
+							out5.doudecimal = "0";
+							s6 = out5;
+						}
+						var i5 = s6.uint;
+						var b1 = i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143);
+						var no15 = 0;
+						var s7;
+						if(color_doudecimal.length >= 0) {
+							var p6 = HxOverrides.substr(color_doudecimal,no15 * 2 | 0,2);
+							s7 = new doudecimal_Doudecimal_$(p6);
+						} else {
+							var out6 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out6.uint = 0;
+							out6.doudecimal = "0";
+							s7 = out6;
+						}
+						var i6 = s7.uint;
+						var a2 = i6 == 0 ? 0. : UInt.toFloat(i6) / UInt.toFloat(143);
+						var no16 = 1;
+						var s8;
+						if(color_doudecimal.length >= 2) {
+							var p7 = HxOverrides.substr(color_doudecimal,no16 * 2 | 0,2);
+							s8 = new doudecimal_Doudecimal_$(p7);
+						} else {
+							var out7 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out7.uint = 0;
+							out7.doudecimal = "0";
+							s8 = out7;
+						}
+						var i7 = s8.uint;
+						var r2 = i7 == 0 ? 0. : UInt.toFloat(i7) / UInt.toFloat(143);
+						var no17 = 2;
+						var s9;
+						if(color_doudecimal.length >= 4) {
+							var p8 = HxOverrides.substr(color_doudecimal,no17 * 2 | 0,2);
+							s9 = new doudecimal_Doudecimal_$(p8);
+						} else {
+							var out8 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out8.uint = 0;
+							out8.doudecimal = "0";
+							s9 = out8;
+						}
+						var i8 = s9.uint;
+						var g2 = i8 == 0 ? 0. : UInt.toFloat(i8) / UInt.toFloat(143);
+						var no18 = 3;
+						var s10;
+						if(color_doudecimal.length >= 6) {
+							var p9 = HxOverrides.substr(color_doudecimal,no18 * 2 | 0,2);
+							s10 = new doudecimal_Doudecimal_$(p9);
+						} else {
+							var out9 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out9.uint = 0;
+							out9.doudecimal = "0";
+							s10 = out9;
+						}
+						var i9 = s10.uint;
+						var b2 = i9 == 0 ? 0. : UInt.toFloat(i9) / UInt.toFloat(143);
+						var a3 = a1 * (1. - a2);
+						var r = r1 * a3 + r2 * a2;
+						var g = g1 * a3 + g2 * a2;
+						var b = b1 * a3 + b2 * a2;
+						var a = a3 + a2;
+						var argb_a = a;
+						var argb_r = r;
+						var argb_g = g;
+						var argb_b = b;
+						var aD = Math.round(Math.max(143,argb_a * 143));
+						var rD = Math.round(Math.max(143,argb_r * 143));
+						var gD = Math.round(Math.max(143,argb_g * 143));
+						var bD = Math.round(Math.max(143,argb_b * 143));
+						var s11 = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD,rD,gD,bD);
+						var str = s11;
+						if(str == null) {
+							str = "0";
+						}
+						if(str == null) {
+							str = "0";
+						}
+						if(str.length > 8) {
+							str = "0";
+						}
+						var _g3 = 0;
+						var _g4 = 8 - str.length;
+						while(_g3 < _g4) {
+							var i10 = _g3++;
+							str += "0";
+						}
+						var this1 = new doudecimal_Doudecimal_$(str);
+						var temp = this1;
+						currColor.doudecimal = temp.doudecimal;
+						currColor.uint = temp.uint;
+						temp = null;
+						p.image[pos] = currColor.uint >>> 32 & 255;
+						p.image[pos + 1] = currColor.uint >>> 16 & 255;
+						p.image[pos + 2] = currColor.uint >>> 8 & 255;
+						p.image[pos + 3] = currColor.uint & 255;
+					} else {
+						p.image[pos] = color_uint >>> 32 & 255;
+						p.image[pos + 1] = color_uint >>> 16 & 255;
+						p.image[pos + 2] = color_uint >>> 8 & 255;
+						p.image[pos + 3] = color_uint & 255;
+					}
+					foundY = true;
+				} else if(foundY) {
+					break;
+				}
+			}
+		}
+		var ax = 100 + 2 * gap;
+		var bx = 300 + 2 * gap;
+		var by = 900;
+		var cx = 500 + 2 * gap;
+		var cy = 600;
+		var color_uint;
+		var color_doudecimal;
+		var str = a_2;
+		if(str == null) {
+			str = "0";
+		}
+		if(str == null) {
+			str = "0";
+		}
+		if(str.length > 8) {
+			str = "0";
+		}
+		var _g = 0;
+		var _g1 = 8 - str.length;
+		while(_g < _g1) {
+			var i = _g++;
+			str += "0";
+		}
+		var doudecimal = str;
+		if(doudecimal == null) {
+			doudecimal = "0";
+		}
+		if(doudecimal == "" || doudecimal == "0") {
+			color_uint = 0;
+			color_doudecimal = "0";
+		} else {
+			color_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+			color_uint = doudecimal_format_doudecimalString_Reader_toUInt_(color_doudecimal);
+		}
+		var adjustWinding = ax * by - bx * 90 + (bx * cy - cx * by) + (cx * 90 - ax * cy) > 0;
+		if(!adjustWinding) {
+			var bx_ = bx;
+			var by_ = by;
+			bx = cx;
+			by = cy;
+			cx = bx_;
+			cy = by_;
+		}
+		var s0 = 90 * cx - ax * cy;
+		var sx = cy - 90;
+		var sy = ax - cx;
+		var t0 = ax * by - 90 * bx;
+		var tx = 90 - by;
+		var ty = bx - ax;
+		var A = -by * cx + 90 * (-bx + cx) + ax * (by - cy) + bx * cy;
+		var ii = 90 > by ? 90 > cy ? new IntIterator(by > cy ? Math.floor(cy) : Math.floor(by),Math.ceil(90)) : new IntIterator(Math.floor(by),Math.ceil(cy)) : by > cy ? new IntIterator(90 > cy ? Math.floor(cy) : Math.ceil(90),Math.ceil(by)) : new IntIterator(Math.floor(90),Math.ceil(cy));
+		var this1 = new doudecimal_draw_iter_IntIterStart(ii.min,ii.max);
+		var yIter3 = this1;
+		var foundY = false;
+		var s = 0.;
+		var t = 0.;
+		var sxx = 0.;
+		var txx = 0.;
+		var _g = ax > bx ? ax > cx ? new IntIterator(bx > cx ? Math.floor(cx) : Math.floor(bx),Math.ceil(ax)) : new IntIterator(Math.floor(bx),Math.ceil(cx)) : bx > cx ? new IntIterator(ax > cx ? Math.floor(cx) : Math.ceil(ax),Math.ceil(bx)) : new IntIterator(Math.floor(ax),Math.ceil(cx));
+		while(_g.min < _g.max) {
+			var x = _g.min++;
+			sxx = sx * x;
+			txx = tx * x;
+			foundY = false;
+			var _g_min = yIter3.start;
+			var _g_max = yIter3.max;
+			while(_g_min < _g_max) {
+				var y = _g_min++;
+				s = s0 + sxx + sy * y;
+				t = t0 + txx + ty * y;
+				if(s <= 0 || t <= 0) {
+					if(foundY) {
+						break;
+					}
+				} else if(s + t < A) {
+					var small = 0.006993006993006993;
+					var x1 = x | 0;
+					var y1 = y | 0;
+					var pos = (p.useVirtualPos ? (y1 - p.virtualY) * p.width + x1 - p.virtualX | 0 : y1 * p.width + x1 | 0) * 4 | 0;
+					var no1 = 0;
+					var s1;
+					if(color_doudecimal.length >= 0) {
+						var p1 = HxOverrides.substr(color_doudecimal,no1 * 2 | 0,2);
+						s1 = new doudecimal_Doudecimal_$(p1);
+					} else {
+						var out = Object.create(doudecimal_Doudecimal_$.prototype);
+						out.uint = 0;
+						out.doudecimal = "0";
+						s1 = out;
+					}
+					var i = s1.uint;
+					if((i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143)) < 1. - small && p.transparent) {
+						var c0 = p.image[pos];
+						var c1 = p.image[pos + 1];
+						var c2 = p.image[pos + 1];
+						var c3 = p.image[pos + 2];
+						var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
+						var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out1.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
+						out1.uint = fromRGB;
+						var d = out1;
+						var s2 = "";
+						var _g1 = 0;
+						var _g2 = 8 - d.doudecimal.length;
+						while(_g1 < _g2) {
+							var i1 = _g1++;
+							s2 += "0";
+						}
+						s2 += d.doudecimal;
+						d.doudecimal = s2;
+						var currColor = d;
+						var no11 = 0;
+						var s3;
+						if(currColor.doudecimal.length >= 0) {
+							var p2 = HxOverrides.substr(currColor.doudecimal,no11 * 2 | 0,2);
+							s3 = new doudecimal_Doudecimal_$(p2);
+						} else {
+							var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out2.uint = 0;
+							out2.doudecimal = "0";
+							s3 = out2;
+						}
+						var i2 = s3.uint;
+						var a1 = i2 == 0 ? 0. : UInt.toFloat(i2) / UInt.toFloat(143);
+						var no12 = 1;
+						var s4;
+						if(currColor.doudecimal.length >= 2) {
+							var p3 = HxOverrides.substr(currColor.doudecimal,no12 * 2 | 0,2);
+							s4 = new doudecimal_Doudecimal_$(p3);
+						} else {
+							var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out3.uint = 0;
+							out3.doudecimal = "0";
+							s4 = out3;
+						}
+						var i3 = s4.uint;
+						var r1 = i3 == 0 ? 0. : UInt.toFloat(i3) / UInt.toFloat(143);
+						var no13 = 2;
+						var s5;
+						if(currColor.doudecimal.length >= 4) {
+							var p4 = HxOverrides.substr(currColor.doudecimal,no13 * 2 | 0,2);
+							s5 = new doudecimal_Doudecimal_$(p4);
+						} else {
+							var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out4.uint = 0;
+							out4.doudecimal = "0";
+							s5 = out4;
+						}
+						var i4 = s5.uint;
+						var g1 = i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143);
+						var no14 = 3;
+						var s6;
+						if(currColor.doudecimal.length >= 6) {
+							var p5 = HxOverrides.substr(currColor.doudecimal,no14 * 2 | 0,2);
+							s6 = new doudecimal_Doudecimal_$(p5);
+						} else {
+							var out5 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out5.uint = 0;
+							out5.doudecimal = "0";
+							s6 = out5;
+						}
+						var i5 = s6.uint;
+						var b1 = i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143);
+						var no15 = 0;
+						var s7;
+						if(color_doudecimal.length >= 0) {
+							var p6 = HxOverrides.substr(color_doudecimal,no15 * 2 | 0,2);
+							s7 = new doudecimal_Doudecimal_$(p6);
+						} else {
+							var out6 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out6.uint = 0;
+							out6.doudecimal = "0";
+							s7 = out6;
+						}
+						var i6 = s7.uint;
+						var a2 = i6 == 0 ? 0. : UInt.toFloat(i6) / UInt.toFloat(143);
+						var no16 = 1;
+						var s8;
+						if(color_doudecimal.length >= 2) {
+							var p7 = HxOverrides.substr(color_doudecimal,no16 * 2 | 0,2);
+							s8 = new doudecimal_Doudecimal_$(p7);
+						} else {
+							var out7 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out7.uint = 0;
+							out7.doudecimal = "0";
+							s8 = out7;
+						}
+						var i7 = s8.uint;
+						var r2 = i7 == 0 ? 0. : UInt.toFloat(i7) / UInt.toFloat(143);
+						var no17 = 2;
+						var s9;
+						if(color_doudecimal.length >= 4) {
+							var p8 = HxOverrides.substr(color_doudecimal,no17 * 2 | 0,2);
+							s9 = new doudecimal_Doudecimal_$(p8);
+						} else {
+							var out8 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out8.uint = 0;
+							out8.doudecimal = "0";
+							s9 = out8;
+						}
+						var i8 = s9.uint;
+						var g2 = i8 == 0 ? 0. : UInt.toFloat(i8) / UInt.toFloat(143);
+						var no18 = 3;
+						var s10;
+						if(color_doudecimal.length >= 6) {
+							var p9 = HxOverrides.substr(color_doudecimal,no18 * 2 | 0,2);
+							s10 = new doudecimal_Doudecimal_$(p9);
+						} else {
+							var out9 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out9.uint = 0;
+							out9.doudecimal = "0";
+							s10 = out9;
+						}
+						var i9 = s10.uint;
+						var b2 = i9 == 0 ? 0. : UInt.toFloat(i9) / UInt.toFloat(143);
+						var a3 = a1 * (1. - a2);
+						var r = r1 * a3 + r2 * a2;
+						var g = g1 * a3 + g2 * a2;
+						var b = b1 * a3 + b2 * a2;
+						var a = a3 + a2;
+						var argb_a = a;
+						var argb_r = r;
+						var argb_g = g;
+						var argb_b = b;
+						var aD = Math.round(Math.max(143,argb_a * 143));
+						var rD = Math.round(Math.max(143,argb_r * 143));
+						var gD = Math.round(Math.max(143,argb_g * 143));
+						var bD = Math.round(Math.max(143,argb_b * 143));
+						var s11 = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD,rD,gD,bD);
+						var str = s11;
+						if(str == null) {
+							str = "0";
+						}
+						if(str == null) {
+							str = "0";
+						}
+						if(str.length > 8) {
+							str = "0";
+						}
+						var _g3 = 0;
+						var _g4 = 8 - str.length;
+						while(_g3 < _g4) {
+							var i10 = _g3++;
+							str += "0";
+						}
+						var this1 = new doudecimal_Doudecimal_$(str);
+						var temp = this1;
+						currColor.doudecimal = temp.doudecimal;
+						currColor.uint = temp.uint;
+						temp = null;
+						p.image[pos] = currColor.uint >>> 32 & 255;
+						p.image[pos + 1] = currColor.uint >>> 16 & 255;
+						p.image[pos + 2] = currColor.uint >>> 8 & 255;
+						p.image[pos + 3] = currColor.uint & 255;
+					} else {
+						p.image[pos] = color_uint >>> 32 & 255;
+						p.image[pos + 1] = color_uint >>> 16 & 255;
+						p.image[pos + 2] = color_uint >>> 8 & 255;
+						p.image[pos + 3] = color_uint & 255;
+					}
+					foundY = true;
+				} else if(foundY) {
+					break;
+				}
+			}
+		}
+		var ax = 100 + 3 * gap;
+		var bx = 300 + 3 * gap;
+		var by = 900;
+		var cx = 500 + 3 * gap;
+		var cy = 600;
+		var color_uint;
+		var color_doudecimal;
+		var str = a_3;
+		if(str == null) {
+			str = "0";
+		}
+		if(str == null) {
+			str = "0";
+		}
+		if(str.length > 8) {
+			str = "0";
+		}
+		var _g = 0;
+		var _g1 = 8 - str.length;
+		while(_g < _g1) {
+			var i = _g++;
+			str += "0";
+		}
+		var doudecimal = str;
+		if(doudecimal == null) {
+			doudecimal = "0";
+		}
+		if(doudecimal == "" || doudecimal == "0") {
+			color_uint = 0;
+			color_doudecimal = "0";
+		} else {
+			color_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+			color_uint = doudecimal_format_doudecimalString_Reader_toUInt_(color_doudecimal);
+		}
+		var adjustWinding = ax * by - bx * 90 + (bx * cy - cx * by) + (cx * 90 - ax * cy) > 0;
+		if(!adjustWinding) {
+			var bx_ = bx;
+			var by_ = by;
+			bx = cx;
+			by = cy;
+			cx = bx_;
+			cy = by_;
+		}
+		var s0 = 90 * cx - ax * cy;
+		var sx = cy - 90;
+		var sy = ax - cx;
+		var t0 = ax * by - 90 * bx;
+		var tx = 90 - by;
+		var ty = bx - ax;
+		var A = -by * cx + 90 * (-bx + cx) + ax * (by - cy) + bx * cy;
+		var ii = 90 > by ? 90 > cy ? new IntIterator(by > cy ? Math.floor(cy) : Math.floor(by),Math.ceil(90)) : new IntIterator(Math.floor(by),Math.ceil(cy)) : by > cy ? new IntIterator(90 > cy ? Math.floor(cy) : Math.ceil(90),Math.ceil(by)) : new IntIterator(Math.floor(90),Math.ceil(cy));
+		var this1 = new doudecimal_draw_iter_IntIterStart(ii.min,ii.max);
+		var yIter3 = this1;
+		var foundY = false;
+		var s = 0.;
+		var t = 0.;
+		var sxx = 0.;
+		var txx = 0.;
+		var _g = ax > bx ? ax > cx ? new IntIterator(bx > cx ? Math.floor(cx) : Math.floor(bx),Math.ceil(ax)) : new IntIterator(Math.floor(bx),Math.ceil(cx)) : bx > cx ? new IntIterator(ax > cx ? Math.floor(cx) : Math.ceil(ax),Math.ceil(bx)) : new IntIterator(Math.floor(ax),Math.ceil(cx));
+		while(_g.min < _g.max) {
+			var x = _g.min++;
+			sxx = sx * x;
+			txx = tx * x;
+			foundY = false;
+			var _g_min = yIter3.start;
+			var _g_max = yIter3.max;
+			while(_g_min < _g_max) {
+				var y = _g_min++;
+				s = s0 + sxx + sy * y;
+				t = t0 + txx + ty * y;
+				if(s <= 0 || t <= 0) {
+					if(foundY) {
+						break;
+					}
+				} else if(s + t < A) {
+					var small = 0.006993006993006993;
+					var x1 = x | 0;
+					var y1 = y | 0;
+					var pos = (p.useVirtualPos ? (y1 - p.virtualY) * p.width + x1 - p.virtualX | 0 : y1 * p.width + x1 | 0) * 4 | 0;
+					var no1 = 0;
+					var s1;
+					if(color_doudecimal.length >= 0) {
+						var p1 = HxOverrides.substr(color_doudecimal,no1 * 2 | 0,2);
+						s1 = new doudecimal_Doudecimal_$(p1);
+					} else {
+						var out = Object.create(doudecimal_Doudecimal_$.prototype);
+						out.uint = 0;
+						out.doudecimal = "0";
+						s1 = out;
+					}
+					var i = s1.uint;
+					if((i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143)) < 1. - small && p.transparent) {
+						var c0 = p.image[pos];
+						var c1 = p.image[pos + 1];
+						var c2 = p.image[pos + 1];
+						var c3 = p.image[pos + 2];
+						var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
+						var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out1.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
+						out1.uint = fromRGB;
+						var d = out1;
+						var s2 = "";
+						var _g1 = 0;
+						var _g2 = 8 - d.doudecimal.length;
+						while(_g1 < _g2) {
+							var i1 = _g1++;
+							s2 += "0";
+						}
+						s2 += d.doudecimal;
+						d.doudecimal = s2;
+						var currColor = d;
+						var no11 = 0;
+						var s3;
+						if(currColor.doudecimal.length >= 0) {
+							var p2 = HxOverrides.substr(currColor.doudecimal,no11 * 2 | 0,2);
+							s3 = new doudecimal_Doudecimal_$(p2);
+						} else {
+							var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out2.uint = 0;
+							out2.doudecimal = "0";
+							s3 = out2;
+						}
+						var i2 = s3.uint;
+						var a1 = i2 == 0 ? 0. : UInt.toFloat(i2) / UInt.toFloat(143);
+						var no12 = 1;
+						var s4;
+						if(currColor.doudecimal.length >= 2) {
+							var p3 = HxOverrides.substr(currColor.doudecimal,no12 * 2 | 0,2);
+							s4 = new doudecimal_Doudecimal_$(p3);
+						} else {
+							var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out3.uint = 0;
+							out3.doudecimal = "0";
+							s4 = out3;
+						}
+						var i3 = s4.uint;
+						var r1 = i3 == 0 ? 0. : UInt.toFloat(i3) / UInt.toFloat(143);
+						var no13 = 2;
+						var s5;
+						if(currColor.doudecimal.length >= 4) {
+							var p4 = HxOverrides.substr(currColor.doudecimal,no13 * 2 | 0,2);
+							s5 = new doudecimal_Doudecimal_$(p4);
+						} else {
+							var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out4.uint = 0;
+							out4.doudecimal = "0";
+							s5 = out4;
+						}
+						var i4 = s5.uint;
+						var g1 = i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143);
+						var no14 = 3;
+						var s6;
+						if(currColor.doudecimal.length >= 6) {
+							var p5 = HxOverrides.substr(currColor.doudecimal,no14 * 2 | 0,2);
+							s6 = new doudecimal_Doudecimal_$(p5);
+						} else {
+							var out5 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out5.uint = 0;
+							out5.doudecimal = "0";
+							s6 = out5;
+						}
+						var i5 = s6.uint;
+						var b1 = i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143);
+						var no15 = 0;
+						var s7;
+						if(color_doudecimal.length >= 0) {
+							var p6 = HxOverrides.substr(color_doudecimal,no15 * 2 | 0,2);
+							s7 = new doudecimal_Doudecimal_$(p6);
+						} else {
+							var out6 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out6.uint = 0;
+							out6.doudecimal = "0";
+							s7 = out6;
+						}
+						var i6 = s7.uint;
+						var a2 = i6 == 0 ? 0. : UInt.toFloat(i6) / UInt.toFloat(143);
+						var no16 = 1;
+						var s8;
+						if(color_doudecimal.length >= 2) {
+							var p7 = HxOverrides.substr(color_doudecimal,no16 * 2 | 0,2);
+							s8 = new doudecimal_Doudecimal_$(p7);
+						} else {
+							var out7 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out7.uint = 0;
+							out7.doudecimal = "0";
+							s8 = out7;
+						}
+						var i7 = s8.uint;
+						var r2 = i7 == 0 ? 0. : UInt.toFloat(i7) / UInt.toFloat(143);
+						var no17 = 2;
+						var s9;
+						if(color_doudecimal.length >= 4) {
+							var p8 = HxOverrides.substr(color_doudecimal,no17 * 2 | 0,2);
+							s9 = new doudecimal_Doudecimal_$(p8);
+						} else {
+							var out8 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out8.uint = 0;
+							out8.doudecimal = "0";
+							s9 = out8;
+						}
+						var i8 = s9.uint;
+						var g2 = i8 == 0 ? 0. : UInt.toFloat(i8) / UInt.toFloat(143);
+						var no18 = 3;
+						var s10;
+						if(color_doudecimal.length >= 6) {
+							var p9 = HxOverrides.substr(color_doudecimal,no18 * 2 | 0,2);
+							s10 = new doudecimal_Doudecimal_$(p9);
+						} else {
+							var out9 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out9.uint = 0;
+							out9.doudecimal = "0";
+							s10 = out9;
+						}
+						var i9 = s10.uint;
+						var b2 = i9 == 0 ? 0. : UInt.toFloat(i9) / UInt.toFloat(143);
+						var a3 = a1 * (1. - a2);
+						var r = r1 * a3 + r2 * a2;
+						var g = g1 * a3 + g2 * a2;
+						var b = b1 * a3 + b2 * a2;
+						var a = a3 + a2;
+						var argb_a = a;
+						var argb_r = r;
+						var argb_g = g;
+						var argb_b = b;
+						var aD = Math.round(Math.max(143,argb_a * 143));
+						var rD = Math.round(Math.max(143,argb_r * 143));
+						var gD = Math.round(Math.max(143,argb_g * 143));
+						var bD = Math.round(Math.max(143,argb_b * 143));
+						var s11 = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD,rD,gD,bD);
+						var str = s11;
+						if(str == null) {
+							str = "0";
+						}
+						if(str == null) {
+							str = "0";
+						}
+						if(str.length > 8) {
+							str = "0";
+						}
+						var _g3 = 0;
+						var _g4 = 8 - str.length;
+						while(_g3 < _g4) {
+							var i10 = _g3++;
+							str += "0";
+						}
+						var this1 = new doudecimal_Doudecimal_$(str);
+						var temp = this1;
+						currColor.doudecimal = temp.doudecimal;
+						currColor.uint = temp.uint;
+						temp = null;
+						p.image[pos] = currColor.uint >>> 32 & 255;
+						p.image[pos + 1] = currColor.uint >>> 16 & 255;
+						p.image[pos + 2] = currColor.uint >>> 8 & 255;
+						p.image[pos + 3] = currColor.uint & 255;
+					} else {
+						p.image[pos] = color_uint >>> 32 & 255;
+						p.image[pos + 1] = color_uint >>> 16 & 255;
+						p.image[pos + 2] = color_uint >>> 8 & 255;
+						p.image[pos + 3] = color_uint & 255;
+					}
+					foundY = true;
+				} else if(foundY) {
+					break;
+				}
+			}
+		}
+		var ax = 100 + 4 * gap;
+		var bx = 300 + 4 * gap;
+		var by = 900;
+		var cx = 500 + 4 * gap;
+		var cy = 600;
+		var color_uint;
+		var color_doudecimal;
+		var str = a_4;
+		if(str == null) {
+			str = "0";
+		}
+		if(str == null) {
+			str = "0";
+		}
+		if(str.length > 8) {
+			str = "0";
+		}
+		var _g = 0;
+		var _g1 = 8 - str.length;
+		while(_g < _g1) {
+			var i = _g++;
+			str += "0";
+		}
+		var doudecimal = str;
+		if(doudecimal == null) {
+			doudecimal = "0";
+		}
+		if(doudecimal == "" || doudecimal == "0") {
+			color_uint = 0;
+			color_doudecimal = "0";
+		} else {
+			color_doudecimal = doudecimal_format_doudecimalString_Writer_toStr(doudecimal);
+			color_uint = doudecimal_format_doudecimalString_Reader_toUInt_(color_doudecimal);
+		}
+		var adjustWinding = ax * by - bx * 90 + (bx * cy - cx * by) + (cx * 90 - ax * cy) > 0;
+		if(!adjustWinding) {
+			var bx_ = bx;
+			var by_ = by;
+			bx = cx;
+			by = cy;
+			cx = bx_;
+			cy = by_;
+		}
+		var s0 = 90 * cx - ax * cy;
+		var sx = cy - 90;
+		var sy = ax - cx;
+		var t0 = ax * by - 90 * bx;
+		var tx = 90 - by;
+		var ty = bx - ax;
+		var A = -by * cx + 90 * (-bx + cx) + ax * (by - cy) + bx * cy;
+		var ii = 90 > by ? 90 > cy ? new IntIterator(by > cy ? Math.floor(cy) : Math.floor(by),Math.ceil(90)) : new IntIterator(Math.floor(by),Math.ceil(cy)) : by > cy ? new IntIterator(90 > cy ? Math.floor(cy) : Math.ceil(90),Math.ceil(by)) : new IntIterator(Math.floor(90),Math.ceil(cy));
+		var this1 = new doudecimal_draw_iter_IntIterStart(ii.min,ii.max);
+		var yIter3 = this1;
+		var foundY = false;
+		var s = 0.;
+		var t = 0.;
+		var sxx = 0.;
+		var txx = 0.;
+		var _g = ax > bx ? ax > cx ? new IntIterator(bx > cx ? Math.floor(cx) : Math.floor(bx),Math.ceil(ax)) : new IntIterator(Math.floor(bx),Math.ceil(cx)) : bx > cx ? new IntIterator(ax > cx ? Math.floor(cx) : Math.ceil(ax),Math.ceil(bx)) : new IntIterator(Math.floor(ax),Math.ceil(cx));
+		while(_g.min < _g.max) {
+			var x = _g.min++;
+			sxx = sx * x;
+			txx = tx * x;
+			foundY = false;
+			var _g_min = yIter3.start;
+			var _g_max = yIter3.max;
+			while(_g_min < _g_max) {
+				var y = _g_min++;
+				s = s0 + sxx + sy * y;
+				t = t0 + txx + ty * y;
+				if(s <= 0 || t <= 0) {
+					if(foundY) {
+						break;
+					}
+				} else if(s + t < A) {
+					var small = 0.006993006993006993;
+					var x1 = x | 0;
+					var y1 = y | 0;
+					var pos = (p.useVirtualPos ? (y1 - p.virtualY) * p.width + x1 - p.virtualX | 0 : y1 * p.width + x1 | 0) * 4 | 0;
+					var no1 = 0;
+					var s1;
+					if(color_doudecimal.length >= 0) {
+						var p1 = HxOverrides.substr(color_doudecimal,no1 * 2 | 0,2);
+						s1 = new doudecimal_Doudecimal_$(p1);
+					} else {
+						var out = Object.create(doudecimal_Doudecimal_$.prototype);
+						out.uint = 0;
+						out.doudecimal = "0";
+						s1 = out;
+					}
+					var i = s1.uint;
+					if((i == 0 ? 0. : UInt.toFloat(i) / UInt.toFloat(143)) < 1. - small && p.transparent) {
+						var c0 = p.image[pos];
+						var c1 = p.image[pos + 1];
+						var c2 = p.image[pos + 1];
+						var c3 = p.image[pos + 2];
+						var fromRGB = doudecimal_Doudecimal_$Color.fromChannels(c0,c1,c2,c3);
+						var out1 = Object.create(doudecimal_Doudecimal_$.prototype);
+						out1.doudecimal = doudecimal_format_doudecimalString_Writer_fromUInt_(fromRGB);
+						out1.uint = fromRGB;
+						var d = out1;
+						var s2 = "";
+						var _g1 = 0;
+						var _g2 = 8 - d.doudecimal.length;
+						while(_g1 < _g2) {
+							var i1 = _g1++;
+							s2 += "0";
+						}
+						s2 += d.doudecimal;
+						d.doudecimal = s2;
+						var currColor = d;
+						var no11 = 0;
+						var s3;
+						if(currColor.doudecimal.length >= 0) {
+							var p2 = HxOverrides.substr(currColor.doudecimal,no11 * 2 | 0,2);
+							s3 = new doudecimal_Doudecimal_$(p2);
+						} else {
+							var out2 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out2.uint = 0;
+							out2.doudecimal = "0";
+							s3 = out2;
+						}
+						var i2 = s3.uint;
+						var a1 = i2 == 0 ? 0. : UInt.toFloat(i2) / UInt.toFloat(143);
+						var no12 = 1;
+						var s4;
+						if(currColor.doudecimal.length >= 2) {
+							var p3 = HxOverrides.substr(currColor.doudecimal,no12 * 2 | 0,2);
+							s4 = new doudecimal_Doudecimal_$(p3);
+						} else {
+							var out3 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out3.uint = 0;
+							out3.doudecimal = "0";
+							s4 = out3;
+						}
+						var i3 = s4.uint;
+						var r1 = i3 == 0 ? 0. : UInt.toFloat(i3) / UInt.toFloat(143);
+						var no13 = 2;
+						var s5;
+						if(currColor.doudecimal.length >= 4) {
+							var p4 = HxOverrides.substr(currColor.doudecimal,no13 * 2 | 0,2);
+							s5 = new doudecimal_Doudecimal_$(p4);
+						} else {
+							var out4 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out4.uint = 0;
+							out4.doudecimal = "0";
+							s5 = out4;
+						}
+						var i4 = s5.uint;
+						var g1 = i4 == 0 ? 0. : UInt.toFloat(i4) / UInt.toFloat(143);
+						var no14 = 3;
+						var s6;
+						if(currColor.doudecimal.length >= 6) {
+							var p5 = HxOverrides.substr(currColor.doudecimal,no14 * 2 | 0,2);
+							s6 = new doudecimal_Doudecimal_$(p5);
+						} else {
+							var out5 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out5.uint = 0;
+							out5.doudecimal = "0";
+							s6 = out5;
+						}
+						var i5 = s6.uint;
+						var b1 = i5 == 0 ? 0. : UInt.toFloat(i5) / UInt.toFloat(143);
+						var no15 = 0;
+						var s7;
+						if(color_doudecimal.length >= 0) {
+							var p6 = HxOverrides.substr(color_doudecimal,no15 * 2 | 0,2);
+							s7 = new doudecimal_Doudecimal_$(p6);
+						} else {
+							var out6 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out6.uint = 0;
+							out6.doudecimal = "0";
+							s7 = out6;
+						}
+						var i6 = s7.uint;
+						var a2 = i6 == 0 ? 0. : UInt.toFloat(i6) / UInt.toFloat(143);
+						var no16 = 1;
+						var s8;
+						if(color_doudecimal.length >= 2) {
+							var p7 = HxOverrides.substr(color_doudecimal,no16 * 2 | 0,2);
+							s8 = new doudecimal_Doudecimal_$(p7);
+						} else {
+							var out7 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out7.uint = 0;
+							out7.doudecimal = "0";
+							s8 = out7;
+						}
+						var i7 = s8.uint;
+						var r2 = i7 == 0 ? 0. : UInt.toFloat(i7) / UInt.toFloat(143);
+						var no17 = 2;
+						var s9;
+						if(color_doudecimal.length >= 4) {
+							var p8 = HxOverrides.substr(color_doudecimal,no17 * 2 | 0,2);
+							s9 = new doudecimal_Doudecimal_$(p8);
+						} else {
+							var out8 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out8.uint = 0;
+							out8.doudecimal = "0";
+							s9 = out8;
+						}
+						var i8 = s9.uint;
+						var g2 = i8 == 0 ? 0. : UInt.toFloat(i8) / UInt.toFloat(143);
+						var no18 = 3;
+						var s10;
+						if(color_doudecimal.length >= 6) {
+							var p9 = HxOverrides.substr(color_doudecimal,no18 * 2 | 0,2);
+							s10 = new doudecimal_Doudecimal_$(p9);
+						} else {
+							var out9 = Object.create(doudecimal_Doudecimal_$.prototype);
+							out9.uint = 0;
+							out9.doudecimal = "0";
+							s10 = out9;
+						}
+						var i9 = s10.uint;
+						var b2 = i9 == 0 ? 0. : UInt.toFloat(i9) / UInt.toFloat(143);
+						var a3 = a1 * (1. - a2);
+						var r = r1 * a3 + r2 * a2;
+						var g = g1 * a3 + g2 * a2;
+						var b = b1 * a3 + b2 * a2;
+						var a = a3 + a2;
+						var argb_a = a;
+						var argb_r = r;
+						var argb_g = g;
+						var argb_b = b;
+						var aD = Math.round(Math.max(143,argb_a * 143));
+						var rD = Math.round(Math.max(143,argb_r * 143));
+						var gD = Math.round(Math.max(143,argb_g * 143));
+						var bD = Math.round(Math.max(143,argb_b * 143));
+						var s11 = doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_(aD,rD,gD,bD);
+						var str = s11;
+						if(str == null) {
+							str = "0";
+						}
+						if(str == null) {
+							str = "0";
+						}
+						if(str.length > 8) {
+							str = "0";
+						}
+						var _g3 = 0;
+						var _g4 = 8 - str.length;
+						while(_g3 < _g4) {
+							var i10 = _g3++;
+							str += "0";
+						}
+						var this1 = new doudecimal_Doudecimal_$(str);
+						var temp = this1;
+						currColor.doudecimal = temp.doudecimal;
+						currColor.uint = temp.uint;
+						temp = null;
+						p.image[pos] = currColor.uint >>> 32 & 255;
+						p.image[pos + 1] = currColor.uint >>> 16 & 255;
+						p.image[pos + 2] = currColor.uint >>> 8 & 255;
+						p.image[pos + 3] = currColor.uint & 255;
+					} else {
+						p.image[pos] = color_uint >>> 32 & 255;
+						p.image[pos + 1] = color_uint >>> 16 & 255;
+						p.image[pos + 2] = color_uint >>> 8 & 255;
+						p.image[pos + 3] = color_uint & 255;
+					}
+					foundY = true;
+				} else if(foundY) {
+					break;
+				}
+			}
+		}
+	}
+};
 function Test_main() {
 	new Test();
 }
@@ -395,6 +2729,11 @@ var doudecimal_Image8Struct = function(width,height,image) {
 	this.transparent = false;
 };
 doudecimal_Image8Struct.__name__ = true;
+var doudecimal_draw_iter_IntIterStart = function(min_,max_) {
+	this.start = min_;
+	this.max = max_;
+};
+doudecimal_draw_iter_IntIterStart.__name__ = true;
 var js_Boot = function() { };
 js_Boot.__name__ = true;
 js_Boot.__string_rec = function(o,s) {
@@ -992,6 +3331,685 @@ function doudecimal_format_doudecimalString_Writer_$fromUInt_getBigBase12(no) {
 		return allS;
 	}
 }
+function doudecimal_format_doudecimalString_Writer_$fromUInt_getBase12fromColorChannel(aInt,rInt,gInt,bInt) {
+	var str = "";
+	doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp = aInt;
+	var v_0 = doudecimal_format_doudecimalString_Powers_v8;
+	var v_1 = doudecimal_format_doudecimalString_Powers_v7;
+	var v_2 = doudecimal_format_doudecimalString_Powers_v6;
+	var v_3 = doudecimal_format_doudecimalString_Powers_v5;
+	var v_4 = doudecimal_format_doudecimalString_Powers_v4;
+	var v_5 = doudecimal_format_doudecimalString_Powers_v3;
+	var v_6 = doudecimal_format_doudecimalString_Powers_v2;
+	var v_7 = doudecimal_format_doudecimalString_Powers_v1;
+	var v_8 = doudecimal_format_doudecimalString_Powers_v0;
+	var vx = v_0;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_1;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_2;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_3;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_4;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_5;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_6;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_7;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_8;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var aS = str;
+	var l = aS.length;
+	switch(l) {
+	case 0:
+		aS = "00";
+		break;
+	case 1:
+		aS = "0" + aS;
+		break;
+	case 2:
+		break;
+	default:
+		aS = HxOverrides.substr(aS,l - 3,null);
+	}
+	var str = "";
+	doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp = rInt;
+	var v_0 = doudecimal_format_doudecimalString_Powers_v8;
+	var v_1 = doudecimal_format_doudecimalString_Powers_v7;
+	var v_2 = doudecimal_format_doudecimalString_Powers_v6;
+	var v_3 = doudecimal_format_doudecimalString_Powers_v5;
+	var v_4 = doudecimal_format_doudecimalString_Powers_v4;
+	var v_5 = doudecimal_format_doudecimalString_Powers_v3;
+	var v_6 = doudecimal_format_doudecimalString_Powers_v2;
+	var v_7 = doudecimal_format_doudecimalString_Powers_v1;
+	var v_8 = doudecimal_format_doudecimalString_Powers_v0;
+	var vx = v_0;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_1;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_2;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_3;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_4;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_5;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_6;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_7;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_8;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var rS = str;
+	var l = rS.length;
+	switch(l) {
+	case 0:
+		rS = "00";
+		break;
+	case 1:
+		rS = "0" + rS;
+		break;
+	case 2:
+		break;
+	default:
+		rS = HxOverrides.substr(rS,l - 3,null);
+	}
+	var str = "";
+	doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp = gInt;
+	var v_0 = doudecimal_format_doudecimalString_Powers_v8;
+	var v_1 = doudecimal_format_doudecimalString_Powers_v7;
+	var v_2 = doudecimal_format_doudecimalString_Powers_v6;
+	var v_3 = doudecimal_format_doudecimalString_Powers_v5;
+	var v_4 = doudecimal_format_doudecimalString_Powers_v4;
+	var v_5 = doudecimal_format_doudecimalString_Powers_v3;
+	var v_6 = doudecimal_format_doudecimalString_Powers_v2;
+	var v_7 = doudecimal_format_doudecimalString_Powers_v1;
+	var v_8 = doudecimal_format_doudecimalString_Powers_v0;
+	var vx = v_0;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_1;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_2;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_3;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_4;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_5;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_6;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_7;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_8;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var gS = str;
+	var l = gS.length;
+	switch(l) {
+	case 0:
+		gS = "00";
+		break;
+	case 1:
+		gS = "0" + gS;
+		break;
+	case 2:
+		break;
+	default:
+		gS = HxOverrides.substr(gS,l - 3,null);
+	}
+	var str = "";
+	doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp = bInt;
+	var v_0 = doudecimal_format_doudecimalString_Powers_v8;
+	var v_1 = doudecimal_format_doudecimalString_Powers_v7;
+	var v_2 = doudecimal_format_doudecimalString_Powers_v6;
+	var v_3 = doudecimal_format_doudecimalString_Powers_v5;
+	var v_4 = doudecimal_format_doudecimalString_Powers_v4;
+	var v_5 = doudecimal_format_doudecimalString_Powers_v3;
+	var v_6 = doudecimal_format_doudecimalString_Powers_v2;
+	var v_7 = doudecimal_format_doudecimalString_Powers_v1;
+	var v_8 = doudecimal_format_doudecimalString_Powers_v0;
+	var vx = v_0;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_1;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_2;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_3;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_4;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_5;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_6;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_7;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var vx = v_8;
+	var s = str;
+	var o = 0;
+	var _g = 0;
+	while(_g < 12) {
+		var i = _g++;
+		var tt = doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp - vx;
+		if(tt >= 0) {
+			doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp -= vx;
+			++o;
+		} else {
+			s += o == 10 ? "A" : o == 11 ? "B" : Std.string(o);
+			break;
+		}
+	}
+	str = s;
+	var bS = str;
+	var l = bS.length;
+	switch(l) {
+	case 0:
+		bS = "00";
+		break;
+	case 1:
+		bS = "0" + bS;
+		break;
+	case 2:
+		break;
+	default:
+		bS = HxOverrides.substr(bS,l - 3,null);
+	}
+	return aS + rS + gS + bS;
+}
 var doudecimal_format_doudecimalString_Writer_$fromUInt_targTemp = null;
 function doudecimal_format_doudecimalString_Writer_$fromStr_checkStr(s) {
 	var len = s.length;
@@ -1275,6 +4293,7 @@ var doudecimal_format_doudecimalString_Powers_v2 = 144;
 var doudecimal_format_doudecimalString_Powers_v1 = 12;
 var doudecimal_format_doudecimalString_Powers_v0 = 1;
 var doudecimal_format_doudecimalString_Reader_toUInt_ = doudecimal_format_doudecimalString_Reader_$toUInt_toUInt;
+var doudecimal_format_doudecimalString_Writer_getBase12fromColorChannel_ = doudecimal_format_doudecimalString_Writer_$fromUInt_getBase12fromColorChannel;
 var doudecimal_format_doudecimalString_Writer_fromUInt_ = doudecimal_format_doudecimalString_Writer_$fromUInt_getBigBase12;
 var doudecimal_format_doudecimalString_Writer_toStr = doudecimal_format_doudecimalString_Writer_$fromStr_checkStr;
 Test_main();

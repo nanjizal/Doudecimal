@@ -13,14 +13,22 @@ class Test {
         trace( 'Doudecimal example on Canvas' );
         var g   = canvasSetup.surface;
         // check encoding
+        
+
+        /**
         var p = new Doudecimal_Image( 1, 1 );
         var d = new Doudecimal_Color( 'BBAA9988' ); 
+        trace( 'color string should be BB AA 99 88 :' + d );
+        trace( 'color uint should be 429708344 :' + d.uint );
+        trace( 'color as hex should be 19 9C D4 38 :' + d.hexadecimal );
+        var d1: Doudecimal_Color = 429708344;
+        trace( 'color from uint should be BB AA 99 88 :' + d1 );
+**/
         // 19 9C D4 38
         // 429708344
-        trace( d.uint );
-           
+        
+           /*
         // 6C 7E 5B E4
-        trace( d.uint );
         trace( d.channel_dds( 0 ) + ' '
              + d.channel_dds( 1 ) + ' '
              + d.channel_dds( 2 ) + ' ' 
@@ -31,13 +39,22 @@ class Test {
              + StringTools.hex( d.channel_ddi( 2 ), 2 ) + ' ' 
              + StringTools.hex( d.channel_ddi( 3 ), 2 )
              );  
+*/
+        //trace( d.stringPixel() );
 
-        trace( d.stringPixel() );
-        p.set_doudecimalPixel( 0., 0., d );
-        trace( p.stringPixel( 0., 0. ) );
-        var d2 = p.get_doudecimalPixel( 0., 0. );
-        trace( d.uint + ' '+ d.doudecimal + ' '+ d2.uint + ' ' + d2.doudecimal );  
-
+        //p.set_doudecimalPixel( 0., 0., d );
+        //trace( p.stringPixel( 0., 0. ) );
+        
+        //var d2 = p.get_doudecimalPixel( 0., 0. );
+        //trace( d.uint + ' '+ d.doudecimal + ' '+ d2.uint + ' ' + d2.doudecimal );  
+        var p = new Doudecimal_Image( 1000, 1000 );
+        p.fillGradTri( 100, 100, Doudecimal_Color.RED, 300, 500, Doudecimal_Color.GREEN, 100, 500, Doudecimal_Color.BLUE );
+        drawAlphaTriangle( p );
+        p.fillSquare( 400, 400, 400, 'BBAA9988' );
+        drawGrid( p );
+        
+        //trace( p );
+        p.drawToContext( g.me, 0, 0 );
 
 /*
         trace( 'creating image' );
@@ -69,7 +86,7 @@ class Test {
      }
 
      public function drawGrid( p: Doudecimal_Image ){
-        //p.lineGrid( 10, 10, 240, 240, 100, 2.5, 'AA002200' );
+        p.lineGrid( 10, 10, 1000, 1000, 100, 2.5, 'BB002200' );
    }
      //public old(){
         // applying Vision test 
@@ -112,20 +129,22 @@ class Test {
      public function drawGrid( p: Pixelshape ){
           p.lineGrid( 100, 100, 1024*3, 768*3, 100, 2.5, 0xfF003300 );
      }
+*/
 
-     public function drawAlphaTriangle( p: Pixelshape ){
-        var a = [ 0x33F000c0
-                , 0x99F000c0
-                , 0xaaF000c0
-                , 0xccF000c0
-                , 0xeeF000c0];
+
+     public function drawAlphaTriangle( p : Doudecimal_Image ){
+        var a = [ '33AAAA00'
+                , '66AAAA00'
+                , '99AAAA00'
+                , 'AAAAAA00'
+                , 'BBAAAA00'];
         var gap = 200;
         for( i in 0...5 ){
-            p.fillTri( 100 + i*gap, 900
-                     , 300 + i*gap, 1200
-                     , 500 + i*gap, 1000
+            p.fillTri( 100 + i*gap, 90
+                     , 300+ i*gap, 900
+                     , 500 + i*gap, 600
                      , a[i] );
         }
    }
-   */
+   
 }

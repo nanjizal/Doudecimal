@@ -34,7 +34,30 @@ inline function getBigBase12( no: UInt ): String {
         allS;
     }
 }
-
+inline function getBase12fromColorChannel( aInt: UInt, rInt: UInt, gInt: UInt, bInt: UInt ): String {
+    var aS = getBase12( aInt );
+    aS = pad2x0s( aS );
+    var rS = getBase12( rInt );
+    rS = pad2x0s( rS );
+    var gS = getBase12( gInt );
+    gS = pad2x0s( gS );
+    var bS = getBase12( bInt );
+    bS = pad2x0s( bS );
+    return aS + rS + gS + bS;
+}
+inline function pad2x0s( str: String ): String {
+    var l = str.length;
+    return switch( l ){
+        case 0: 
+            '00';
+        case 1:
+            '0'+str;
+        case 2:
+            str;
+        case _:
+            str.substr( l - 3 );    
+    }
+}
 inline function padLeading0s( str: String, no: Int ): String {
     var s = '';
     for( i in 0...no-str.length ) s += '0';

@@ -10,21 +10,21 @@ import doudecimal.Doudecimal;
 **/
 @:structInit
 class Image8Struct {
-  public var width:  Int;
-  public var height: Int;
-  public var image:  UInt8Array;
-  // for composing shapes where overwitting set as false, for alpha blending set as true.
-  public var transparent: Bool = false;
-  // set these when using relative offset x,y
-  public var virtualX: Float = 0;
-  public var virtualY: Float = 0;
-  public var useVirtualPos: Bool = false;
-  public function new( width: Int, height: Int, image: UInt8Array ){
-    this.width    = width;
-    this.height   = height;
-    this.image    = image;
-    this.transparent = false;
-  }
+    public var width:  Int;
+    public var height: Int;
+    public var image:  UInt8Array;
+    // for composing shapes where overwitting set as false, for alpha blending set as true.
+    public var transparent: Bool = false;
+    // set these when using relative offset x,y
+    public var virtualX: Float = 0;
+    public var virtualY: Float = 0;
+    public var useVirtualPos: Bool = false;
+    public function new( width: Int, height: Int, image: UInt8Array ){
+        this.width    = width;
+        this.height   = height;
+        this.image    = image;
+        this.transparent = false;
+    }
 }
 
 @:transient
@@ -33,13 +33,15 @@ abstract Doudecimal_Image( Image8Struct ) from Image8Struct to Image8Struct {
         provides the width used by the UInt32Array
     **/
     public var width( get, never ): Int;
-    inline function get_width(): Int
+    inline
+    function get_width(): Int
        return this.width;
     /**
         provides the height used by the UInt32Array
     **/
     public var height( get, never ): Int;
-    inline function get_height(): Int
+    inline
+    function get_height(): Int
         return this.height;
     /**
         setting relative position provide a drawing offset, it must be positive
@@ -91,26 +93,31 @@ abstract Doudecimal_Image( Image8Struct ) from Image8Struct to Image8Struct {
     /**
         provides the location of the pixel after considering any relative internal x,y offset
     **/
-    inline 
-    public function position( x: Int, y: Int ){
+    public inline 
+    function position( x: Int, y: Int ){
         return ( this.useVirtualPos )? /* allows off set position when drawing */
             Std.int( ( y - this.virtualY ) * this.width + x - this.virtualX ):
             Std.int( y * this.width + x );
     }
-    public inline function stringPixel( x: Float, y: Float ): String {
+    public inline
+    function stringPixel( x: Float, y: Float ): String {
         var pos:Int = pos4( Std.int( x ), Std.int( y ) );
-        return StringTools.hex( this.image[ pos ], 2 ) 
-             + StringTools.hex( this.image[ pos + 1], 2 ) 
-             + StringTools.hex( this.image[ pos + 2 ], 2 )
-             + StringTools.hex( this.image[ pos + 3 ], 2 );
+        return    StringTools.hex( this.image[ pos ], 2 ) 
+                + StringTools.hex( this.image[ pos + 1 ], 2 ) 
+                + StringTools.hex( this.image[ pos + 2 ], 2 )
+                + StringTools.hex( this.image[ pos + 3 ], 2 );
     }
-    public inline function extractPixels( x: Float, y: Float ):Doudecimal_Color {
+
+    public inline
+    function extractPixels( x: Float, y: Float ):Doudecimal_Color {
         var v = Std.parseInt( '0x'+stringPixel( x, y ) );
         var d: Doudecimal_Color = cast Doudecimal_.fromUInt( v );
         d.pad();
         return d;
-      }
-    public inline function get_doudecimalPixel( x: Float, y: Float ): Doudecimal_Color {
+    }
+
+    public inline
+    function get_doudecimalPixel( x: Float, y: Float ): Doudecimal_Color {
         
         var pos = pos4( Std.int( x ), Std.int( y ) );
         var d: Doudecimal_Color = Doudecimal_Color.fromChannelEncodeHex(
@@ -195,7 +202,7 @@ abstract Doudecimal_Image( Image8Struct ) from Image8Struct to Image8Struct {
         }
         fillTriUnsafe( this, ax, ay, bx, by, cx, cy, color );
     }
-        /**
+    /**
         uses two triangles to create a filled quad using four coordinates a,b,c,d arranged clockwise 
     **/
     public inline
@@ -261,6 +268,7 @@ abstract Doudecimal_Image( Image8Struct ) from Image8Struct to Image8Struct {
             simpleRect( x, y + i* delta - thick/2, w_, thick, color );
         }
     }
+
     #if js
     inline
     public function drawToContext( ctx: js.html.CanvasRenderingContext2D, x: Int, y: Int  ){

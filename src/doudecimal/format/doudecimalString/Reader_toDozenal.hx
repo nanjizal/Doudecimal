@@ -23,17 +23,17 @@ inline function toDozenal( doudecimal: String ):String {
 inline function toDozenal( doudecimal: String ):String {
     var len = doudecimal.length;
     var no: Int;
-    var b = new StringBuf();
+    var b   = new StringBuf();
     for( i in 0...len ){
-      no = StringTools.fastCodeAt( doudecimal, i ); 
-      b.add(switch( no ){
-        case 65:
-          '↊';
-        case 66:
-          '↋';
-        case _:
-          String.fromCharCode( no );
-      });
+        no = StringTools.fastCodeAt( doudecimal, i ); 
+        b.add(  switch( no ){
+                    case 65:
+                        '↊';
+                    case 66:
+                        '↋';
+                    case _:
+                        String.fromCharCode( no );
+                });
     }
     return b.toString();
 }

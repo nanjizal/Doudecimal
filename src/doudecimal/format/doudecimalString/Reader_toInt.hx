@@ -13,22 +13,22 @@ inline function toInt( doudecimal: String ): Int{
     var dozit = '';
     var negative = false;
     if( doudecimal.charAt(0) == '-' ){
-      doudecimal = doudecimal.substr( 1 );
-      len = doudecimal.length;
-      negative = true;
+        doudecimal = doudecimal.substr( 1 );
+        len = doudecimal.length;
+        negative = true;
     }
     for( i in 0...len ){
-      multi = Math.pow( 12, n );
-      dozit = doudecimal.charAt( i );
-      var no = if( dozit == 'A' ){
-        10;
-      } else if( dozit == 'B' ){
-        11;
-      } else { 
-        Std.parseInt( dozit );
-      }
-      out = out + multi*no;
-      n--;
+        multi = Math.pow( 12, n );
+        dozit = doudecimal.charAt( i );
+        var no = if( dozit == 'A' ){
+            10;
+        } else if( dozit == 'B' ){
+            11;
+        } else { 
+            Std.parseInt( dozit );
+        }
+        out = out + multi*no;
+        n--;
     }
     return ( negative )? -Std.int( out ): Std.int( out );
 }
