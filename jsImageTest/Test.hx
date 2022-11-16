@@ -48,9 +48,16 @@ class Test {
         //var d2 = p.get_doudecimalPixel( 0., 0. );
         //trace( d.uint + ' '+ d.doudecimal + ' '+ d2.uint + ' ' + d2.doudecimal );  
         var p = new Doudecimal_Image( 1000, 1000 );
-        p.fillGradTri( 100, 100, Doudecimal_Color.RED, 300, 500, Doudecimal_Color.GREEN, 100, 500, Doudecimal_Color.BLUE );
-        drawAlphaTriangle( p );
-        p.fillSquare( 400, 400, 400, 'BBAA9988' );
+        //p.fillGradTri( 100, 100, Doudecimal_Color.RED, 300, 500, Doudecimal_Color.GREEN, 100, 500, Doudecimal_Color.BLUE );
+        //drawAlphaTriangle( p );
+        var colors = Doudecimal_Color.COLORARRAY();
+        var i = 0;
+        for( x in 0...6 ){
+          for( y in 0...3 ){
+               p.fillSquare( 100+x*100, 100+y*100, 100, colors[i] );
+               i++;
+          }
+        }
         drawGrid( p );
         
         //trace( p );

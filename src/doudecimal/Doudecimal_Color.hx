@@ -290,47 +290,77 @@ abstract Doudecimal_Color( Doudecimal_ ){
     // some default colors would be idea to precalculate...
     public static var RED( get, never ): Doudecimal_Color;
     static inline function get_RED(): Doudecimal_Color
-        return new Doudecimal_Color('AAAA0000');
+        return new Doudecimal_Color('BBBB0000');
     
     public static var GREEN( get, never ): Doudecimal_Color;
     static inline function get_GREEN(): Doudecimal_Color
-        return new Doudecimal_Color('AA00AA00');
+        return new Doudecimal_Color('BB00BB00');
     
     public static var BLUE( get, never ): Doudecimal_Color;
     static inline function get_BLUE(): Doudecimal_Color
-        return new Doudecimal_Color('AA0000AA');
+        return new Doudecimal_Color('BB0000BB');
     
     public static var YELLOW( get, never ): Doudecimal_Color;
     static inline function get_YELLOW(): Doudecimal_Color
-        return new Doudecimal_Color('AAAAAA00');
+        return new Doudecimal_Color('BBBBBB00');
     
     public static var CYAN( get, never ): Doudecimal_Color;
     static inline function get_CYAN(): Doudecimal_Color
-        return new Doudecimal_Color('AA00AAAA');
+        return new Doudecimal_Color('BB00BBBB');
     
     public static var MAGENTA( get, never ): Doudecimal_Color;
     static inline function get_MAGENTA(): Doudecimal_Color
-        return new Doudecimal_Color('AAAA00AA');
+        return new Doudecimal_Color('BBBB00BB');
     
     public static var BLACK( get, never ): Doudecimal_Color;
     static inline function get_BLACK(): Doudecimal_Color
-        return new Doudecimal_Color('AA000000');
+        return new Doudecimal_Color('BB000000');
     
     public static var WHITE( get, never ): Doudecimal_Color;
     static inline function get_WHITE(): Doudecimal_Color
-        return new Doudecimal_Color('AAAAAAAA');
+        return new Doudecimal_Color('BBBBBBBB');
     
     // need more colors and grays.
+
     public static var GREY44( get, never ): Doudecimal_Color;
     static inline function get_GREY44(): Doudecimal_Color 
-        return new Doudecimal_Color('AA444444');
+        return new Doudecimal_Color('BB444444');
     
     public static var GREY66( get, never ): Doudecimal_Color;
     static inline function get_GREY66(): Doudecimal_Color 
-        return new Doudecimal_Color('AA666666');
+        return new Doudecimal_Color('BB666666');
     
     public static var GREY88( get, never ): Doudecimal_Color;
     static inline function get_GREY88(): Doudecimal_Color 
-        return new Doudecimal_Color('AA888888');
+        return new Doudecimal_Color('BB888888');
     
+    // 144/2 = 72 in doudecimal that is 60
+    public static var PURPLE( get, never ): Doudecimal_Color;
+    static inline function get_PURPLE(): Doudecimal_Color 
+        return new Doudecimal_Color('BB600060');
+    public static var OLIVE( get, never ): Doudecimal_Color;
+    static inline function get_OLIVE(): Doudecimal_Color 
+        return new Doudecimal_Color('BB606000');
+    public static var NAVY( get, never ): Doudecimal_Color;
+    static inline function get_NAVY(): Doudecimal_Color 
+        return new Doudecimal_Color('BB000060');
+    public static var TEAL( get, never ): Doudecimal_Color;
+    static inline function get_TEAL(): Doudecimal_Color 
+        return new Doudecimal_Color('BB006060');
+    public static var MAROON( get, never ): Doudecimal_Color;
+    static inline function get_MAROON(): Doudecimal_Color 
+        return new Doudecimal_Color('BB600000');
+    public static var DEEPGREEN( get, never ): Doudecimal_Color;
+    static inline function get_DEEPGREEN(): Doudecimal_Color 
+        return new Doudecimal_Color('BB006000');
+    public static var GREY( get, never ): Doudecimal_Color;
+    static inline function get_GREY(): Doudecimal_Color 
+        return new Doudecimal_Color('BB606060');
+    public static var ORANGE( get, never ): Doudecimal_Color;
+    static inline function get_ORANGE(): Doudecimal_Color 
+        return new Doudecimal_Color('BBBB6000');
+
+    public static function COLORARRAY(): Array<Doudecimal_Color> {
+        return [ MAROON, RED, ORANGE, YELLOW, GREEN, DEEPGREEN, OLIVE, CYAN, TEAL, BLUE, NAVY, MAGENTA, BLACK, WHITE, GREY, GREY44, GREY66, GREY88 ];
+    }
 }
